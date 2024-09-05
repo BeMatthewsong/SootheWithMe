@@ -13,6 +13,10 @@
 - Next.js
 - Github Actions
 - Vercel
+- React hook form
+- React Query
+- React Date Picker
+- Zod
 
 ## 🚀 Quick start guide
 
