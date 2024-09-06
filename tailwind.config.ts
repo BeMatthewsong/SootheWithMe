@@ -59,6 +59,15 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontSize: {
+        12: ['1.2rem', '1.6rem'],
+        14: ['1.4rem', '2rem'],
+        16: ['1.6rem', '2.4rem'],
+        18: ['1.8rem', '2.8rem'],
+        20: ['2.0rem', '2.8rem'],
+        24: ['2.4rem', '3.2rem'],
+        30: ['3rem', '3.6rem'],
+      },
     },
   },
   plugins: [],
