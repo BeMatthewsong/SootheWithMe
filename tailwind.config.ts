@@ -18,6 +18,10 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      md: { min: '768px' },
+      lg: { min: '1024px' },
+    },
     extend: {
       spacing: PX_ENTRIES,
       fontFamily: {
