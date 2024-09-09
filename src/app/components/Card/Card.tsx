@@ -26,7 +26,7 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
           type='button'
           name='예약 취소하기'
           variant='white'
-          //   onClick={handleCancelGatherings}
+          //  TODO : onClick={handleCancelGatherings}
         />
       );
     }
@@ -36,7 +36,7 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
           type='button'
           name='리뷰 작성하기'
           variant='default'
-          //   onClick={handleWriteReview}
+          //  TODO : onClick={handleWriteReview}
         />
       );
     }

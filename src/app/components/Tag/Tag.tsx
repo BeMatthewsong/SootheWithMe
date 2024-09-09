@@ -1,19 +1,14 @@
 import { IconAlarm } from '@/public/icons';
+import { ReactNode } from 'react';
 
 interface TagProps {
-  size?: 'large' | 'small';
-  children: string;
+  children: ReactNode;
 }
 
-const sizeClasses = {
-  large: 'pr-16 rounded-tr-[22px]',
-  small: 'pr-[10px]',
-};
-
-const Tag = ({ size = 'large', children }: TagProps) => {
+const Tag = ({ children }: TagProps) => {
   return (
     <div
-      className={`absolute right-0 top-0 flex items-center gap-4 rounded-bl-[12px] bg-orange-600 py-4 pl-8 text-12 font-medium text-white ${sizeClasses[size]}`}
+      className={`absolute right-0 top-0 flex items-center gap-4 rounded-bl-[12px] rounded-tr-[22px] bg-orange-600 py-4 pl-8 pr-16 text-12 font-medium text-white md:rounded-none md:pr-[10px]`}
     >
       <IconAlarm width='24' height='24' />
       <span className='shrink-0'>{children}</span>
