@@ -68,6 +68,16 @@ const config: Config = {
         24: ['2.4rem', '3.2rem'],
         30: ['3rem', '3.6rem'],
       },
+      keyframes: {
+        heartPulse: {
+          '0%': { transform: 'scale(0.8)' },
+          '50%': { transform: 'scale(1.2)' },
+          '100%': { transform: 'scale(1)' },
+        },
+      },
+      animation: {
+        heartPulse: 'heartPulse 0.4s ease-in-out',
+      },
     },
   },
   plugins: [],
