@@ -1,4 +1,5 @@
 'use client';
+
 import { ChangeEvent } from 'react';
 import { InputStyles } from './Input';
 
