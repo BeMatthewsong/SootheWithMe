@@ -8,6 +8,7 @@ import { IconArrow, IconCheckCircle, IconPerson } from '@/public/icons';
  * @param {number} participantNumber - 참여 인원 수
  * @param {boolean} hasParticipantNumber - 참여 인원 수 렌더링 여부
  * @param {boolean} hasOpeningConfirmed - 개설 확정 렌더링 여부
+ * @param {boolean} hasText - 우측 텍스트 (join now 혹은 Closed) 렌더링 여부
  */
 
 interface ProgressBarProps {
@@ -15,6 +16,7 @@ interface ProgressBarProps {
   capacity: number;
   hasParticipantNumber: boolean;
   hasOpeningConfirmed: boolean;
+  hasText: boolean;
 }
 
 const ProgressBar = ({
@@ -22,6 +24,7 @@ const ProgressBar = ({
   capacity,
   hasParticipantNumber,
   hasOpeningConfirmed,
+  hasText,
 }: ProgressBarProps) => {
   const isOpeningConfirmed = participantNumber >= 5; // 개설 확정 여부 (boolean)
   const isClosedGathering = participantNumber === capacity; // 참여 인원이 다 찬 경우 (boolean)
@@ -58,11 +61,15 @@ const ProgressBar = ({
       </div>
       {/* user action */}
       {isClosedGathering ? (
-        <div className='text-16 flex items-center font-semibold text-var-orange-400'>
+        <div
+          className={`${hasText ? 'block' : 'hidden'} text-16 flex items-center font-semibold text-var-orange-400`}
+        >
           Closed
         </div>
       ) : (
-        <div className='text-16 flex items-center gap-8 whitespace-nowrap font-semibold text-var-orange-600'>
+        <div
+          className={`${hasText ? 'block' : 'hidden'} text-16 flex items-center gap-8 whitespace-nowrap font-semibold text-var-orange-600`}
+        >
           join now
           <IconArrow className='h-[18px] w-[18px]' />
         </div>
