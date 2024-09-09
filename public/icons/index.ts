@@ -5,6 +5,7 @@ import IconCaret from './caret.svg';
 import IconCheck from './check.svg';
 import IconCheckBoxDefault from './checkbox-default.svg';
 import IconCheckBoxActive from './checkbox-active.svg';
+import IconCheckCircle from './check-circle.svg';
 import IconDalaemfit from './dalaemfit.svg';
 import IconHeart from './heart.svg';
 import IconX from './icon-x.svg';
@@ -26,6 +27,7 @@ export {
   IconCheck,
   IconCheckBoxDefault,
   IconCheckBoxActive,
+  IconCheckCircle,
   IconDalaemfit,
   IconHeart,
   IconX,
