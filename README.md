@@ -11,10 +11,12 @@
 - Git/GitHub
 - Tailwind CSS
 - Next.js
+- Jest
+- React Testing Library
 - Github Actions
 - Vercel
-- React hook form
 - React Query
+- React hook form
 - React Date Picker
 - Zod
 
