@@ -25,7 +25,7 @@ interface CardProps {
 
 const CardList = ({ data }: CardProps) => {
   // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
-  const isRenderTag = isSameDate(data.dateTime);
+  const isRenderTag = isSameDate(data.registrationEnd);
 
   // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
   const isChallengeEnded = new Date(data.dateTime) <= new Date();

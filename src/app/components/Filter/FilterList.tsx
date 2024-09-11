@@ -28,9 +28,15 @@ const FilterList = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleOptionSelect = (option: string) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    setCurrentState('active');
+    if (option === children) {
+      setSelectedOption(null);
+      setIsOpen(false);
+      setCurrentState('default');
+    } else {
+      setSelectedOption(option);
+      setIsOpen(false);
+      setCurrentState('active');
+    }
   };
 
   const toggleDropDown = () => {
@@ -66,7 +72,7 @@ const FilterList = ({
 
       {isOpen && (
         <DropDown
-          options={options}
+          options={[children, ...options]}
           onSelect={handleOptionSelect}
           onClose={() => setIsOpen(false)}
         />

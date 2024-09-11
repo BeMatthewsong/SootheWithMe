@@ -4,16 +4,24 @@ interface DropDownProps {
   options: string[];
   onSelect: (option: string) => void;
   onClose: () => void;
+  classnames?: string;
 }
 
-const DropDown = ({ options, onSelect, onClose }: DropDownProps) => {
+const DropDown = ({
+  options,
+  onSelect,
+  onClose,
+  classnames,
+}: DropDownProps) => {
   const handleSelect = (option: string) => {
     onSelect(option);
     onClose();
   };
 
   return (
-    <div className='absolute z-10 mt-4 max-h-240 w-full overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400'>
+    <div
+      className={`absolute z-10 mt-4 max-h-240 w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400 ${classnames}`}
+    >
       <ul>
         {options.map((option, index) => (
           <li

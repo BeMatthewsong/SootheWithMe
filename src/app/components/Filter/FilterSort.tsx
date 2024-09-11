@@ -71,6 +71,7 @@ const FilterSort = ({
           options={options}
           onSelect={handleOptionSelect}
           onClose={() => setIsOpen(false)}
+          classnames='min-w-max right-0'
         />
       )}
     </div>

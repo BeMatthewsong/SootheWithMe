@@ -40,7 +40,7 @@ const Gnb = () => {
   };
 
   return (
-    <header className='border-b-2 border-var-gray-900 bg-var-orange-600'>
+    <header className='fixed left-0 top-0 z-20 w-full border-b-2 border-var-gray-900 bg-var-orange-600'>
       <div className='mx-16 flex max-w-[1200px] items-center justify-between md:mx-24 lg:mx-auto'>
         <nav className='flex items-center'>
           <Link href='/'>
