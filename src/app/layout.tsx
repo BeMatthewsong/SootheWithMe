@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
 import '@/styles/reset.css';
+import '@/styles/style.css';
 
 import Gnb from './components/Gnb/Gnb';
 

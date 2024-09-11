@@ -18,10 +18,10 @@ const Button = ({
   const variantClasses = {
     default: 'bg-var-orange-600 text-var-white hover:bg-var-orange-700',
     white:
-      'bg-var-white text-var-orange-600 ring-2 ring-var-orange-600 hover:bg-var-orange-100',
-    gray: 'bg-var-gray-400 text-var-white ring-2 ring-var-gray-400 hover:bg-var-gray-300',
+      'bg-var-white text-var-orange-600 ring-1 ring-var-orange-600 hover:bg-var-orange-700 hover:text-var-white',
+    gray: 'bg-var-gray-400 text-var-white ring-1 ring-var-gray-400 cursor-not-allowed',
     grayOutline:
-      'bg-var-white text-var-gray-400 ring-2 ring-var-gray-400 hover:bg-var-gray-300',
+      'bg-var-white text-var-gray-400 ring-1 ring-var-gray-400 cursor-not-allowed',
   };
 
   return (

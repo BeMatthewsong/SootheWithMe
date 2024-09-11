@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-datepicker {
+  @apply !flex h-full w-full !items-center !justify-center !border-none !text-14;
+}
+
+.react-datepicker__month-container {
+  @apply h-full w-full;
+}
+
+.react-datepicker__header {
+  @apply flex flex-col !border-none !bg-var-white !p-0;
+}
+
+.react-datepicker__month {
+  @apply !m-0;
+}
+
+.react-datepicker__current-month {
+  @apply !flex !h-32 !items-center !justify-center !py-8 !text-14 !font-medium;
+}
+
+.react-datepicker__week {
+  @apply flex justify-between;
+}
+
+.react-datepicker__day-names {
+  @apply flex justify-between;
+}
+
+.react-datepicker__day-name {
+  @apply !flex h-32 !w-32 items-center justify-center font-semibold;
+}
+
+.react-datepicker__navigation {
+  @apply hidden;
+}
+
+.react-datepicker__navigation--previous {
+  @apply hidden;
+}
+
+.react-datepicker__navigation--next {
+  @apply hidden;
+}
+
+.react-datepicker__day {
+  @apply !flex !h-32 !w-32 items-center justify-center !text-14 !font-medium;
+}
+
+.react-datepicker__day--disabled {
+  @apply !text-var-gray-400;
+}
+
+.react-datepicker__day--outside-month {
+  @apply !text-var-gray-400;
+}
+
+.react-datepicker__day--selected {
+  @apply !bg-var-orange-600 !text-var-white;
+}
+
+.react-datepicker__day:hover {
+  @apply !bg-var-orange-200 !text-var-white;
+}
+
+.react-datepicker__day--keyboard-selected {
+  @apply !text-var-orange-600;
+}
