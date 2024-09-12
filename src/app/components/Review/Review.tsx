@@ -25,7 +25,7 @@ const Review = ({
   date,
 }: ReviewProps) => {
   return (
-    <div className='flex-col space-x-6 p-[10px] font-medium md:flex md:flex-row'>
+    <div className='flex-col space-x-6 font-medium md:flex md:flex-row'>
       {image_source ? (
         <div className='relative h-[252px] w-full md:h-auto md:w-[378px]'>
           <Image
@@ -55,9 +55,11 @@ const Review = ({
           <div>{description}</div>
         </div>
 
-        <div className='mt-[10px] text-var-gray-700'>
-          {place} 이용 · {location}
-        </div>
+        {place && location && (
+          <div className='mt-[10px] text-var-gray-700'>
+            {place} 이용 · {location}
+          </div>
+        )}
 
         <div className='mt-8 flex items-center space-x-[8px] divide-x divide-var-gray-700 md:mt-10'>
           <div>

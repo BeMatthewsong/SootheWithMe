@@ -67,7 +67,7 @@ const InformationCard = ({
   };
 
   return (
-    <div className='w-full divide-y divide-dashed p-6 text-var-gray-900'>
+    <div className='h-full w-full divide-y divide-dashed rounded-[24px] border p-6 text-var-gray-900'>
       <div className='pb-44'>
         <div className='flex justify-between'>
           <div>
@@ -126,7 +126,7 @@ const InformationCard = ({
           hasText={false}
         />
 
-        <div className='mt-8 flex justify-between text-12 font-semibold'>
+        <div className='mt-10 flex justify-between text-12 font-semibold'>
           <div>최소인원 {MIN_PARTICIPANTS}명</div>
           <div className='text-var-orange-500'>
             최대인원 {maxParticipants}명

@@ -6,6 +6,8 @@ import IconCheck from './check.svg';
 import IconCheckBoxDefault from './checkbox-default.svg';
 import IconCheckBoxActive from './checkbox-active.svg';
 import IconCheckCircle from './check-circle.svg';
+import IconChevronLeft from './chevron-left.svg';
+import IconChevronRight from './chevron-right.svg';
 import IconDalaemfit from './dalaemfit.svg';
 import IconHeart from './heart.svg';
 import IconX from './icon-x.svg';
@@ -28,6 +30,8 @@ export {
   IconCheckBoxDefault,
   IconCheckBoxActive,
   IconCheckCircle,
+  IconChevronLeft,
+  IconChevronRight,
   IconDalaemfit,
   IconHeart,
   IconX,
