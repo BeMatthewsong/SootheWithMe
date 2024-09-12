@@ -1,8 +1,18 @@
-module.exports = {
-  testEnvironment: 'jest-environment-jsdom', // Jest가 테스트를 실행할 환경을 설정
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'], // Jest가 테스트 실행 전에 실행할 파일을 지정
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  }, // Jest가 TypeScript 파일을 처리할 때 사용할 변환기를 지정
-  testMatch: ['<rootDir>/src/**/*.(spec|test).[jt]s?(x)'], // 테스트 파일의 위치와 이름 패턴을 지정
+const nextJest = require('next/jest');
+
+/** @type {import('jest').Config} */
+const createJestConfig = nextJest({
+  // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
+  dir: './',
+});
+
+// Add any custom config to be passed to Jest
+const config = {
+  coverageProvider: 'v8',
+  testEnvironment: 'jsdom',
+  // Add more setup options before each test is run
+  // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 };
+
+// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
+module.exports = createJestConfig(config);
