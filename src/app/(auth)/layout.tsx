@@ -1,10 +1,11 @@
 import { ImageLogin } from '@/public/images';
-import Footer from '../components/AuthForm/Footer';
+import Footer from './_component/Footer';
+import { ReactNode } from 'react';
 
 const Layout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) => {
   return (
     <div className='min-h-dvh w-full bg-var-gray-100'>
