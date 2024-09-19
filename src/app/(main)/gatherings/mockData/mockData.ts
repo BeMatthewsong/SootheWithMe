@@ -88,179 +88,24 @@ export const MOCKUSER = {
 export const DESCRIPTION =
   '따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.';
 
+const generateReviews = (rating: number, count: number) => {
+  return Array.from({ length: count }, () => ({
+    rating,
+    description: DESCRIPTION,
+    user_name: '럽윈즈올',
+    date: '2024.01.25',
+  }));
+};
+
 export const MOCK_REVIEWS = [
-  {
-    rating: 1,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 1,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 1,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 1,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 2,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 2,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 2,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 2,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 5,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 5,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 5,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 5,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 4,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 3,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
-  {
-    rating: 2,
-    description: DESCRIPTION,
-    user_name: '럽윈즈올',
-    date: '2024.01.25',
-  },
+  ...generateReviews(1, 4),
+  ...generateReviews(2, 4),
+  ...generateReviews(3, 4),
+  ...generateReviews(4, 4),
+  ...generateReviews(5, 4),
+  ...generateReviews(4, 4),
+  ...generateReviews(3, 4),
+  ...generateReviews(2, 4),
+  ...generateReviews(1, 4),
+  ...generateReviews(1, 4),
 ];

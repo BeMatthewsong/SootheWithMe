@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
 import { IconChevronLeft, IconChevronRight } from '@/public/icons';
 
 const MAX_PAGES_TO_SHOW_TABLET = 4; // 태블릿에서 표시할 최대 페이지 수
@@ -44,29 +43,29 @@ const Pagination = ({
   // 페이지네이션 범위 설정 함수
   const getPaginationRange = () => {
     const range: (number | string)[] = [];
-
     const maxPagesToShow = isTablet
       ? MAX_PAGES_TO_SHOW_TABLET
       : MAX_PAGES_TO_SHOW_DESKTOP;
 
-    // 총 페이지 수가 maxPages 보다 작은 경우
+    // 총 페이지 수가 maxPagesToShow보다 적은 경우
     if (totalPages <= maxPagesToShow) {
       for (let i = 1; i <= totalPages; i++) {
         range.push(i);
       }
     } else {
-      // 현재 페이지가 처음 부분에 가까운 경우
-      if (currentPage <= Math.floor(maxPagesToShow / 2) + 1) {
+      // 중간값 판별을 위한 변수
+      const half = Math.floor(maxPagesToShow / 2);
+
+      // 현재 페이지가 시작 부분에 가까운 경우
+      if (currentPage <= half) {
         for (let i = 1; i <= maxPagesToShow - 1; i++) {
           range.push(i);
         }
-
         range.push('···', totalPages);
       }
-      // 현재 페이지가 마지막 부분에 가까운 경우
-      else if (currentPage >= totalPages - Math.floor(maxPagesToShow / 2)) {
+      // 현재 페이지가 끝 부분에 가까운 경우
+      else if (currentPage >= totalPages - half) {
         range.push(1, '···');
-
         for (let i = totalPages - (maxPagesToShow - 2); i <= totalPages; i++) {
           range.push(i);
         }
@@ -75,10 +74,11 @@ const Pagination = ({
       else {
         range.push(1, '···');
         for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          range.push(i);
+          if (i > 1 && i < totalPages) {
+            range.push(i);
+          }
         }
-
-        range.push(totalPages);
+        range.push('···', totalPages);
       }
     }
 
@@ -103,6 +103,7 @@ const Pagination = ({
         typeof item === 'number' ? (
           <button
             key={item}
+            data-testid={`page-button-${item}`}
             className={`rounded-lg border p-[10px] ${
               currentPage === item
                 ? 'text-16 font-semibold text-var-black'
