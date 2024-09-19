@@ -8,7 +8,7 @@ const Layout = ({
   children: ReactNode;
 }>) => {
   return (
-    <div className='min-h-dvh w-full bg-var-gray-100'>
+    <div className='flex h-full w-full items-center justify-center bg-var-gray-100'>
       <div className='flex flex-col items-center justify-between gap-32 py-40 md:mx-24 lg:mx-auto lg:max-w-[1200px] lg:flex-row lg:gap-100 lg:px-24 lg:pt-40'>
         {/* 이미지 영역 */}
         <div className='text-center'>

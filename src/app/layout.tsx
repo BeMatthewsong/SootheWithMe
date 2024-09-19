@@ -17,9 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className='min-h-dvh bg-var-gray-100 font-pretendard'>
+      <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
         <Gnb />
-        <div className='pt-60'>{children}</div>
+        <div className='grow pt-60'>{children}</div>
       </body>
     </html>
   );
