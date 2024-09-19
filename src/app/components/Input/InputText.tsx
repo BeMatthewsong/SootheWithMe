@@ -8,6 +8,7 @@ interface InputTextProps {
   placeholder?: string;
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
+  spellCheck?: boolean;
 }
 
 /**
@@ -23,6 +24,7 @@ const InputText = ({
   placeholder = '',
   onChange,
   className = '',
+  spellCheck = false,
 }: InputTextProps) => {
   return (
     <textarea
@@ -30,7 +32,7 @@ const InputText = ({
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      spellCheck={false}
+      spellCheck={spellCheck}
     />
   );
 };

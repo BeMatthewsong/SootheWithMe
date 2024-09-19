@@ -13,6 +13,7 @@ export const InputStyles = {
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
   className?: string;
+  type?: 'text' | 'password';
 }
 
 /**
@@ -27,10 +28,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param {Ref<HTMLInputElement>} ref - forwardRef를 사용하여 전달받은 ref
  */
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ hasError = false, className = '', ...rest }, ref) => {
+  ({ hasError = false, className = '', type = 'text', ...rest }, ref) => {
     return (
       <input
         ref={ref}
+        type={type}
         className={`${InputStyles.base} hover: ${InputStyles.hover} focus: ${InputStyles.focus} ${hasError && InputStyles.error} ${className}`}
         {...rest}
       />

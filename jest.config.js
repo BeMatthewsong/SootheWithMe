@@ -10,6 +10,14 @@ const createJestConfig = nextJest({
 const config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+  rootDir: './',
+  moduleNameMapper: {
+    '^@/public/(.*)$': '<rootDir>/public/$1', // public 폴더 매핑
+    '^@/(.*)$': '<rootDir>/src/$1', // src 폴더 매핑
+  },
+  modulePaths: ['<rootDir>'],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'node'],
+  moduleDirectories: ['node_modules', '<rootDir>'],
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   rootDir: './',
