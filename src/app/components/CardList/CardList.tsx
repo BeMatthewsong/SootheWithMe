@@ -15,8 +15,8 @@ import {
 } from '@/utils/formatDate';
 import { GatheringsListData } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
-import InfoChip from '../Chip/InfoChip';
-import ProgressBar from '../ProgressBar/ProgressBar';
+import InfoChip from '@/app/components/Chip/InfoChip';
+import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
 import { useState } from 'react';
 
 interface CardProps {
@@ -49,7 +49,9 @@ const CardList = ({ data }: CardProps) => {
           quality={85}
           sizes='(max-width: 768px) 100vw, 280px'
         />
-        {isRenderTag && <Tag>오늘 {formatTimeHours(data.dateTime)}시 마감</Tag>}
+        {isRenderTag && (
+          <Tag>오늘 {formatTimeHours(data.registrationEnd)}시 마감</Tag>
+        )}
       </div>
 
       {/* 정보 */}

@@ -15,8 +15,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@/public/*": ["./public/*"]
+      "@/public/*": ["./public/*"],
+      "@/*": ["./src/*"]
     },
     "plugins": [
       {

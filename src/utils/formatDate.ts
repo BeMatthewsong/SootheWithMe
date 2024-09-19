@@ -16,7 +16,6 @@ export const formatTime = (dateString: string): string => {
 export const formatTimeHours = (dateString: string): string => {
   const date = new Date(dateString);
   const hours = date.getHours();
-  const minutes = date.getMinutes();
   return `${hours}`;
 };
 

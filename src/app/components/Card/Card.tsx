@@ -15,9 +15,17 @@ interface CardProps {
   hasChips?: boolean;
   handleCancelGatherings?: () => void; // 예약 취소 버튼 클릭 핸들러
   handleWriteReview?: () => void; // 리뷰 작성 버튼 클릭 핸들러
+  handleSaveDiscard?: () => void; // 모임 스토리지 삭제 핸들러
 }
 
-const Card = ({ data, hasButton, hasChips }: CardProps) => {
+const Card = ({
+  data,
+  hasButton,
+  hasChips,
+  handleCancelGatherings,
+  handleWriteReview,
+  handleSaveDiscard,
+}: CardProps) => {
   // Button 렌더링
   const button = () => {
     if (!data.isCompleted) {
@@ -26,7 +34,7 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
           type='button'
           name='예약 취소하기'
           variant='white'
-          //  TODO : onClick={handleCancelGatherings}
+          onClick={handleCancelGatherings}
         />
       );
     }
@@ -36,7 +44,7 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
           type='button'
           name='리뷰 작성하기'
           variant='default'
-          //  TODO : onClick={handleWriteReview}
+          onClick={handleWriteReview}
         />
       );
     }
@@ -49,22 +57,18 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
     if (data.isCompleted) {
       return <StateChip state='done' />;
     }
-    if ('이용 예정, 개설 확정 로직') {
-      return (
-        <>
-          <StateChip state='scheduled' />
-          <StateChip state='confirmed' />
-        </>
-      );
-    }
-    if ('이용 예정, 개설 대기 로직') {
-      return (
-        <>
-          <StateChip state='scheduled' />
-          <StateChip state='pending' />
-        </>
-      );
-    }
+
+    // 참가 인원이 5명 이상인 경우 개설 확정
+    const MIN_PARTICIPANTS = 5;
+    const isConfirmed = data.participantCount >= MIN_PARTICIPANTS;
+    return (
+      <>
+        {/* 이용 예정 */}
+        <StateChip state='scheduled' />
+        {/* 개설 확정 || 개설 대기 */}
+        <StateChip state={isConfirmed ? 'confirmed' : 'pending'} />
+      </>
+    );
   };
 
   return (
@@ -86,6 +90,7 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
         <div className='flex flex-col gap-[6px] p-2'>
           {/* StateChip이 있는 경우 */}
           {hasChips && <div className='mb-[6px] flex gap-8'>{chips()}</div>}
+
           <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
             <p>{data.name}</p>
             <span>|</span>
@@ -119,8 +124,9 @@ const Card = ({ data, hasButton, hasChips }: CardProps) => {
             </p>
             <button
               type='button'
+              data-testid='save-discard-button'
               className='right-24 mt-24 md:absolute md:top-24 md:mt-0'
-              // TODO : onClick={}
+              onClick={handleSaveDiscard}
             >
               <IconSaveDiscardBtn className='h-36 w-116 md:hidden' />
               <IconSaveDiscard className='hidden h-48 w-48 md:block' />
