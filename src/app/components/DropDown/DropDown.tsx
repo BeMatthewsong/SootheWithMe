@@ -11,7 +11,7 @@ const DropDown = ({
   options,
   onSelect,
   onClose,
-  classnames,
+  classnames = '',
 }: DropDownProps) => {
   const handleSelect = (option: string) => {
     onSelect(option);
