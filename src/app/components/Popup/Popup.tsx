@@ -15,16 +15,14 @@ import Button from '../Button/Button';
 interface PopupProps {
   type: 'exit' | 'signUpCompleted';
   hasCancelButton: boolean;
-  onClickClosePopup: () => void;
-  onClickCancel?: () => void;
+  onClickClose?: () => void;
   onClickConfirm?: () => void;
 }
 
 const Popup = ({
   type = 'exit',
-  hasCancelButton,
-  onClickClosePopup,
-  onClickCancel,
+  hasCancelButton = true,
+  onClickClose,
   onClickConfirm,
 }: PopupProps) => {
   return (
@@ -33,7 +31,7 @@ const Popup = ({
     >
       {/* 닫기 버튼 */}
       <div className='flex w-full justify-end'>
-        <button onClick={onClickClosePopup}>
+        <button data-testid='close-modal-button' onClick={onClickClose}>
           <IconX className='h-24 w-24' />
         </button>
       </div>
@@ -53,11 +51,11 @@ const Popup = ({
       >
         {hasCancelButton && (
           <div className='w-120'>
-            <Button name='취소' variant='white' />
+            <Button name='취소' variant='white' onClick={onClickClose} />
           </div>
         )}
         <div className='w-120'>
-          <Button name='확인' variant='default' />
+          <Button name='확인' variant='default' onClick={onClickConfirm} />
         </div>
       </div>
     </div>
