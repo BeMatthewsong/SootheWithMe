@@ -9,14 +9,8 @@ interface AvatarProps {
 
 const Avatar = ({ id, name, image, className }: AvatarProps) => {
   return (
-    <div className={`relative ${className}`}>
-      <Image
-        className='rounded-full'
-        src={image}
-        alt={name}
-        fill
-        objectFit='cover'
-      />
+    <div className={`relative ${className} object-cover`}>
+      <Image className='rounded-full' src={image} alt={name} fill />
     </div>
   );
 };
