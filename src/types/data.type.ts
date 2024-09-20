@@ -34,3 +34,16 @@ export interface GatheringsListData {
   createdBy: number;
   canceledAt?: string;
 }
+
+// GET : /{teamId}/gatherings/joined
+// 참석한 모임 목록 조회 시 Response Data
+export interface myGatheringData extends GatheringsListData {
+  joinedAt: string;
+  isCompleted: boolean;
+  isReviewed: boolean;
+}
+export interface FetchGatheringsResponse {
+  data: myGatheringData[];
+  hasNextPage: boolean;
+  page: number; // 현재 페이지 번호
+}
