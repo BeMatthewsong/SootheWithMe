@@ -13,7 +13,7 @@ export const InputStyles = {
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
   className?: string;
-  type?: 'text' | 'password';
+  type?: 'text' | 'password' | 'number';
 }
 
 /**

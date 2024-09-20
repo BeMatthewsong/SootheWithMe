@@ -20,6 +20,7 @@ export default function RootLayout({
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
         <Gnb />
         <div className='grow pt-60'>{children}</div>
+        <div id='modal-root'></div>
       </body>
     </html>
   );

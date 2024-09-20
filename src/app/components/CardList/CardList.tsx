@@ -94,7 +94,7 @@ const CardList = ({ data }: CardProps) => {
 
       {/* 종료된 챌린지의 경우 */}
       {isChallengeEnded && (
-        <div className='absolute left-0 top-0 z-10 flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
+        <div className='absolute left-0 top-0 z-base flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
           <p className='text-14 font-medium text-white'>
             마감된 챌린지예요.
             <br />

@@ -22,6 +22,12 @@ const config: Config = {
       md: { min: '768px' },
       lg: { min: '1024px' },
     },
+    zIndex: {
+      base: '1',
+      nav: '2',
+      popup: '999',
+      floating: '1000',
+    },
     extend: {
       spacing: PX_ENTRIES,
       fontFamily: {

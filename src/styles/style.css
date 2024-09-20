@@ -47,7 +47,7 @@
 }
 
 .react-datepicker__day {
-  @apply !flex !h-32 !w-32 items-center justify-center !text-14 !font-medium;
+  @apply !flex !h-32 !w-32 items-center justify-center !rounded-xl !text-14 !font-medium;
 }
 
 .react-datepicker__day--disabled {

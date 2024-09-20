@@ -56,7 +56,7 @@ const InformationCard = ({
       visibleAvatars.push(
         <div
           key='remaining'
-          className='z-10 flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
+          className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
         >
           +{participants.length - maxVisible}
         </div>,
