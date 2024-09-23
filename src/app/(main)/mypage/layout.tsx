@@ -1,5 +1,6 @@
 import UserProfileLayout from '@/app/components/UserProfileLayout/UserProfileLayout';
 import { ReactNode } from 'react';
+import Tab from './_component/Tab';
 
 const Layout = ({
   children,
@@ -13,7 +14,10 @@ const Layout = ({
         <h2 className='text-24 font-semibold text-var-gray-900'>마이페이지</h2>
         <UserProfileLayout />
       </div>
-      {children}
+      <section className='flex w-full grow flex-col border-t-2 border-var-gray-900 bg-white px-16 py-24 md:px-24'>
+        <Tab />
+        {children}
+      </section>
     </main>
   );
 };

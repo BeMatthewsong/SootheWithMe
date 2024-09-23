@@ -1,6 +1,7 @@
 'use client';
 
 import ModalPlaceDropdown from '@/app/(main)/gatherings/_component/ModalPlaceDropdown';
+import { GATHERING_TIMES } from '@/constants/common';
 import { IconX } from '@/public/icons';
 import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
@@ -14,17 +15,6 @@ import ModalFrame from './ModalFrame';
 interface MakeGatheringModalProps {
   onClose: () => void;
 }
-
-const MORNING_TIMES = ['09:00', '10:00', '11:00'];
-const AFTERNOON_TIMES = [
-  '12:00',
-  '13:00',
-  '14:00',
-  '15:00',
-  '16:00',
-  '17:00',
-  '18:00',
-];
 
 // TODO: 여러 컴포넌트로 쪼개기 (리팩토링 단계)
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
@@ -120,7 +110,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <div className='space-y-8 text-14 font-semibold'>
           <h2>오전</h2>
           <div className='flex gap-8'>
-            {MORNING_TIMES.map((time) => (
+            {GATHERING_TIMES.MORNING.map((time) => (
               <TimeChip
                 key={time}
                 state={selectedTime === time ? 'active' : 'default'}
@@ -134,7 +124,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <div className='space-y-8 text-14 font-semibold'>
           <h2>오후</h2>
           <div className='flex flex-wrap gap-8 md:flex-nowrap'>
-            {AFTERNOON_TIMES.map((time) => (
+            {GATHERING_TIMES.AFTERNOON.map((time) => (
               <TimeChip
                 key={time}
                 state={selectedTime === time ? 'active' : 'default'}

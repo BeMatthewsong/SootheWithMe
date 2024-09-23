@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 캘린더 라이브러리 스타일링 */
 .react-datepicker {
   @apply !flex h-full w-full !items-center !justify-center !border-none !text-14;
 }

@@ -73,11 +73,11 @@ const Card = ({
 
   return (
     <div className='w-full border-b-2 border-dashed border-var-gray-200 py-24'>
-      <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-[12px] md:flex-row md:rounded-[24px]'>
+      <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-xl md:flex-row md:rounded-3xl'>
         {/* 이미지 */}
-        <div className='md: relative flex h-156 w-full flex-col gap-16 md:w-280'>
+        <div className='relative flex h-156 w-full flex-col gap-16 md:w-280'>
           <Image
-            className='rounded-[24px] object-cover'
+            className='rounded-3xl object-cover'
             src={data.image}
             alt='image'
             fill
@@ -109,9 +109,7 @@ const Card = ({
           </div>
 
           {/* 버튼이 있는 경우 */}
-          {hasButton && (
-            <div className='mt-12 w-120 md:mt-auto'>{button()}</div>
-          )}
+          {hasButton && <div className='mt-12 w-120'>{button()}</div>}
         </div>
 
         {/* 취소된 모임의 경우 */}

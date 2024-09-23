@@ -6,11 +6,11 @@ import { usePathname } from 'next/navigation';
 const tabList = [
   {
     name: '나의 모임',
-    link: '/mypage/myGetherings',
+    link: '/mypage',
   },
   {
     name: '나의 리뷰',
-    link: '/mypage/myReview',
+    link: '/mypage/review',
   },
   {
     name: '내가 만든 모임',

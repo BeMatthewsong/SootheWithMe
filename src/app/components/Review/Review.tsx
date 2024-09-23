@@ -25,11 +25,11 @@ const Review = ({
   date,
 }: ReviewProps) => {
   return (
-    <div className='flex-col space-x-6 font-medium md:flex md:flex-row'>
+    <div className='flex-col space-x-6 border-b-2 border-dashed border-var-gray-200 font-medium md:flex md:flex-row'>
       {image_source ? (
-        <div className='relative h-[252px] w-full md:h-auto md:w-[378px]'>
+        <div className='relative h-156 w-312 md:w-280'>
           <Image
-            className='rounded-[20px] object-cover'
+            className='rounded-3xl object-cover'
             src={image_source}
             alt='review image'
             fill

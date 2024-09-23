@@ -21,7 +21,7 @@ export const DATA_LIST: UserJoinedGatheringsData[] = [
     createdBy: 0,
     joinedAt: registrationEnd.toISOString(),
     isCompleted: true,
-    isReviewed: true,
+    isReviewed: false,
   },
   {
     teamId: 0,
@@ -36,8 +36,8 @@ export const DATA_LIST: UserJoinedGatheringsData[] = [
     image: '/images/mock-image.png',
     createdBy: 0,
     joinedAt: registrationEnd.toISOString(),
-    isCompleted: true,
-    isReviewed: true,
+    isCompleted: false,
+    isReviewed: false,
   },
   {
     teamId: 0,
@@ -69,6 +69,6 @@ export const DATA_LIST: UserJoinedGatheringsData[] = [
     createdBy: 0,
     joinedAt: registrationEnd.toISOString(),
     isCompleted: true,
-    isReviewed: true,
+    isReviewed: false,
   },
 ];

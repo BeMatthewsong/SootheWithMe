@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import MyGatheringList from '../_component/MyGatheringList';
+import MyGatheringList from './_component/MyGatheringList';
 
 export const metadata: Metadata = {
   title: '나의 모임 | Soothe With Me',
