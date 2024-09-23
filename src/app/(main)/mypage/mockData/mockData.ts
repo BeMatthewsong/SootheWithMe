@@ -307,6 +307,22 @@ const mockData: myGatheringData[] = [
     isCompleted: true,
     isReviewed: false,
   },
+  {
+    teamId: 20,
+    id: 20,
+    type: '스터디',
+    name: '달램핏 오피스 스트레칭123',
+    dateTime: '2024-09-15T00:00:00',
+    registrationEnd: '2024-09-15T00:00:00',
+    location: '서울',
+    participantCount: 10,
+    capacity: 20,
+    image: '/images/mock-image.png',
+    createdBy: 1,
+    joinedAt: '2024-09-15T00:00:00',
+    isCompleted: true,
+    isReviewed: false,
+  },
 ];
 
 export default mockData;
