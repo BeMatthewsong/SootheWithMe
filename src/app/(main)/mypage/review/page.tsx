@@ -58,13 +58,29 @@ const Page = () => {
             filterType,
           ) &&
           filteredData.map((data) => (
+            // <Card
+            //   key={data?.id}
+            //   data={data}
+            //   hasButton
+            //   hasChips
+            //   handleWriteReview={() => setIsModalOpen(true)}
+            // />
+
             <Card
               key={data?.id}
+              handleSaveDiscard={() => console.log('Save Discard')}
               data={data}
-              hasButton
-              hasChips
-              handleWriteReview={() => setIsModalOpen(true)}
-            />
+            >
+              <Card.Chips />
+              <Card.Info />
+              <Card.Button
+                handleButtonClick={() => {
+                  data.isCompleted
+                    ? setIsModalOpen(true)
+                    : console.log('Cancel gathering');
+                }}
+              />
+            </Card>
           ))
         )}
         {/* 작성한 리뷰 */}

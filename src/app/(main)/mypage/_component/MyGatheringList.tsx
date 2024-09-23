@@ -11,13 +11,25 @@ const MyGatheringList = () => {
       queryFn={fetchGatherings}
       emptyText='아직 참여한 모임이 없습니다.'
       renderItem={(item, index) => (
-        <Card
-          data={item}
-          hasButton={true}
-          hasChips={true}
-          handleCancelGatherings={() => console.log('Cancel gathering')}
-          handleWriteReview={() => console.log('Write review')}
-        />
+        // <Card
+        //   data={item}
+        //   hasButton={true}
+        //   hasChips={true}
+        //   handleCancelGatherings={() => console.log('Cancel gathering')}
+        //   handleWriteReview={() => console.log('Write review')}
+        // />
+
+        <Card handleSaveDiscard={() => console.log('Save Discard')} data={item}>
+          <Card.Chips />
+          <Card.Info />
+          <Card.Button
+            handleButtonClick={() => {
+              item.isCompleted
+                ? console.log('Write review')
+                : console.log('Cancel gathering');
+            }}
+          />
+        </Card>
       )}
     />
   );

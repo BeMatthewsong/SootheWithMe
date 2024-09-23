@@ -1,3 +1,5 @@
+'use client';
+
 import {
   IconPerson,
   IconSaveDiscard,
@@ -8,69 +10,23 @@ import Button from '@/app/components/Button/Button';
 import StateChip from '@/app/components/Chip/StateChip';
 import { formatDate, formatTime } from '@/utils/formatDate';
 import { UserJoinedGatheringsData } from '@/types/data.type';
+import { createContext, PropsWithChildren, useContext } from 'react';
 
 interface CardProps {
   data: UserJoinedGatheringsData;
-  hasButton?: boolean;
-  hasChips?: boolean;
-  handleCancelGatherings?: () => void; // 예약 취소 버튼 클릭 핸들러
-  handleWriteReview?: () => void; // 리뷰 작성 버튼 클릭 핸들러
-  handleSaveDiscard?: () => void; // 모임 스토리지 삭제 핸들러
+  handleSaveDiscard: () => void;
 }
 
+const CardContext = createContext<UserJoinedGatheringsData | undefined>(
+  undefined,
+);
+
+// Card Wapper
 const Card = ({
   data,
-  hasButton,
-  hasChips,
-  handleCancelGatherings,
-  handleWriteReview,
   handleSaveDiscard,
-}: CardProps) => {
-  // Button 렌더링
-  const button = () => {
-    if (!data.isCompleted) {
-      return (
-        <Button
-          type='button'
-          name='예약 취소하기'
-          variant='white'
-          onClick={handleCancelGatherings}
-        />
-      );
-    }
-    if (data.isCompleted && !data.isReviewed) {
-      return (
-        <Button
-          type='button'
-          name='리뷰 작성하기'
-          variant='default'
-          onClick={handleWriteReview}
-        />
-      );
-    }
-    return null;
-  };
-
-  // State chip 렌더링
-  const chips = () => {
-    // 이용 완료 시
-    if (data.isCompleted) {
-      return <StateChip state='done' />;
-    }
-
-    // 참가 인원이 5명 이상인 경우 개설 확정
-    const MIN_PARTICIPANTS = 5;
-    const isConfirmed = data.participantCount >= MIN_PARTICIPANTS;
-    return (
-      <>
-        {/* 이용 예정 */}
-        <StateChip state='scheduled' />
-        {/* 개설 확정 || 개설 대기 */}
-        <StateChip state={isConfirmed ? 'confirmed' : 'pending'} />
-      </>
-    );
-  };
-
+  children,
+}: PropsWithChildren<CardProps>): JSX.Element => {
   return (
     <div className='w-full border-b-2 border-dashed border-var-gray-200 py-24'>
       <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-xl md:flex-row md:rounded-3xl'>
@@ -79,61 +35,147 @@ const Card = ({
           <Image
             className='rounded-3xl object-cover'
             src={data.image}
-            alt='image'
+            alt='모임 이미지'
             fill
             quality={85}
             sizes='(max-width: 768px) 100vw, 378px'
           />
         </div>
 
-        {/* 정보 */}
-        <div className='flex flex-col gap-[6px] p-2'>
-          {/* StateChip이 있는 경우 */}
-          {hasChips && <div className='mb-[6px] flex gap-8'>{chips()}</div>}
+        {/* content - chip, info, button */}
+        <CardContext.Provider value={data}>
+          <div className='flex flex-col gap-[6px] p-2'>{children}</div>
+        </CardContext.Provider>
 
-          <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
-            <p>{data.name}</p>
-            <span>|</span>
-            <p className='text-14 font-medium text-var-gray-700'>
-              {data.location}
-            </p>
-          </div>
-          <div className='flex items-center gap-4 text-14 font-medium text-var-gray-700'>
-            <p>{formatDate(data.dateTime)}</p>
-            <span>·</span>
-            <p>{formatTime(data.dateTime)}</p>
-            <IconPerson className='ml-8 h-16 w-16' />
-            <p>
-              {data.participantCount}/{data.capacity}
-            </p>
-          </div>
-
-          {/* 버튼이 있는 경우 */}
-          {hasButton && <div className='mt-12 w-120'>{button()}</div>}
-        </div>
-
-        {/* 취소된 모임의 경우 */}
         {data.canceledAt && (
-          <div className='absolute left-0 top-0 z-base flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
-            <p className='text-14 font-medium text-white'>
-              모집 취소된 모임이에요.
-              <br />
-              다음 기회에 만나요 🙏
-            </p>
-            <button
-              type='button'
-              data-testid='save-discard-button'
-              className='right-24 mt-24 md:absolute md:top-24 md:mt-0'
-              onClick={handleSaveDiscard}
-            >
-              <IconSaveDiscardBtn className='h-36 w-116 md:hidden' />
-              <IconSaveDiscard className='hidden h-48 w-48 md:block' />
-            </button>
-          </div>
+          <CardOverlay handleButtonClick={handleSaveDiscard} />
         )}
       </div>
     </div>
   );
 };
+
+// Ooption Components - Chips
+const CardChips = (): JSX.Element => {
+  const data = useContext(CardContext);
+  if (!data) {
+    throw new Error('Card.Chips must be used within a Card');
+  }
+  const { isCompleted, participantCount } = data;
+
+  if (isCompleted) {
+    return (
+      <div className='mb-[6px] flex gap-8'>
+        <StateChip state='done' />
+      </div>
+    );
+  }
+
+  const MIN_PARTICIPANTS = 5;
+  const isConfirmed = participantCount >= MIN_PARTICIPANTS;
+  return (
+    <div className='mb-[6px] flex gap-8'>
+      {/* 이용 예정 */}
+      <StateChip state='scheduled' />
+      {/* 개설 확정 || 개설 대기 */}
+      <StateChip state={isConfirmed ? 'confirmed' : 'pending'} />
+    </div>
+  );
+};
+
+// Ooption Components - Button
+const CardButton = ({
+  handleButtonClick,
+}: {
+  handleButtonClick: () => void;
+}): JSX.Element => {
+  const data = useContext(CardContext);
+  if (!data) {
+    throw new Error('Card.Button must be used within a Card');
+  }
+  const { isCompleted, isReviewed } = data;
+
+  // 데이터에 따라 버튼의 이름과 스타일을 변경
+  const getButtonProps = () => {
+    if (!isCompleted)
+      return { name: '예약 취소하기', variant: 'white' as const };
+    if (!isReviewed)
+      return { name: '리뷰 작성하기', variant: 'default' as const };
+    return null;
+  };
+
+  const buttonProps = getButtonProps();
+
+  return (
+    <>
+      {buttonProps ? (
+        <div className='mt-12 w-120 md:mt-auto'>
+          <Button
+            type='button'
+            name={buttonProps.name}
+            variant={buttonProps.variant}
+            onClick={handleButtonClick}
+          />
+        </div>
+      ) : null}
+    </>
+  );
+};
+
+// Ooption Components - Info
+const CardInfo = (): JSX.Element => {
+  const data = useContext(CardContext);
+  if (!data) {
+    throw new Error('Card.Button must be used within a Card');
+  }
+  const { name, location, dateTime, participantCount, capacity } = data;
+
+  return (
+    <>
+      <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
+        <p>{name}</p>,<span>|</span>
+        <p className='text-14 font-medium text-var-gray-700'>{location}</p>
+      </div>
+      <div className='flex items-center gap-4 text-14 font-medium text-var-gray-700'>
+        <p>{formatDate(dateTime)}</p>
+        <span>·</span>
+        <p>{formatTime(dateTime)}</p>
+        <IconPerson className='ml-8 h-16 w-16' />
+        <p>
+          {participantCount}/{capacity}
+        </p>
+      </div>
+    </>
+  );
+};
+
+const CardOverlay = ({
+  handleButtonClick,
+}: {
+  handleButtonClick: () => void;
+}): JSX.Element => {
+  return (
+    <div className='z-base absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
+      <p className='text-14 font-medium text-white'>
+        모집 취소된 모임이에요.
+        <br />
+        다음 기회에 만나요 🙏
+      </p>
+      <button
+        type='button'
+        data-testid='save-discard-button'
+        className='right-24 mt-24 md:absolute md:top-24 md:mt-0'
+        onClick={handleButtonClick}
+      >
+        <IconSaveDiscardBtn className='h-36 w-116 md:hidden' />
+        <IconSaveDiscard className='hidden h-48 w-48 md:block' />
+      </button>
+    </div>
+  );
+};
+
+Card.Chips = CardChips;
+Card.Button = CardButton;
+Card.Info = CardInfo;
 
 export default Card;
