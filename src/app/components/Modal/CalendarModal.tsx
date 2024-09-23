@@ -6,9 +6,19 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from '../Button/Button';
 
-const CalendarModal = () => {
+interface CalendarModalProps {
+  initialSelectedData: Date | null;
+  handleClickButtons: (date?: Date) => void;
+}
+
+const CalendarModal = ({
+  initialSelectedData,
+  handleClickButtons,
+}: CalendarModalProps) => {
   const datepickerRef = useRef(null);
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    initialSelectedData,
+  );
 
   return (
     <div className='flex h-328 w-336 flex-col items-center justify-center gap-12 rounded-xl bg-var-white px-44 py-24'>
@@ -30,16 +40,18 @@ const CalendarModal = () => {
           <Button
             name='초기화'
             variant={`${selectedDate !== null ? 'white' : 'grayOutline'}`}
-            onClick={() => setSelectedDate(null)}
+            onClick={() => {
+              setSelectedDate(null);
+              handleClickButtons();
+            }}
           />
         </div>
         <div className='w-124'>
           <Button
             name='적용'
             variant={`${selectedDate !== null ? 'default' : 'gray'}`}
-            // TODO: '적용' 버튼 함수 추가
             onClick={() => {
-              console.log(selectedDate);
+              selectedDate && handleClickButtons(selectedDate);
             }}
           />
         </div>

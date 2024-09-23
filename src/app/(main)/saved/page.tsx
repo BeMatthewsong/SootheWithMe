@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { HeadSaved } from '@/public/images';
 import Tab from '@/app/components/Tab/Tab';
 import Chip from '@/app/components/Chip/Chip';
-import FilterList from '@/app/components/Filter/FilterList';
-import FilterSort from '@/app/components/Filter/FilterSort';
 import CardList from '@/app/components/CardList/CardList';
+import Filter from '@/app/components/Filter/Filter';
+import FilterDate from '@/app/components/Filter/FilterDate';
 import { DATA_LIST, OPTIONS, SORT_OPTIONS } from './mockData';
 
 const SavedPage = () => {
@@ -95,16 +95,14 @@ const SavedPage = () => {
           {/* filter */}
           <div className='flex items-center justify-between'>
             <div className='flex gap-8'>
-              <FilterList state='default' options={OPTIONS}>
+              <Filter type='list' state='default' options={OPTIONS}>
                 지역 선택
-              </FilterList>
-              <FilterList state='default' options={OPTIONS}>
-                날짜 선택
-              </FilterList>
+              </Filter>
+              <FilterDate state='default'>날짜 선택</FilterDate>
             </div>
-            <FilterSort state='default' options={SORT_OPTIONS}>
+            <Filter type='sort' state='default' options={SORT_OPTIONS}>
               마감 임박
-            </FilterSort>
+            </Filter>
           </div>
         </div>
         {/* data list */}
