@@ -3,7 +3,7 @@ import '@/styles/globals.css';
 import '@/styles/reset.css';
 import '@/styles/style.css';
 import Gnb from './components/Gnb/Gnb';
-import Providers from './react-query-providers';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: 'Create Next App',

@@ -1,20 +1,24 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 import Button from '../../../components/Button/Button';
 import { signinSchema } from '../../_component/FormOptions';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormField from '../../_component/FormField';
 import { SignInData } from '@/types/client.type';
+import { submitSignInData } from '@/app/api/auths/service/postSignIn';
 
 const SignInForm = () => {
+  const router = useRouter();
   const {
     control,
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setError,
   } = useForm<SignInData>({
-    mode: 'onBlur',
+    mode: 'onSubmit',
     resolver: zodResolver(signinSchema),
     defaultValues: {
       email: '',
@@ -22,10 +26,29 @@ const SignInForm = () => {
     },
   });
 
-  //@todo 제출 함수 작성
-  const submit = (data: SignInData) => {
-    console.log(data);
+  const submit = async (data: SignInData) => {
+    try {
+      await submitSignInData(data);
+      router.push('/');
+    } catch (error) {
+      if (error instanceof Error) {
+        // 로그인 오류 처리
+        if (error.message.includes('잘못된 이메일 또는 비밀번호입니다')) {
+          setError('email', {
+            type: 'manual',
+            message: '잘못된 이메일 또는 비밀번호입니다',
+          });
+          setError('password', {
+            type: 'manual',
+            message: '잘못된 이메일 또는 비밀번호입니다',
+          });
+        } else {
+          console.error('Error:', error.message);
+        }
+      }
+    }
   };
+
   return (
     <form
       className='rounded-[24px] bg-var-white'

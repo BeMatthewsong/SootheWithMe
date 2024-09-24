@@ -17,7 +17,7 @@ export const signupSchema = z
       .string()
       .min(1, { message: '이메일을 입력해주세요.' })
       .email('이메일 형식을 입력해주세요.'),
-    company: z.string().min(1, { message: '회사명을 입력해주세요.' }),
+    companyName: z.string().min(1, { message: '회사명을 입력해주세요.' }),
     password: z
       .string()
       .min(1, { message: '비밀번호를 입력해 주세요.' })

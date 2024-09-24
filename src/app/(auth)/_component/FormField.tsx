@@ -5,7 +5,7 @@ import { errorMessageStyle } from './FormOptions';
 interface SignUpData {
   name: string;
   email: string;
-  company: string;
+  companyName: string;
   password: string;
   passwordCheck: string;
 }

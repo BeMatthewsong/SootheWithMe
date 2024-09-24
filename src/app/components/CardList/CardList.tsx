@@ -43,7 +43,7 @@ const CardList = ({ data }: CardProps) => {
       <div className='relative flex h-156 w-full flex-col gap-16 md:h-auto md:w-280'>
         <Image
           className='rounded-t-[24px] object-cover md:rounded-l-[24px] md:rounded-tr-none'
-          src={data.image}
+          src={data.image || '/images/mock-image.png'}
           alt='image'
           fill
           quality={85}
