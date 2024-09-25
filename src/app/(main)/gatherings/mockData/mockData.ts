@@ -19,18 +19,6 @@ export const mockData = {
   canceledAt: registrationEnd.toISOString(),
 };
 
-export const OPTIONS = [
-  '건대입구',
-  '을지로 3가',
-  '신림',
-  '홍대입구',
-  '시청',
-  '신대방',
-  '서울대입구',
-];
-
-export const SORT_OPTIONS = ['마감 임박', '을지로 3가', '참여 인원 순'];
-
 export interface Participant {
   User: {
     id: number;

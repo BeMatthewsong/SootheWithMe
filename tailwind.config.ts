@@ -25,6 +25,7 @@ const config: Config = {
     zIndex: {
       base: '1',
       nav: '2',
+      dropdown: '10',
       popup: '999',
       floating: '1000',
     },

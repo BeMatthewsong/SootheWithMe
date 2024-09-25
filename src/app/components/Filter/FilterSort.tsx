@@ -9,6 +9,7 @@ interface FilterSortProps {
   state?: 'default' | 'active';
   options: string[];
   children: string;
+  onSelect?: (option: string) => void;
 }
 
 const stateClasses = {
@@ -18,8 +19,9 @@ const stateClasses = {
 
 const FilterSort = ({
   state = 'default',
-  options,
+  options = [],
   children,
+  onSelect,
 }: FilterSortProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -28,9 +30,17 @@ const FilterSort = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleOptionSelect = (option: string) => {
-    setSelectedOption(option);
-    setIsOpen(false);
-    setCurrentState('active');
+    if (option === children) {
+      setSelectedOption(null);
+      setIsOpen(false);
+      setCurrentState('default');
+      onSelect?.('');
+    } else {
+      setSelectedOption(option);
+      setIsOpen(false);
+      setCurrentState('active');
+      onSelect?.(option);
+    }
   };
 
   const toggleDropDown = () => {
@@ -68,7 +78,7 @@ const FilterSort = ({
 
       {isOpen && (
         <DropDown
-          options={options}
+          options={[children, ...options]}
           onSelect={handleOptionSelect}
           onClose={() => setIsOpen(false)}
           classnames='min-w-max right-0'

@@ -25,7 +25,9 @@ const Chips = ({ activeTab, onChipClick }: ChipsProps) => {
     <div className='mt-8 space-x-8 py-16'>
       <Chip
         state={activeChip === 'ALL' ? 'active' : 'default'}
-        onClick={() => handleChipClick('ALL')}
+        onClick={
+          activeTab === 'WORKATION' ? undefined : () => handleChipClick('ALL')
+        }
       >
         전체
       </Chip>

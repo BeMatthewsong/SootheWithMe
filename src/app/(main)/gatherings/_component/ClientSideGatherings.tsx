@@ -8,37 +8,26 @@ import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from '@/app/components/Chips/Chips';
 import CreateGatheringButton from './CreateGatheringButton';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
+import useGatherings from '@/hooks/useGatherings';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
-import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
 }
 
 const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
-  const [activeTab, setActiveTab] = useState<'WORKATION' | 'DALLAEMFIT'>(
-    'DALLAEMFIT',
-  );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [filteredData, setFilteredData] =
-    useState<GatheringsListData[]>(gatherings);
 
-  const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
-    setActiveTab(type);
-
-    const newData = await getGatherings({ type });
-    setFilteredData(newData);
-  };
-
-  const handleChipClick = async (
-    label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
-  ) => {
-    const type = label === 'ALL' ? activeTab : label;
-
-    const newData = await getGatherings({ type });
-    setFilteredData(newData || []);
-  };
+  const {
+    filteredData,
+    activeTab,
+    handleTabClick,
+    handleChipClick,
+    handleLocationChange,
+    handleDateChange,
+    handleSortChange,
+  } = useGatherings(gatherings);
 
   usePreventScroll(isModalOpen);
 
@@ -52,7 +41,11 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
           </div>
           <Chips activeTab={activeTab} onChipClick={handleChipClick} />
         </div>
-        <Filters />
+        <Filters
+          onLocationChange={handleLocationChange}
+          onDateChange={handleDateChange}
+          onSortChange={handleSortChange}
+        />
       </div>
       <GatheringCardList gatherings={filteredData} />
 

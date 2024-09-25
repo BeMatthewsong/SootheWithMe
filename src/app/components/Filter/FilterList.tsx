@@ -9,6 +9,7 @@ interface FilterListProps {
   state?: 'default' | 'active';
   children: string;
   options?: string[];
+  onSelect?: (selectedOption: string | undefined) => void;
 }
 
 const stateClasses = {
@@ -20,6 +21,7 @@ const FilterList = ({
   state = 'default',
   children,
   options = [],
+  onSelect,
 }: FilterListProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -32,10 +34,12 @@ const FilterList = ({
       setSelectedOption(null);
       setIsOpen(false);
       setCurrentState('default');
+      onSelect?.(undefined);
     } else {
       setSelectedOption(option);
       setIsOpen(false);
       setCurrentState('active');
+      onSelect?.(option);
     }
   };
 

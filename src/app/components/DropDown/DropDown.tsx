@@ -20,7 +20,7 @@ const DropDown = ({
 
   return (
     <div
-      className={`absolute z-base mt-4 max-h-240 w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400 ${classnames}`}
+      className={`z-dropdown absolute mt-4 max-h-240 w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400 ${classnames}`}
     >
       <ul>
         {options.map((option, index) => (

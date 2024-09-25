@@ -11,6 +11,7 @@ interface FilterProps {
   children: string;
   options?: string[];
   type?: 'list' | 'sort';
+  onSelect?: (selectedOption: string | undefined) => void;
 }
 
 // Filter 하위의 FilterList, FilterSort 컴포넌트의 props 타입
@@ -64,6 +65,7 @@ const Filter = ({
   children,
   options = [],
   type = 'list',
+  onSelect,
 }: FilterProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -76,10 +78,12 @@ const Filter = ({
       setSelectedOption(null);
       setIsOpen(false);
       setCurrentState('default');
+      onSelect?.(undefined);
     } else {
       setSelectedOption(option);
       setIsOpen(false);
       setCurrentState('active');
+      onSelect?.(option);
     }
   };
 
