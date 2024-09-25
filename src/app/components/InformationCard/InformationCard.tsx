@@ -10,16 +10,17 @@ import {
 import Avatar from './Avatar';
 import InfoChip from '../Chip/InfoChip';
 import ProgressBar from '../ProgressBar/ProgressBar';
-
-// min number of people to confirm opening
-const MIN_PARTICIPANTS = 5;
+import { GatheringParticipantsType } from '@/types/data.type';
+import { MIN_PARTICIPANTS } from '@/constants/common';
+import { formatDate, formatTimeColon } from '@/utils/formatDate';
 
 interface InformationCardProps {
   title: string;
   address: string;
   date: string;
   time: string;
-  participants: { id: number; name: string; image: string }[];
+  participants: GatheringParticipantsType[];
+  participantCount: number;
   maxParticipants: number;
 }
 
@@ -29,8 +30,11 @@ const InformationCard = ({
   date,
   time,
   participants,
+  participantCount,
   maxParticipants,
 }: InformationCardProps) => {
+  console.log(date);
+
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const handleToggleSave = () => {
@@ -42,23 +46,23 @@ const InformationCard = ({
     const maxVisible = 4;
     const visibleAvatars = participants
       .slice(0, maxVisible)
-      .map(({ id, name, image }) => (
+      .map(({ User }) => (
         <Avatar
-          key={id}
-          id={id}
-          name={name}
-          image={image}
+          key={User.id}
+          id={User.id}
+          name={User.name}
+          image={User.image}
           className='h-28 w-28'
         />
       ));
 
-    if (participants.length > maxVisible) {
+    if (participantCount > maxVisible) {
       visibleAvatars.push(
         <div
           key='remaining'
           className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
         >
-          +{participants.length - maxVisible}
+          +{participantCount - maxVisible}
         </div>,
       );
     }
@@ -71,8 +75,12 @@ const InformationCard = ({
       <div className='pb-44'>
         <div className='flex justify-between'>
           <div>
-            <div className='text-[18px] font-semibold'>{title}</div>
-            <div className='text-[14px] font-medium'>{address}</div>
+            <div className='text-[18px] font-semibold' data-testid='title'>
+              {title}
+            </div>
+            <div className='text-[14px] font-medium' data-testid='address'>
+              {address}
+            </div>
           </div>
 
           {/* 찜 */}
@@ -91,8 +99,12 @@ const InformationCard = ({
 
         {/* 날짜, 시간 chip */}
         <div className='mt-12 space-x-8'>
-          <InfoChip type='date'>{date}</InfoChip>
-          <InfoChip type='time'>{time}</InfoChip>
+          <InfoChip type='date' data-testid='date'>
+            {formatDate(date)}
+          </InfoChip>
+          <InfoChip type='time' data-testid='time'>
+            {formatTimeColon(time)}
+          </InfoChip>
         </div>
       </div>
 
@@ -101,12 +113,12 @@ const InformationCard = ({
         <div className='flex justify-between'>
           <div className='flex items-center'>
             <div className='text-14 font-semibold'>
-              모집 정원 {participants.length}명
+              모집 정원 {participantCount}명
             </div>
             <div className='ml-12 flex -space-x-6'>{renderAvatars()}</div>
           </div>
           <div className='flex items-center'>
-            {participants.length >= MIN_PARTICIPANTS ? (
+            {participantCount >= MIN_PARTICIPANTS ? (
               <>
                 <IconCheckCircle />
                 <div className='text-14 font-medium text-var-orange-500'>
@@ -119,7 +131,7 @@ const InformationCard = ({
 
         {/* progress bar */}
         <ProgressBar
-          participantNumber={participants.length}
+          participantNumber={participantCount}
           hasParticipantNumber={false}
           hasOpeningConfirmed={false}
           capacity={maxParticipants}

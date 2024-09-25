@@ -10,7 +10,7 @@ import CreateGatheringButton from './CreateGatheringButton';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
-import fetchGatherings from '@/app/actions/gatherings/fetchGatherings';
+import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -27,7 +27,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   const handleTabClick = async (type: 'WORKATION' | 'DALLAEMFIT') => {
     setActiveTab(type);
 
-    const newData = await fetchGatherings({ type });
+    const newData = await getGatherings({ type });
     setFilteredData(newData);
   };
 
@@ -36,7 +36,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
   ) => {
     const type = label === 'ALL' ? activeTab : label;
 
-    const newData = await fetchGatherings({ type });
+    const newData = await getGatherings({ type });
     setFilteredData(newData || []);
   };
 

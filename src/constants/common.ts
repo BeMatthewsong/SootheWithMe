@@ -10,3 +10,7 @@ export const MYPAGE_REVIEW_TABS = {
   WRITABLE: '작성 가능한 리뷰',
   WRITTEN: '작성한 리뷰',
 };
+
+export const REVIEWS_PER_PAGE = 4;
+
+export const MIN_PARTICIPANTS = 5;

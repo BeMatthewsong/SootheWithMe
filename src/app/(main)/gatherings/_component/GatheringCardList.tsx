@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import CardList from '@/app/components/CardList/CardList';
 import { GatheringsListData } from '@/types/data.type';
 
@@ -19,7 +21,9 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         </div>
       ) : (
         gatherings.map((gathering) => (
-          <CardList key={gathering.id} data={gathering} />
+          <Link key={gathering.id} href={`/gatherings/${gathering.id}`}>
+            <CardList data={gathering} />
+          </Link>
         ))
       )}
     </div>

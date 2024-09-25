@@ -2,7 +2,7 @@
 
 import { GatheringsListData } from '@/types/data.type';
 
-interface FetchGatheringsParams {
+interface GetGatheringsParams {
   limit?: number;
   offset?: number;
   type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
@@ -13,11 +13,11 @@ interface FetchGatheringsParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-const fetchGatherings = async (
-  params: FetchGatheringsParams = {},
+const getGatherings = async (
+  params: GetGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
-    const { limit = 10, offset = 0, ...rest } = params;
+    const { limit = 12, offset = 0, ...rest } = params;
 
     const queryString = new URLSearchParams({
       limit: String(limit),
@@ -43,4 +43,4 @@ const fetchGatherings = async (
   }
 };
 
-export default fetchGatherings;
+export default getGatherings;
