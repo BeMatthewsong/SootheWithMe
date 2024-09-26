@@ -36,15 +36,12 @@
 }
 
 .react-datepicker__navigation {
-  @apply hidden;
 }
 
 .react-datepicker__navigation--previous {
-  @apply hidden;
 }
 
 .react-datepicker__navigation--next {
-  @apply hidden;
 }
 
 .react-datepicker__day {
@@ -68,5 +65,5 @@
 }
 
 .react-datepicker__day--keyboard-selected {
-  @apply !text-var-orange-600;
+  @apply !bg-var-white !text-var-orange-600;
 }

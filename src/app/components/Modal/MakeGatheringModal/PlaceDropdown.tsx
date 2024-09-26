@@ -5,8 +5,10 @@ import { useRef, useState, useEffect } from 'react';
 import { IconCaret } from '@/public/icons';
 import DropDown from '@/app/components/DropDown/DropDown';
 
-interface ModalPlaceDropdownProps {
+interface PlaceDropdownProps {
   state?: 'default' | 'active';
+  selectedOption: string | null;
+  setSelectedOption: (option: string | null) => void;
   children: string;
   options?: string[];
 }
@@ -16,13 +18,14 @@ const stateClasses = {
   active: 'text-var-gray-800 bg-var-gray-50',
 };
 
-const ModalPlaceDropdown = ({
+const PlaceDropdown = ({
   state = 'default',
+  selectedOption,
+  setSelectedOption,
   children,
   options = [],
-}: ModalPlaceDropdownProps) => {
+}: PlaceDropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [currentState, setCurrentState] = useState<'default' | 'active'>(state);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -62,12 +65,15 @@ const ModalPlaceDropdown = ({
 
   return (
     <div className='relative' ref={containerRef}>
-      <div
-        className={`h- mb-8 flex w-full cursor-pointer items-center justify-between rounded-xl py-[6px] pl-12 pr-8 text-16 font-medium md:h-44 md:py-[10px] ${stateClasses[currentState]}`}
-        onClick={toggleDropDown}
-      >
-        {selectedOption || children}
-        <IconCaret className={`h-24 w-24 text-var-gray-800`} />
+      <div className='space-y-12 text-16 font-semibold'>
+        <h2>장소</h2>
+        <div
+          className={`h- mb-8 flex w-full cursor-pointer items-center justify-between rounded-xl py-[6px] pl-12 pr-8 text-16 font-semibold md:h-44 md:py-[10px] ${stateClasses[currentState]}`}
+          onClick={toggleDropDown}
+        >
+          {selectedOption || children}
+          <IconCaret className={`h-24 w-24 text-var-gray-800`} />
+        </div>
       </div>
 
       {isOpen && (
@@ -81,4 +87,4 @@ const ModalPlaceDropdown = ({
   );
 };
 
-export default ModalPlaceDropdown;
+export default PlaceDropdown;

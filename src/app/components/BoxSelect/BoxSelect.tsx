@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 /**
  * BoxSelect component
@@ -12,14 +12,14 @@ interface BoxSelectProps {
   title: string;
   subTitle?: string;
   isSelected: boolean;
-  handleCheckboxChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const BoxSelect = ({
   title = '',
   subTitle = '',
   isSelected,
-  handleCheckboxChange,
+  onChange,
 }: BoxSelectProps) => {
   return (
     <label
@@ -30,7 +30,7 @@ const BoxSelect = ({
         type='checkbox'
         className="h-24 w-24 appearance-none rounded-md bg-[url('/icons/checkbox-default.svg')] bg-center bg-no-repeat checked:bg-[url('/icons/checkbox-active.svg')] checked:bg-center checked:bg-no-repeat"
         checked={isSelected}
-        onChange={handleCheckboxChange}
+        onChange={onChange}
       />
       <div className='flex flex-col'>
         <div className='text-14 font-bold md:text-16'>{title}</div>

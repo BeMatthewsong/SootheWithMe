@@ -48,14 +48,3 @@ export const onCancel = () => console.log('모임이 취소되었습니다.');
 export const onShare = () => console.log('모임을 공유했습니다.');
 export const onJoin = () => console.log('모임에 참여했습니다.');
 export const onWithdraw = () => console.log('참여를 취소했습니다.');
-
-/* 모임 만들기 드롭다운 */
-export const MOCK_DROPDOWN_OPTIONS = [
-  '건대입구',
-  '을지로 3가',
-  '신림',
-  '홍대입구',
-  '시청',
-  '신대방',
-  '서울대입구',
-];
