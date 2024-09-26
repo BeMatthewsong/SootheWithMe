@@ -13,9 +13,9 @@ export interface UserJoinedGatheringsData {
   image: string;
   createdBy: number;
   canceledAt?: string | null;
-  joinedAt: string;
-  isCompleted: boolean;
-  isReviewed: boolean;
+  joinedAt?: string;
+  isCompleted?: boolean;
+  isReviewed?: boolean;
 }
 
 // GET : /{teamId}/gatherings

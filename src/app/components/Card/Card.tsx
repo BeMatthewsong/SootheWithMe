@@ -133,7 +133,8 @@ const CardInfo = (): JSX.Element => {
   return (
     <>
       <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
-        <p>{name}</p>,<span>|</span>
+        <p>{name}</p>
+        <span>|</span>
         <p className='text-14 font-medium text-var-gray-700'>{location}</p>
       </div>
       <div className='flex items-center gap-4 text-14 font-medium text-var-gray-700'>
