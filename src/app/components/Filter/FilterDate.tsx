@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import { IconCaret } from '@/public/icons';
 import CalendarModal from '../Modal/CalendarModal';

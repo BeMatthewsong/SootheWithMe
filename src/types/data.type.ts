@@ -1,7 +1,7 @@
 // GET : /{teamId}/gatherings/joined
 // 로그인된 사용자가 참석한 모임 목록 조회 시 Response Data
 export interface UserJoinedGatheringsData {
-  teamId: number;
+  teamId: number | string;
   id: number;
   type: string;
   name: string;
@@ -12,7 +12,7 @@ export interface UserJoinedGatheringsData {
   capacity: number;
   image: string;
   createdBy: number;
-  canceledAt?: string;
+  canceledAt?: string | null;
   joinedAt: string;
   isCompleted: boolean;
   isReviewed: boolean;
@@ -21,7 +21,7 @@ export interface UserJoinedGatheringsData {
 // GET : /{teamId}/gatherings
 // 모임 목록 조회 시 Response Data
 export interface GatheringsListData {
-  teamId: number;
+  teamId: number | string;
   id: number;
   type: string;
   name: string;
@@ -32,11 +32,11 @@ export interface GatheringsListData {
   capacity: number;
   image: string;
   createdBy: number;
-  canceledAt?: string;
+  canceledAt?: string | null;
 }
 
 export interface GatheringInfoType {
-  teamId: number;
+  teamId: number | string;
   id: number;
   type: string;
   name: string | null;
@@ -47,11 +47,11 @@ export interface GatheringInfoType {
   capacity: number;
   image: string;
   createdBy: number;
-  canceledAt?: string;
+  canceledAt?: string | null;
 }
 
 export interface GatheringParticipantsType {
-  teamId: number;
+  teamId: number | string;
   userId: number;
   gatheringId: number;
   joinedAt: string;
@@ -60,7 +60,7 @@ export interface GatheringParticipantsType {
     email: string;
     name: string;
     companyName: string;
-    image: string | null;
+    image: string;
   };
 }
 
@@ -80,13 +80,13 @@ export interface FetchGatheringsResponse {
 }
 
 export interface ReviewsType {
-  teamId: number;
+  teamId: number | string;
   id: number;
   score: number;
   comment: string;
   createdAt: string;
   Gathering: {
-    teamId: number;
+    teamId: number | string;
     id: number;
     type: string;
     name: string;
@@ -95,9 +95,20 @@ export interface ReviewsType {
     image: string;
   };
   User: {
-    teamId: number;
+    teamId: number | string;
     id: number;
     name: string;
     image: string;
   };
+}
+
+export interface ReviewScoreType {
+  teamId: number | string;
+  gatheringId: number;
+  type: string;
+  oneStar: number;
+  twoStars: number;
+  threeStars: number;
+  fourStars: number;
+  fiveStars: number;
 }
