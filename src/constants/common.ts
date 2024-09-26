@@ -20,3 +20,5 @@ export const SORT_OPTIONS = ['최신순', '마감 임박', '참여 인원 순'];
 export const REVIEWS_PER_PAGE = 4;
 
 export const MIN_PARTICIPANTS = 5;
+
+export const LIMIT_PER_REQUEST = 10;

@@ -72,7 +72,7 @@ const FilterDate = ({
 
       {isOpen && (
         <div
-          className={`z-dropdown absolute mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400`}
+          className={`absolute z-dropdown mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400`}
         >
           <CalendarModal
             initialSelectedData={selectedDate}
