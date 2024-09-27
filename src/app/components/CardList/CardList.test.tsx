@@ -97,26 +97,6 @@ describe('Tag Component Render', () => {
   });
 });
 
-// 마감된 챌린지일 경우 (isChallengeEnded)
-describe('isChallengeEnded Layer Render', () => {
-  beforeEach(() => {
-    const date = new Date();
-    date.setDate(date.getDate() - 1); // 하루 전 날짜로 설정
-
-    const MOCK_DATA = {
-      ...MOCK_DATA_BASE,
-      dateTime: date.toISOString(),
-    };
-
-    render(<CardList data={MOCK_DATA} />);
-  });
-
-  it('should render isChallengeEnded layer when isChallengeEnded is true', () => {
-    const challengeEndedElement = screen.getByText(/마감된 챌린지예요/);
-    expect(challengeEndedElement).toBeInTheDocument();
-  });
-});
-
 // SAVED 아이콘 클릭으로 토글 테스트
 describe('Saved button Test', () => {
   it('should toggle isSaved state when handleToggleSave is called', () => {
@@ -128,28 +108,68 @@ describe('Saved button Test', () => {
     inactiveButton = screen.getByTestId('IconSaveInactive');
     activeButton = screen.queryByTestId('IconSaveActive');
 
-    // 초기 상태 - (inactive 아이콘 확인)
     expect(inactiveButton).toBeInTheDocument();
     expect(activeButton).not.toBeInTheDocument();
 
-    // 버튼 클릭하여 상태 변경
     fireEvent.click(inactiveButton);
 
-    // 아이콘이 변경되었는지 확인 (actove 아이콘 확인)
     inactiveButton = screen.queryByTestId('IconSaveInactive');
     activeButton = screen.getByTestId('IconSaveActive');
 
     expect(activeButton).toBeInTheDocument();
     expect(inactiveButton).not.toBeInTheDocument();
 
-    // 버튼 클릭하여 상태 변경
     fireEvent.click(activeButton);
 
     inactiveButton = screen.getByTestId('IconSaveInactive');
     activeButton = screen.queryByTestId('IconSaveActive');
 
-    // 초기와 같은 상태 (inactive 아이콘 확인)
     expect(inactiveButton).toBeInTheDocument();
     expect(activeButton).not.toBeInTheDocument();
+  });
+
+  // 아이콘 클릭 시 이벤트 핸들러 작동 여부 테스트
+  it('should call handleToggleSave when IconSaveInactive is clicked', () => {
+    const handleToggleSave = jest.fn();
+    render(
+      <CardList data={MOCK_DATA_BASE} handleButtonClick={handleToggleSave} />,
+    );
+
+    const inactiveButton = screen.getByTestId('IconSaveInactive');
+    fireEvent.click(inactiveButton);
+
+    expect(handleToggleSave).toHaveBeenCalled();
+
+    const activeButton = screen.getByTestId('IconSaveActive');
+    expect(activeButton).toBeInTheDocument();
+  });
+});
+
+// 마감된 챌린지일 경우 (isChallengeEnded)
+describe('isChallengeEnded Layer Render', () => {
+  const handleToggleSave = jest.fn();
+
+  beforeEach(() => {
+    const date = new Date();
+    date.setDate(date.getDate() - 1); // 하루 전 날짜로 설정
+
+    const MOCK_DATA = {
+      ...MOCK_DATA_BASE,
+      dateTime: date.toISOString(),
+    };
+
+    render(<CardList data={MOCK_DATA} handleButtonClick={handleToggleSave} />);
+  });
+
+  it('should render isChallengeEnded layer when isChallengeEnded is true', () => {
+    const challengeEndedElement = screen.getByText(/마감된 챌린지예요/);
+    expect(challengeEndedElement).toBeInTheDocument();
+  });
+
+  it('should call handleButtonClick when IconSaveDiscardBtn is clicked', () => {
+    const discardButton = screen.getByTestId('IconSaveDiscard');
+    fireEvent.click(discardButton);
+
+    expect(handleToggleSave).toHaveBeenCalled();
   });
 });

@@ -17,24 +17,30 @@ import { GatheringsListData } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 
+// TODO : optional props를 필수로 변경
 interface CardProps {
   data: GatheringsListData;
+  isSaved?: boolean;
+  handleButtonClick?: (id: number) => void;
 }
 
-const CardList = ({ data }: CardProps) => {
+const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
   // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
   const isRenderTag = isSameDate(data.registrationEnd);
 
   // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
   const isChallengeEnded = new Date(data.dateTime) <= new Date();
 
-  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isSavedActive, setSavedActive] = useState<boolean>(isSaved || false);
 
-  const handleToggleSave = () => {
-    setIsSaved((prev) => !prev);
-    // TODO : storage 변경 코드
+  const handleToggleSave = (e: MouseEvent) => {
+    e.preventDefault();
+    setSavedActive(!isSavedActive);
+    if (handleButtonClick) {
+      handleButtonClick(data.id);
+    }
   };
 
   return (
@@ -70,7 +76,7 @@ const CardList = ({ data }: CardProps) => {
               <InfoChip type='time'>{formatTimeColon(data.dateTime)}</InfoChip>
             </div>
           </div>
-          {isSaved ? (
+          {isSavedActive ? (
             <IconSaveActive
               className='h-48 w-48 animate-heartPulse cursor-pointer'
               onClick={handleToggleSave}
@@ -94,7 +100,7 @@ const CardList = ({ data }: CardProps) => {
 
       {/* 종료된 챌린지의 경우 */}
       {isChallengeEnded && (
-        <div className='absolute left-0 top-0 z-base flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
+        <div className='z-base absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
           <p className='text-14 font-medium text-white'>
             마감된 챌린지예요.
             <br />
@@ -103,7 +109,7 @@ const CardList = ({ data }: CardProps) => {
           <button
             type='button'
             className='right-24 mt-24 md:absolute md:top-24 md:mt-0'
-            // TODO : onClick={}
+            onClick={handleToggleSave}
           >
             <IconSaveDiscardBtn className='h-36 w-116 md:hidden' />
             <IconSaveDiscard className='hidden h-48 w-48 md:block' />

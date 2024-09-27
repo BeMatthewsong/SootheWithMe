@@ -7,7 +7,7 @@ interface TabsProps {
 
 const Tabs = ({ activeTab, onTabClick }: TabsProps) => {
   return (
-    <div className='flex space-x-12'>
+    <div className='flex items-center'>
       <Tab
         type='dalaemfit'
         isActive={activeTab === 'DALLAEMFIT'}

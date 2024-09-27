@@ -3,6 +3,7 @@
 import { GatheringsListData } from '@/types/data.type';
 
 interface GetGatheringsParams {
+  id?: string;
   limit?: number;
   offset?: number;
   type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';

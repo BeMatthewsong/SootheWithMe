@@ -4,6 +4,7 @@ import '@/styles/reset.css';
 import '@/styles/style.css';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
+import { SavedGatheringProvider } from '@/context/SavedGatheringContext';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,11 +19,11 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard'>
-        <Gnb />
         <Providers>
+          <Gnb />
           <div className='grow pt-60'>{children}</div>
+          <div id='modal-root'></div>
         </Providers>
-        <div id='modal-root'></div>
       </body>
     </html>
   );

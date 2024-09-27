@@ -1,10 +1,12 @@
+import { GatheringsListData } from '@/types/data.type';
+
 export const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 
 export const registrationEnd = new Date(tomorrow);
 registrationEnd.setDate(tomorrow.getDate() - 1);
 
-export const DATA_LIST = [
+export const DATA_LIST: GatheringsListData[] = [
   {
     teamId: 0,
     id: 0,

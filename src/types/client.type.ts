@@ -17,3 +17,6 @@ export interface UserData {
   createdAt: string;
   updatedAt: string;
 }
+
+export type GatheringTabsType = 'WORKATION' | 'DALLAEMFIT';
+export type GatheringChipsType = 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS';

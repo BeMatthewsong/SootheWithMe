@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 interface BadgeProps {
-  children: string;
+  children: ReactNode;
 }
 
 const Badge = ({ children }: BadgeProps) => {
