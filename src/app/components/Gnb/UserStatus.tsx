@@ -1,19 +1,18 @@
 'use client';
 
+import { deleteCookie } from '@/actions/auth/cookie/cookie';
+import { useUser } from '@/app/(auth)/context/UserContext';
 import { Profile } from '@/public/images';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
-
-/* user을 null로 설정하면 로그아웃된 상황을 볼 수 있습니다. */
-const user = {
-  name: 'test name',
-};
-
-const options = [{ name: '마이페이지' }, { name: '로그아웃' }];
+import { useRouter } from 'next/navigation';
 
 const UserStatus = () => {
+  const { user, setUser } = useUser();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,31 +30,47 @@ const UserStatus = () => {
     };
   }, []);
 
+  const handleLogout = async () => {
+    deleteCookie('token');
+    setUser(null);
+    setIsOpen(false);
+    router.push('/gatherings');
+  };
+
   return (
     <>
       {user ? (
         <div className='relative' ref={dropDownRef}>
-          <Profile
-            className='size-40 cursor-pointer'
-            onClick={() => setIsOpen((prev) => !prev)}
-          />
+          <div className='relative size-40 cursor-pointer overflow-hidden rounded-full'>
+            {user.image ? (
+              <button onClick={() => setIsOpen((prev) => !prev)}>
+                <Image fill src={user.image} alt='프로필 이미지' />
+              </button>
+            ) : (
+              <Profile onClick={() => setIsOpen((prev) => !prev)} />
+            )}
+          </div>
           {isOpen && (
             <ul className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0'>
-              {options.map((option, index) => (
-                <li
-                  key={index}
-                  className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'
-                >
-                  {option.name}
+              <Link href='/mypage' onClick={() => setIsOpen(false)}>
+                <li className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'>
+                  마이페이지
                 </li>
-              ))}
+              </Link>
+              <li
+                onClick={handleLogout}
+                className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'
+              >
+                로그아웃
+              </li>
             </ul>
           )}
         </div>
       ) : (
         <Link href='/signin'>
-          {/* @todo 임시 경로입니다. */}
-          <div className='text-[16px] font-semibold text-white'>로그인</div>
+          <button className='text-[16px] font-semibold text-white'>
+            로그인
+          </button>
         </Link>
       )}
     </>

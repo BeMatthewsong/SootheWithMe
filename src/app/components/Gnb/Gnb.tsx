@@ -9,19 +9,18 @@ import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
 
-//@todo pathname 정해질 시 추가 예정
 const navList = [
   {
     name: '모임 찾기',
-    link: '#',
+    link: '/gatherings', // @todo link 변경 시 수정
   },
   {
     name: '찜한 모임',
-    link: '#',
+    link: '/saved',
   },
   {
     name: '모든 리뷰',
-    link: '#',
+    link: '/reviews',
   },
 ];
 

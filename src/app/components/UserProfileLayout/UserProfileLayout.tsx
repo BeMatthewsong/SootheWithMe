@@ -1,48 +1,89 @@
 'use client';
 
-import { BtnEdit, ImageProfile, Profile } from '@/public/images';
-import { User } from './Mock';
+import { Profile } from '@/public/images';
+import { useUser } from '@/app/(auth)/context/UserContext';
+import ProfileEditModal from '../Modal/ProfileEditModal';
+import { useState } from 'react';
+import onChangeProfileImage from './onChangeProfileImage';
+import { putProfileData } from '@/app/api/actions/mypage/putProfileData';
+import { useProfileState } from './useProfileState';
 import Image from 'next/image';
-
-// @todo 프로필 변경 모달 함수작성
-const handleEditProfile = () => {};
+import UserProfileHeader from './UserProfileHeader';
+import UserInfo from './UserInfo';
 
 const UserProfileLayout = () => {
+  const { user, setUser } = useUser();
+  const {
+    profileInput,
+    setProfileInput,
+    profileImage,
+    setProfileImage,
+    imagePreview,
+    setImagePreview,
+    resetProfileState,
+  } = useProfileState(user);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  /* 프로필 수정 제충 함수 */
+  const onSubmit = async () => {
+    const updatedUser = await putProfileData({
+      companyName: profileInput,
+      profileImage: profileImage,
+    });
+
+    if (updatedUser) {
+      setUser((prevUser) =>
+        prevUser ? { ...prevUser, ...updatedUser } : prevUser,
+      );
+    }
+
+    setIsModalOpen(false);
+  };
+
+  /* 모달 열기/닫기 함수 */
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev);
+
+    if (isModalOpen) {
+      resetProfileState();
+    }
+  };
+
   return (
     <div className='relative w-full rounded-[24px] border-2 border-var-gray-200'>
-      <div className='flex items-center justify-between rounded-t-[24px] bg-var-orange-400 p-4 px-24 pb-16 pt-[14px]'>
-        <div className='text-18 font-semibold text-var-gray-900'>내 프로필</div>
-        <ImageProfile className='mx-auto mb-[-26px] h-40 w-156 md:mr-156' />
-        <button onClick={handleEditProfile}>
-          <BtnEdit className='size-32' />
-        </button>
-      </div>
-      {/* 프로필 헤더 밑줄입니다. */}
-      <div className='h-8 w-full border-t-2 border-var-orange-600 bg-var-orange-400'></div>
+      <UserProfileHeader toggleModal={toggleModal} />
       <div className='rounded-b-[24px] bg-var-white px-92 py-16'>
         {/* 프로필 이미지 */}
         <div className='absolute left-24 top-56 size-56'>
-          {User.image ? (
-            <img src={User.image} alt='Profile' className='rounded-full' />
+          {user?.image ? (
+            <Image
+              fill
+              src={user.image}
+              alt='Profile'
+              className='overflow-hidden rounded-full'
+            />
           ) : (
             <Profile />
           )}
         </div>
-        {/* 이름 */}
-        <div className='text-16 font-semibold text-var-gray-800'>
-          {User.name}
-        </div>
-        <div className='text-14 font-medium text-var-gray-800'>
-          {/* 회사명 */}
-          <div>
-            company.<span className='pl-[6px] font-normal'>{User.company}</span>
-          </div>
-          {/* 이메일 */}
-          <div>
-            E-mail. <span className='pl-24 font-normal'>{User.email}</span>
-          </div>
-        </div>
+        <UserInfo user={user} />
       </div>
+      {isModalOpen && (
+        <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
+          <ProfileEditModal
+            onCloseClick={toggleModal}
+            onUploadProfileImage={onChangeProfileImage({
+              setProfileImage,
+              setImagePreview,
+            })}
+            profileInput={profileInput}
+            setProfileInput={setProfileInput}
+            imagePreview={imagePreview}
+            onSubmit={onSubmit}
+          />
+        </div>
+      )}
     </div>
   );
 };

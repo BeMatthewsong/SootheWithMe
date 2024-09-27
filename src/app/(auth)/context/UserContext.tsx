@@ -1,8 +1,9 @@
-import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserData } from '@/types/client.type';
 import React, {
+  Dispatch,
   FC,
   ReactNode,
+  SetStateAction,
   createContext,
   useContext,
   useEffect,
@@ -11,58 +12,35 @@ import React, {
 
 interface UserContextType {
   user: UserData | null;
-  isloading: boolean;
-  errorMsg: string | null;
+  setUser: Dispatch<SetStateAction<UserData | null>>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserData | null>(null);
-  const [isloading, setIsLoading] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      const token = await getCookie('token');
-
-      if (!token) {
-        return;
+    // 클라이언트에서만 로컬 스토리지에 접근
+    if (typeof window !== 'undefined') {
+      const savedUserData = localStorage.getItem('userData');
+      if (savedUserData) {
+        setUser(JSON.parse(savedUserData));
       }
+    }
+  }, []);
 
-      setIsLoading(true);
-      setErrorMsg(null);
-      try {
-        const userResponse = await fetch(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}/auths/user`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
 
-          setUser(userData);
-        } else {
-          const errorData = await userResponse.json();
-          throw new Error(errorData.message);
-        }
-      } catch (err: any) {
-        setErrorMsg(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    // 초기 유저 데이터 가져오기 (로그인 후)
-    fetchUserData();
-  }, []); // 컴포넌트 마운트 시 한 번만 호출
-
+  useEffect(() => {
+    // 유저 데이터가 변경될 때마다 로컬 스토리지에 저장
+    if (user) {
+      localStorage.setItem('userData', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('userData'); // 로그아웃 시 로컬 스토리지에서 삭제
+    }
+  }, [user]);
   return (
-    <UserContext.Provider value={{ user, isloading, errorMsg }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
+import { DEFAULT_LIMIT } from '@/constants/common';
 interface ItemWithId {
   id: number;
 }
@@ -22,7 +23,7 @@ interface InfiniteScrollProps<T extends ItemWithId> {
 const InfiniteScroll = <T extends ItemWithId>({
   queryKey,
   queryFn,
-  limit = 5,
+  limit = DEFAULT_LIMIT,
   emptyText,
   renderItem,
 }: InfiniteScrollProps<T>) => {
@@ -34,7 +35,7 @@ const InfiniteScroll = <T extends ItemWithId>({
   const { data, isError, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
       queryKey,
-      queryFn: async ({ pageParam = 0 }) => queryFn(pageParam),
+      queryFn: async ({ pageParam = DEFAULT_LIMIT }) => queryFn(pageParam),
       getNextPageParam: (lastPage) => {
         return lastPage.hasNextPage ? lastPage.offset + limit : undefined;
       },
