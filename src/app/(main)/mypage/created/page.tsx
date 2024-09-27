@@ -21,7 +21,9 @@ const CreatedPage = () => {
         setIsLoading(true);
 
         try {
-          const gatherings = await getGatherings({ createdBy: user.id });
+          const gatherings = await getGatherings({
+            createdBy: String(user.id),
+          });
           setGatheringsList(gatherings);
         } catch (error) {
           console.error('Error fetching data:', error);

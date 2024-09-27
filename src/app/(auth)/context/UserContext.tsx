@@ -44,6 +44,8 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
         );
         if (userResponse.ok) {
           const userData = await userResponse.json();
+
+          setUser(userData);
         } else {
           const errorData = await userResponse.json();
           throw new Error(errorData.message);

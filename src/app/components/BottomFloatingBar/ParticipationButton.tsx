@@ -1,24 +1,25 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+
+import { UserData } from '@/types/client.type';
 import Button from '../Button/Button';
-//@todo 함수 기능 구현
-import { onCancel, onShare, onJoin, onWithdraw } from './Mock';
+import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
+import useCancelGathering from '@/hooks/useCancelGathering';
+import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoin';
+import deleteGatheringToWithdraw from '@/app/api/actions/gatherings/deleteGatheringToWithdraw';
+import { GatheringParticipantsType } from '@/types/data.type';
+import Popup from '../Popup/Popup';
 
-interface Participant {
-  User: {
-    id: number;
-  };
-}
-
-// @todo api 연결 후 Props 수정
 interface ParticipationButtonProps {
   isHost: boolean;
-  user: { name: string; id: number };
+  user: UserData | null;
   participantCount: number;
   capacity: number;
   registrationEnd: string;
-  canceledAt: null | string;
-  participantsData: Participant[];
+  canceledAt?: string | null;
+  participantsData: GatheringParticipantsType[];
 }
 
 const ParticipationButton = ({
@@ -30,13 +31,27 @@ const ParticipationButton = ({
   canceledAt,
   participantsData,
 }: ParticipationButtonProps) => {
+  const router = useRouter();
+  const params = useParams();
+
+  const { copyUrlToClipboard } = useCopyUrlToClipboard();
+  const { cancelGathering } = useCancelGathering(Number(params.id));
+
+  const [hasParticipated, setHasParticipated] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (user) {
+      const isParticipated = participantsData.some(
+        (participant) => participant.User.id === user.id,
+      );
+      setHasParticipated(isParticipated);
+    }
+  }, [user, participantsData]);
+
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
   const isRegistrationEnded = new Date() > new Date(registrationEnd); // 마감일이 지났는지 검사
-  const hasParticipated = participantsData.some(
-    (participant) => participant.User.id === user.id,
-  ); //이미 참여했는지 검사
   const isCancelled = Boolean(canceledAt); //취소되었는지 검사
-
   const isParticipationDisabled = isFull || isRegistrationEnded || isCancelled; // 참여 가능 여부 검사
 
   const buttonName = hasParticipated ? '참여 취소하기' : '참여하기'; //버튼 이름
@@ -45,7 +60,26 @@ const ParticipationButton = ({
     : isParticipationDisabled
       ? 'gray'
       : 'default';
-  const buttonAction = hasParticipated ? onWithdraw : onJoin; // 함수 결정
+
+  const handleJoinClick = async () => {
+    if (!user) {
+      // 유저가 없는 경우
+      setShowPopup(true); // 팝업 표시
+      return;
+    }
+
+    if (!hasParticipated) {
+      await postGatheringToJoin(Number(params.id));
+      setHasParticipated(true);
+    }
+  };
+
+  const handleWithdrawClick = async () => {
+    if (hasParticipated) {
+      await deleteGatheringToWithdraw(Number(params.id));
+      setHasParticipated(false);
+    }
+  };
 
   /* 버튼 렌더링 함수 */
   const renderButton = (
@@ -70,17 +104,32 @@ const ParticipationButton = ({
     const disabled = isRegistrationEnded || isCancelled; // 마감일이 지났거나 취소되었을 경우 button 비활성화
     return (
       <div className='flex w-[330px] gap-[10px]'>
-        {renderButton('취소하기', 'white', onCancel, disabled)}
-        {renderButton('공유하기', 'default', onShare, disabled)}
+        {renderButton('취소하기', 'white', cancelGathering, disabled)}
+        {renderButton('공유하기', 'default', copyUrlToClipboard, disabled)}
       </div>
     );
   }
 
-  return renderButton(
-    buttonName,
-    buttonVariant,
-    buttonAction,
-    isParticipationDisabled, // disable 여부
+  return (
+    <>
+      {renderButton(
+        buttonName,
+        buttonVariant,
+        hasParticipated ? handleWithdrawClick : handleJoinClick,
+        isParticipationDisabled, // disable 여부
+      )}
+      {showPopup && ( // 팝업 렌더링
+        <Popup
+          type='login'
+          hasCancelButton={true}
+          onClickClose={() => setShowPopup(false)}
+          onClickConfirm={() => {
+            setShowPopup(false);
+            router.push('/signin');
+          }}
+        />
+      )}
+    </>
   );
 };
 

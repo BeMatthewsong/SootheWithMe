@@ -25,7 +25,7 @@ const Review = ({
   date,
 }: ReviewProps) => {
   return (
-    <div className='flex-col space-x-6 border-b-2 border-dashed border-var-gray-200 font-medium md:flex md:flex-row'>
+    <div className='flex-col space-x-6 border-b-2 border-dashed border-var-gray-200 pb-20 font-medium md:flex md:flex-row'>
       {image_source ? (
         <div className='relative h-156 w-312 md:w-280'>
           <Image
@@ -68,7 +68,9 @@ const Review = ({
               <div className='text-[12px] text-var-gray-700'>{user_name}</div>
             </div>
           </div>
-          <div className='pl-[12px] text-[12px] text-var-gray-500'>{date}</div>
+          <div className='pl-[12px] text-[12px] text-var-gray-500'>
+            {date.split('T')[0]}
+          </div>
         </div>
       </div>
     </div>

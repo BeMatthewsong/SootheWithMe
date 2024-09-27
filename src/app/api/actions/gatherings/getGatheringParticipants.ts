@@ -20,7 +20,7 @@ const getGatheringParticipants = async (
 
     return data;
   } catch (error) {
-    throw new Error('모임을 불러오지 못했습니다.');
+    throw new Error('참가자들을 불러오지 못했습니다.');
   }
 };
 

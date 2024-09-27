@@ -6,12 +6,12 @@ import BottomFloatingBar from '@/app/components/BottomFloatingBar/BottomFloating
 import GatheringImage from './GatheringImage';
 import GatheringInfo from './GatheringInfo';
 import GatheringReviews from './GatheringReviews';
-import { MOCK_PARTICIPANTS, MOCKUSER } from '../../mockData/mockData';
 import {
   GatheringInfoType,
   GatheringParticipantsType,
   ReviewsType,
 } from '@/types/data.type';
+import { useUser } from '@/app/(auth)/context/UserContext';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;
@@ -24,6 +24,8 @@ const GatheringDetail = ({
   gatheringParticipants,
   reviews,
 }: GatheringDetailProps) => {
+  const { user } = useUser();
+
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handlePageChange = (page: number) => {
@@ -58,13 +60,13 @@ const GatheringDetail = ({
 
       {/* Bottom Floating Bar */}
       <BottomFloatingBar
-        user={MOCKUSER}
-        createdBy={2024}
-        participantCount={1}
-        capacity={5}
-        registrationEnd='2024'
-        canceledAt='2024'
-        participantsData={MOCK_PARTICIPANTS}
+        user={user}
+        createdBy={gatheringInfo.createdBy}
+        participantCount={gatheringInfo.participantCount}
+        capacity={gatheringInfo.capacity}
+        registrationEnd={gatheringInfo.registrationEnd}
+        canceledAt={gatheringInfo.canceledAt}
+        participantsData={gatheringParticipants}
       />
     </>
   );

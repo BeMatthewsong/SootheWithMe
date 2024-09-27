@@ -13,7 +13,7 @@ const GatheringImage = ({ image, endTime }: GatheringImageProps) => {
     <div className='relative h-[270px] w-full md:w-[50vw] lg:max-w-[486px]'>
       <Image
         className='rounded-[20px] object-cover'
-        src={image}
+        src={image || '/images/mock-image.png'}
         alt='review image'
         fill
         quality={85}

@@ -28,7 +28,7 @@ const GatheringReviews = ({
       <div className='text-[18px] font-semibold'>
         이용자들은 이 프로그램을 이렇게 느꼈어요!
       </div>
-      <div className='divide-y divide-dashed'>
+      <div>
         {reviews.length === 0 ? (
           <div className='flex h-[400px] items-center justify-center'>
             <p className='text-center text-14 font-medium text-var-gray-500'>

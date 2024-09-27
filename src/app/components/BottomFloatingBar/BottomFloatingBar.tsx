@@ -1,22 +1,17 @@
 'use client';
 
 import ParticipationButton from './ParticipationButton';
-import { userData, groupData, participantsData } from './Mock';
-
-interface Participant {
-  User: {
-    id: number;
-  };
-}
+import { UserData } from '@/types/client.type';
+import { GatheringParticipantsType } from '@/types/data.type';
 
 interface BottomFloatingBarProps {
-  user: { name: string; id: number };
+  user: UserData | null;
   createdBy: number;
   participantCount: number;
   capacity: number;
   registrationEnd: string;
-  canceledAt: null | string;
-  participantsData: Participant[];
+  canceledAt?: string | null;
+  participantsData: GatheringParticipantsType[];
 }
 
 const BottomFloatingBar = ({
@@ -28,7 +23,7 @@ const BottomFloatingBar = ({
   canceledAt,
   participantsData,
 }: BottomFloatingBarProps) => {
-  const isHost = createdBy === userData.id; //주최자인지 검사
+  const isHost = createdBy === user?.id; //주최자인지 검사
 
   return (
     <section className='fixed bottom-0 w-full border-t-2 border-var-black bg-var-white px-16 py-20 md:px-24'>
