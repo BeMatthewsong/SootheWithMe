@@ -56,11 +56,11 @@ const InfiniteScroll = <T extends ItemWithId>({
       </div>
     );
   }
-  /* @todo 임시 에러 처리 */
+
   if (isError)
     return (
       <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
-        Error occurred
+        모임을 불러오지 못했습니다.
       </div>
     );
 
@@ -74,10 +74,12 @@ const InfiniteScroll = <T extends ItemWithId>({
             )),
           )}
       </ul>
-      {/* //@todo 로딩시 스핀 애니메이션 추가 */}
       {isFetching && (
-        <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
-          Loading...
+        <div className='flex grow items-center justify-center'>
+          <div className='h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-transparent'></div>
+          <span className='ml-2 text-[14px] font-medium text-gray-500'>
+            Loading...
+          </span>
         </div>
       )}
       <div ref={ref} />

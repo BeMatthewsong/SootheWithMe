@@ -5,7 +5,7 @@ import { BtnEditProfile } from '@/public/images';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import { ChangeEvent } from 'react';
-import { useUser } from '@/app/(auth)/context/UserContext';
+import { UserData } from '@/types/client.type';
 import Image from 'next/image';
 
 /**
@@ -17,15 +17,17 @@ import Image from 'next/image';
  */
 
 interface ProfileEditModalProps {
+  user: UserData | null;
   onCloseClick?: () => void;
   onUploadProfileImage?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
-  imagePreview?: string | null;
+  imagePreview?: string;
   profileInput: string;
   setProfileInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ProfileEditModal = ({
+  user,
   onCloseClick,
   onUploadProfileImage,
   onSubmit,
@@ -33,8 +35,6 @@ const ProfileEditModal = ({
   profileInput,
   setProfileInput,
 }: ProfileEditModalProps) => {
-  const { user } = useUser();
-
   const onChangeProfileInput = (e: ChangeEvent<HTMLInputElement>) => {
     setProfileInput(e.target.value);
   };

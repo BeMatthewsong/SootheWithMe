@@ -10,7 +10,8 @@ export const getCookie = async (key: string) => {
 
 // 쿠키를 저장하는 함수
 export const setCookie = async (key: string, value: string) => {
-  cookies().set(key, value);
+  const expirationDate = new Date(Date.now() + 3600 * 1000);
+  cookies().set(key, value, { expires: expirationDate });
 };
 
 // 쿠키를 삭제하는 함수

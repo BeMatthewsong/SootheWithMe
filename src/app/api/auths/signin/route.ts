@@ -32,27 +32,7 @@ export const POST = async (req: Request) => {
     const { token }: LoginResponse = await response.json();
     await setCookie('token', token);
 
-    // 유저 정보 받아오는 함수
-    const userResponse = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/auths/user`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      },
-    );
-    if (!userResponse.ok) {
-      const errorData = await userResponse.json();
-      throw new Error(errorData.message);
-    }
-
-    const userData = await userResponse.json();
-
-    return NextResponse.json(
-      { message: '로그인 성공', user: userData },
-      { status: 200 },
-    );
+    return NextResponse.json({ message: '로그인 성공' }, { status: 200 });
   } catch (error) {
     const errorMessage =
       error instanceof Error ? error.message : '알 수 없는 오류 발생';

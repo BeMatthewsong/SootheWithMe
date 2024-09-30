@@ -1,7 +1,6 @@
 'use client';
 
 import { Profile } from '@/public/images';
-import { useUser } from '@/app/(auth)/context/UserContext';
 import ProfileEditModal from '../Modal/ProfileEditModal';
 import { useState } from 'react';
 import onChangeProfileImage from './onChangeProfileImage';
@@ -10,9 +9,12 @@ import { useProfileState } from './useProfileState';
 import Image from 'next/image';
 import UserProfileHeader from './UserProfileHeader';
 import UserInfo from './UserInfo';
+import { UserData } from '@/types/client.type';
 
-const UserProfileLayout = () => {
-  const { user, setUser } = useUser();
+interface MyGatheringListProps {
+  user: UserData | null;
+}
+const UserProfileLayout = ({ user }: MyGatheringListProps) => {
   const {
     profileInput,
     setProfileInput,
@@ -25,17 +27,20 @@ const UserProfileLayout = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  /* 프로필 수정 제충 함수 */
+  /* 수정된 프로필 제출 함수 */
   const onSubmit = async () => {
-    const updatedUser = await putProfileData({
-      companyName: profileInput,
-      profileImage: profileImage,
-    });
+    if (!profileImage || !profileInput) {
+      alert('프로필 이미지와 회사명을 입력해주세요.');
+      return null;
+    }
+    const formData = new FormData();
+    formData.append('companyName', profileInput); // 프로필 이름 추가
+    formData.append('image', profileImage); // 프로필 이미지 추가
 
-    if (updatedUser) {
-      setUser((prevUser) =>
-        prevUser ? { ...prevUser, ...updatedUser } : prevUser,
-      );
+    const updatedUser = await putProfileData(formData);
+
+    if (!updatedUser) {
+      alert('프로필 업데이트에 실패했습니다.');
     }
 
     setIsModalOpen(false);
@@ -72,6 +77,7 @@ const UserProfileLayout = () => {
       {isModalOpen && (
         <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
           <ProfileEditModal
+            user={user}
             onCloseClick={toggleModal}
             onUploadProfileImage={onChangeProfileImage({
               setProfileImage,

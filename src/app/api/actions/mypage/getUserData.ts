@@ -2,35 +2,34 @@
 
 import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserData } from '@/types/client.type';
-import { revalidatePath } from 'next/cache';
 
-export const putProfileData = async (
-  formData: FormData,
-): Promise<UserData | null> => {
+export const getUserData = async () => {
   const token = await getCookie('token');
+
+  if (!token) {
+    return null;
+  }
 
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/auths/user`,
       {
-        method: 'PUT',
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
-        body: formData,
       },
     );
 
     if (!response.ok) {
-      throw new Error('프로필 업데이트에 실패했습니다.');
+      throw new Error('유저 정보를 불러오는데 실패했습니다.');
     }
 
     const result: UserData = await response.json();
-    revalidatePath('/');
 
-    return result; // 업데이트된 사용자 데이터를 반환
+    return result; // 사용자 데이터를 반환
   } catch (error) {
-    console.error('프로필 업데이트 중 오류가 발생했습니다:', error);
+    console.error('유저 정보를 불러오는데 실패했습니다:', error);
     return null;
   }
 };

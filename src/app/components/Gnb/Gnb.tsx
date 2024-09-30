@@ -8,6 +8,7 @@ import TopTab from '../Tab/TopTab';
 import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
+import { UserData } from '@/types/client.type';
 
 const navList = [
   {
@@ -24,7 +25,11 @@ const navList = [
   },
 ];
 
-const Gnb = () => {
+interface GnbProps {
+  user: UserData | null;
+}
+
+const Gnb = ({ user }: GnbProps) => {
   const pathname = usePathname();
 
   const { savedGatherings } = useSavedGatheringList();
@@ -37,7 +42,7 @@ const Gnb = () => {
   }, [savedGatherings]);
 
   return (
-    <header className='z-nav fixed left-0 top-0 w-full border-b-2 border-var-gray-900 bg-var-orange-600'>
+    <header className='fixed left-0 top-0 z-nav w-full border-b-2 border-var-gray-900 bg-var-orange-600'>
       <div className='mx-16 flex max-w-[1200px] items-center justify-between md:mx-24 lg:mx-auto'>
         <nav className='flex items-center'>
           <Link href='/'>
@@ -61,7 +66,7 @@ const Gnb = () => {
             ))}
           </ul>
         </nav>
-        <UserStatus />
+        <UserStatus user={user} />
       </div>
     </header>
   );

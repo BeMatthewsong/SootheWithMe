@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 interface OnChangeProfileImageProps {
   setProfileImage: Dispatch<SetStateAction<File | string>>;
-  setImagePreview: Dispatch<SetStateAction<string | null>>;
+  setImagePreview: Dispatch<SetStateAction<string>>;
 }
 
 const onChangeProfileImage =
