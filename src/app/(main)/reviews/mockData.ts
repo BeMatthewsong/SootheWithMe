@@ -61,7 +61,7 @@ export const REVIEW_MOCK_DATA: ReviewsType[] = [
     id: 1,
     score: 5,
     comment:
-      '따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+      'DALLAEMFIT :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
     createdAt: '2024-09-24T08:12:16.169Z',
     Gathering: {
       teamId: '3-4',
@@ -84,7 +84,7 @@ export const REVIEW_MOCK_DATA: ReviewsType[] = [
     id: 2,
     score: 5,
     comment:
-      '따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+      'OFFICE_STRETCHING :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
     createdAt: '2024-09-24T08:12:16.169Z',
     Gathering: {
       teamId: '3-4',
@@ -107,13 +107,13 @@ export const REVIEW_MOCK_DATA: ReviewsType[] = [
     id: 3,
     score: 5,
     comment:
-      '따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+      'DALLAEMFIT :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
     createdAt: '2024-09-24T08:12:16.169Z',
     Gathering: {
       teamId: '3-4',
       id: 100,
       type: 'DALLAEMFIT',
-      name: 'WORKATION',
+      name: 'DALLAEMFIT',
       dateTime: '2024-09-24T08:12:16.169Z',
       location: '건대입구',
       image: '/images/mock-image.png',
@@ -130,12 +130,81 @@ export const REVIEW_MOCK_DATA: ReviewsType[] = [
     id: 4,
     score: 5,
     comment:
-      '따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+      'MINDFULNESS :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
     createdAt: '2024-09-24T08:12:16.169Z',
     Gathering: {
       teamId: '3-4',
       id: 100,
       type: 'MINDFULNESS',
+      name: '달램핏 오피스 스트레칭',
+      dateTime: '2024-09-24T08:12:16.169Z',
+      location: '건대입구',
+      image: '/images/mock-image.png',
+    },
+    User: {
+      teamId: '3-4',
+      id: 100,
+      name: '윤채현',
+      image: '/images/mock-image.png',
+    },
+  },
+  {
+    teamId: '3-4',
+    id: 5,
+    score: 5,
+    comment:
+      'WORKATION :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+    createdAt: '2024-09-24T08:12:16.169Z',
+    Gathering: {
+      teamId: '3-4',
+      id: 100,
+      type: 'WORKATION',
+      name: '달램핏 오피스 스트레칭',
+      dateTime: '2024-09-24T08:12:16.169Z',
+      location: '건대입구',
+      image: '/images/mock-image.png',
+    },
+    User: {
+      teamId: '3-4',
+      id: 100,
+      name: '윤채현',
+      image: '/images/mock-image.png',
+    },
+  },
+  {
+    teamId: '3-4',
+    id: 6,
+    score: 5,
+    comment:
+      'WORKATION :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+    createdAt: '2024-09-24T08:12:16.169Z',
+    Gathering: {
+      teamId: '3-4',
+      id: 100,
+      type: 'WORKATION',
+      name: '달램핏 오피스 스트레칭',
+      dateTime: '2024-09-24T08:12:16.169Z',
+      location: '건대입구',
+      image: '/images/mock-image.png',
+    },
+    User: {
+      teamId: '3-4',
+      id: 100,
+      name: '윤채현',
+      image: '/images/mock-image.png',
+    },
+  },
+  {
+    teamId: '3-4',
+    id: 7,
+    score: 5,
+    comment:
+      'WORKATION :: 따듯하게 느껴지는 공간이에요 :) 평소에 달램 이용해보고 싶었는데 이렇게 같이 달램 생기니까 너무 좋아요! 프로그램이 더 많이 늘어났으면 좋겠어요.',
+    createdAt: '2024-09-24T08:12:16.169Z',
+    Gathering: {
+      teamId: '3-4',
+      id: 100,
+      type: 'WORKATION',
       name: '달램핏 오피스 스트레칭',
       dateTime: '2024-09-24T08:12:16.169Z',
       location: '건대입구',
