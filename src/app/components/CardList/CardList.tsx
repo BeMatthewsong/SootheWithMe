@@ -44,7 +44,7 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
   };
 
   return (
-    <div className='relative flex w-full flex-col overflow-hidden rounded-[24px] border-2 border-var-gray-100 bg-white transition-all duration-300 hover:drop-shadow-[0_10px_10px_rgba(0,0,0,0.04)] md:flex-row'>
+    <div className='relative flex w-full flex-col overflow-hidden rounded-[24px] border-2 border-var-gray-100 bg-white transition-all duration-300 hover:shadow-lg md:flex-row'>
       {/* 이미지 */}
       <div className='relative flex h-156 w-full flex-col gap-16 md:h-auto md:w-280'>
         <Image
@@ -100,7 +100,7 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
 
       {/* 종료된 챌린지의 경우 */}
       {isChallengeEnded && (
-        <div className='z-base absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
+        <div className='absolute left-0 top-0 z-base flex h-full w-full flex-col items-center justify-center bg-var-black bg-opacity-80'>
           <p className='text-14 font-medium text-white'>
             마감된 챌린지예요.
             <br />

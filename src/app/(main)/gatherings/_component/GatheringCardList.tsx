@@ -21,9 +21,11 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         </div>
       ) : (
         gatherings.map((gathering) => (
-          <Link key={gathering.id} href={`/gatherings/${gathering.id}`}>
-            <CardList data={gathering} />
-          </Link>
+          <div key={gathering.id}>
+            <Link href={`/gatherings/${gathering.id}`}>
+              <CardList data={gathering} />
+            </Link>
+          </div>
         ))
       )}
     </div>

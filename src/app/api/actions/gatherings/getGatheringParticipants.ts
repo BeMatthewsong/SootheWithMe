@@ -4,10 +4,11 @@ import { GatheringParticipantsType } from '@/types/data.type';
 
 const getGatheringParticipants = async (
   gatheringId: number,
+  limit?: number,
 ): Promise<GatheringParticipantsType[]> => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings/${gatheringId}/participants`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings/${gatheringId}/participants?limit=${limit}`,
       {
         method: 'GET',
         headers: {

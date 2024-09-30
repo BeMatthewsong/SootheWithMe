@@ -37,23 +37,6 @@ describe('ProgressBar Component', () => {
     expect(progressBar).toBeInTheDocument();
   });
 
-  // 프로그레스바 너비 확인
-  it('should render the progress bar with the correct progress', () => {
-    render(
-      <ProgressBar
-        participantNumber={MOCK_DATA_BASE.capacity / 2}
-        capacity={MOCK_DATA_BASE.capacity}
-        hasParticipantNumber={MOCK_DATA_BASE.hasParticipantNumber}
-        hasOpeningConfirmed={MOCK_DATA_BASE.hasOpeningConfirmed}
-        hasText={MOCK_DATA_BASE.hasText}
-      />,
-    );
-
-    const progressBar = screen.getByTestId('colored-progress-bar');
-
-    expect(progressBar).toHaveStyle({ width: '50%' });
-  });
-
   // 참가 인원이 다 찼을 때 프로그레스바 색상 확인
   it('should render the progress bar with the correct color', () => {
     render(

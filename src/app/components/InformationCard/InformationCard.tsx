@@ -34,9 +34,18 @@ const InformationCard = ({
   maxParticipants,
 }: InformationCardProps) => {
   const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const handleToggleSave = () => {
     setIsSaved((prev) => !prev);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
 
   // function of setting Avatars with remaining
@@ -58,9 +67,31 @@ const InformationCard = ({
       visibleAvatars.push(
         <div
           key='remaining'
-          className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'
+          className='group relative'
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          +{participantCount - maxVisible}
+          <div className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'>
+            +{participantCount - maxVisible}
+          </div>
+
+          <div
+            className={`absolute left-0 top-full ml-12 mt-2 flex w-max -space-x-6 transition-opacity duration-300 ${
+              isHovered
+                ? 'translate-y-0 opacity-100'
+                : 'translate-y-4 opacity-0'
+            }`}
+          >
+            {participants.slice(maxVisible).map(({ User }) => (
+              <Avatar
+                key={User.id}
+                id={User.id}
+                name={User.name}
+                image={User.image}
+                className={`h-28 w-28 transition-transform duration-300 ${isHovered ? 'translate-y-0' : 'translate-y-4'}`}
+              />
+            ))}
+          </div>
         </div>,
       );
     }
