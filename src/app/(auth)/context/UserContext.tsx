@@ -30,7 +30,6 @@ export const UserProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   }, []);
 
-
   useEffect(() => {
     // 유저 데이터가 변경될 때마다 로컬 스토리지에 저장
     if (user) {

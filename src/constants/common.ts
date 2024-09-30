@@ -6,7 +6,6 @@ export const GATHERING_TIMES = {
 
 // 마이페이지 리뷰 탭
 export const MYPAGE_REVIEW_TABS = {
-  ALL: '',
   WRITABLE: '작성 가능한 리뷰',
   WRITTEN: '작성한 리뷰',
 };

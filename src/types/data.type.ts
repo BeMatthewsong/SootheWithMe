@@ -51,6 +51,8 @@ export interface GatheringInfoType {
   createdBy: number;
   canceledAt?: string | null;
 }
+
+// GET : /{teamId}/gatherings/{id}/participants
 export interface GatheringParticipantsType {
   teamId: number | string;
   userId: number;
@@ -80,6 +82,7 @@ export interface FetchGatheringsResponse {
   offset: number; // 현재 페이지 번호
 }
 
+// GET : /{teamId}/reviews
 export interface ReviewsType {
   teamId: number | string;
   id: number;
@@ -103,6 +106,7 @@ export interface ReviewsType {
   };
 }
 
+// GET : /{teamId}/reviews/scores
 export interface ReviewScoreType {
   teamId: number | string;
   gatheringId: number;
@@ -112,4 +116,15 @@ export interface ReviewScoreType {
   threeStars: number;
   fourStars: number;
   fiveStars: number;
+}
+
+// POST: /{teamId}/reviews
+export interface ReviewPostType {
+  teamId: number;
+  id: number;
+  userId: number;
+  gatheringId: number;
+  score: number;
+  comment: string;
+  createdAt: string;
 }

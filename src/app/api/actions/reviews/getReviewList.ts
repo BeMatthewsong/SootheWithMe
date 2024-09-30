@@ -10,18 +10,20 @@ interface GetReviewListParams {
   sortBy?: string; //createdAt, score, participantCount
   sortOrder?: 'asc' | 'desc';
   gatheringId?: number;
+  userId?: number;
 }
 
 const getReviewList = async (
   params: GetReviewListParams = {},
 ): Promise<ReviewsType[]> => {
   try {
-    const { limit = 10, offset = 0, gatheringId, ...rest } = params;
+    const { limit = 10, offset = 0, gatheringId, userId, ...rest } = params;
 
     const queryString = new URLSearchParams({
       limit: String(limit),
       offset: String(offset),
       gatheringId: String(gatheringId),
+      userId: String(userId),
       ...rest,
     }).toString();
 

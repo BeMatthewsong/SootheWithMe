@@ -68,6 +68,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       image,
     });
     onClose();
+    alert('모임이 생성되었습니다.');
   };
 
   return (

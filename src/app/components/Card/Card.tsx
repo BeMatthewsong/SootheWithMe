@@ -14,7 +14,7 @@ import { createContext, PropsWithChildren, useContext } from 'react';
 
 interface CardProps {
   data: UserJoinedGatheringsData;
-  handleSaveDiscard: () => void;
+  handleSaveDiscard?: () => void;
 }
 
 const CardContext = createContext<UserJoinedGatheringsData | undefined>(
@@ -47,7 +47,7 @@ const Card = ({
           <div className='flex flex-col gap-[6px] p-2'>{children}</div>
         </CardContext.Provider>
 
-        {data.canceledAt && (
+        {data.canceledAt && handleSaveDiscard && (
           <CardOverlay handleButtonClick={handleSaveDiscard} />
         )}
       </div>
