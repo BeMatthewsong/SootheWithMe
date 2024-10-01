@@ -12,7 +12,7 @@ interface ReviewModalProps {
   onClose: () => void;
 }
 
-// TODO: 나중에 개별 컴포넌트로 분리
+// TODO (송민혁): 나중에 개별 컴포넌트로 분리
 const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   const [comment, setComment] = useState<string>('');
   const [score, setScore] = useState<number>(0);
@@ -56,11 +56,13 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
             <IconX className='h-24 w-24' />
           </button>
         </div>
+
         {/* 하트 리뷰 */}
         <div className='flex flex-col gap-12'>
           <h2 className='text-16 font-semibold'>만족스러운 경험이었나요?</h2>
           <div className='flex gap-2'>{ratingStarHandler()}</div>
         </div>
+
         {/* 리뷰 코멘트 */}
         <div className='flex flex-col gap-12'>
           <h2 className='text-16 font-semibold'>경험에 대해 남겨주세요.</h2>
@@ -71,6 +73,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
             placeholder='남겨주신 리뷰는 프로그램 운영 및 다른 회원 분들께 큰 도움이 됩니다.'
           />
         </div>
+
         {/* 버튼 그룹 */}
         <div className='flex items-center gap-16'>
           <Button name='취소' variant='white' onClick={onClose} />

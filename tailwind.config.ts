@@ -96,6 +96,32 @@ const config: Config = {
         heartPulse: 'heartPulse 0.4s ease-in-out',
         bounce: 'bounce 0.5s ease-out 0.25s',
       },
+      scrollbar: {
+        hide: {
+          /* Firefox */
+          'scrollbar-width': 'none',
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+        },
+        thin: {
+          /* Firefox */
+          'scrollbar-width': 'thin',
+          /* Safari and Chrome */
+          '&::-webkit-scrollbar': {
+            width: '1px',
+            height: '1px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#888',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#555',
+          },
+        },
+      },
     },
   },
   plugins: [],

@@ -2,24 +2,30 @@
 
 import { ChangeEvent, useRef, useState } from 'react';
 import Button from '../../Button/Button';
+import { MAX_IMAGE_SIZE_BYTES } from '@/constants/common';
 
 interface ImageUploaderProps {
-  image: string | null;
-  setImage: (image: string | null) => void;
+  setImage: (image: File | null) => void;
 }
 
-const ImageUploader = ({ image, setImage }: ImageUploaderProps) => {
+const ImageUploader = ({ setImage }: ImageUploaderProps) => {
   const [fileName, setFileName] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
     if (file) {
+      if (file.size > MAX_IMAGE_SIZE_BYTES) {
+        // 1MB 제한
+        alert('이미지 크기는 1MB를 초과할 수 없습니다.');
+        return;
+      }
       const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
       reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setImage(file);
+      };
       setFileName(file.name);
     }
   };
@@ -37,7 +43,7 @@ const ImageUploader = ({ image, setImage }: ImageUploaderProps) => {
         <div className='flex gap-12'>
           <div className='flex w-full items-center rounded-xl bg-gray-50 px-16 py-[10px]'>
             {fileName ?? (
-              <p className='text-gray-400'>이미지를 첨부해 주세요</p>
+              <p className='text-gray-400'>이미지를 첨부해 주세요 (1MB 이하)</p>
             )}
           </div>
           <div className='w-100'>

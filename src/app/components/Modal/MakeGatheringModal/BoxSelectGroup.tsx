@@ -43,8 +43,8 @@ const BoxSelectGroup = ({
         <BoxSelect
           title='달램핏'
           subTitle='마인드풀니스'
-          isSelected={gatheringType.MINDFULLNESS}
-          onChange={() => handleCheckboxChange('MINDFULLNESS')}
+          isSelected={gatheringType.MINDFULNESS}
+          onChange={() => handleCheckboxChange('MINDFULNESS')}
         />
         <BoxSelect
           title='워케이션'

@@ -13,7 +13,7 @@ const ModalFrame = ({ children, onClose }: ModalFrameProps) => {
         onClick={onClose}
         className='fixed left-0 top-0 z-popup flex h-full w-full items-center justify-center bg-var-black/50 md:h-screen'
       >
-        {children}
+        <div onClick={(e) => e.stopPropagation()}>{children}</div>
       </div>
     </ModalPortal>
   );

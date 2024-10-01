@@ -28,3 +28,6 @@ export const DEFAULT_OFFSET = 0;
 export const DEFAULT_LIMIT = 5;
 
 export const LIMIT_PER_REQUEST = 10;
+
+// 업로드할 이미지 최대 크기
+export const MAX_IMAGE_SIZE_BYTES = 1 * 1024 * 1024; // 1MB

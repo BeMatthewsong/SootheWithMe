@@ -1,5 +1,3 @@
-'use server';
-
 import { GatheringInfoType } from '@/types/data.type';
 import { getCookie } from '@/actions/auth/cookie/cookie';
 
@@ -8,7 +6,7 @@ interface PostGatheringsParams {
   type: string;
   dateTime: string;
   capacity: number;
-  image: string;
+  image: File;
   registrationEnd?: string;
 }
 
@@ -40,6 +38,10 @@ const postGatherings = async (
         body: formData,
       },
     );
+
+    if (!res.ok) {
+      throw new Error('모임 생성이 실패하였습니다.');
+    }
 
     const data: GatheringInfoType = await res.json();
 

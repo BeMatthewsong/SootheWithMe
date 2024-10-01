@@ -24,7 +24,7 @@ const Calendar = ({ dateTime, setDateTime }: CalendarProps) => {
             dateFormat='yyyy-MM-dd'
             selected={dateTime}
             onChange={(date) => setDateTime(date as Date)}
-            minDate={new Date()}
+            minDate={new Date(new Date().setDate(new Date().getDate() + 1))}
             inline
           />
         </div>

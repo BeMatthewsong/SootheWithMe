@@ -6,13 +6,11 @@ import TimeChip from '../../Chip/TimeChip';
 interface SelectTimeChipProps {
   selectedTime: string | null;
   setSelectedTime: (time: string) => void;
-  isPastTime: (time: string) => boolean;
 }
 
 const SelectTimeChip = ({
   selectedTime,
   setSelectedTime,
-  isPastTime,
 }: SelectTimeChipProps) => {
   return (
     <>
@@ -22,13 +20,7 @@ const SelectTimeChip = ({
           {GATHERING_TIMES.MORNING.map((time) => (
             <TimeChip
               key={time}
-              state={
-                isPastTime(time)
-                  ? 'disabled'
-                  : selectedTime === time
-                    ? 'active'
-                    : 'default'
-              }
+              state={selectedTime === time ? 'active' : 'default'}
               onClick={() => setSelectedTime(time)}
             >
               {time}
@@ -42,13 +34,7 @@ const SelectTimeChip = ({
           {GATHERING_TIMES.AFTERNOON.map((time) => (
             <TimeChip
               key={time}
-              state={
-                isPastTime(time)
-                  ? 'disabled'
-                  : selectedTime === time
-                    ? 'active'
-                    : 'default'
-              }
+              state={selectedTime === time ? 'active' : 'default'}
               onClick={() => setSelectedTime(time)}
             >
               {time}
