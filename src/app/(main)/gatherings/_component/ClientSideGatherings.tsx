@@ -11,6 +11,7 @@ import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import useGatherings from '@/hooks/useGatherings';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
+
 import { useInView } from 'react-intersection-observer';
 
 interface ClientSideGatheringsProps {
@@ -40,7 +41,6 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
     if (inView && hasMore) {
       loadMore();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView, hasMore]);
 
