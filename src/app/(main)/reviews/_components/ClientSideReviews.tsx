@@ -69,6 +69,7 @@ const ClientSideReviews = ({
           <>
             <ReviewList reviewList={filteredData} />
 
+            {/* TODO : 로딩 컴포넌트 */}
             {isLoading && <p>로딩...</p>}
 
             {hasMore && <div ref={ref} className='h-20' />}
