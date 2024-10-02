@@ -48,3 +48,10 @@ export const formatCalendarDate = (date: Date | null): string => {
 
   return `${year}-${month}-${day}`;
 };
+
+// 이전 날짜 및 이후 날짜 설정
+export const adjustDate = (date: Date, days: number): Date => {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+};

@@ -5,7 +5,7 @@ import { LOCATION_OPTIONS, MIN_PARTICIPANTS } from '@/constants/common';
 import { FormEvent, useState } from 'react';
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
-import Calendar from './MakeGatheringModal/Calendar';
+import CalendarSelect from './MakeGatheringModal/CalendarSelect';
 import Header from './MakeGatheringModal/Header';
 import ImageUploader from './MakeGatheringModal/ImageUploader';
 import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
@@ -106,7 +106,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
           />
 
           {/* 날짜 */}
-          <Calendar dateTime={dateTime} setDateTime={setDateTime} />
+          <CalendarSelect dateTime={dateTime} setDateTime={setDateTime} />
 
           {/* 시간 */}
           <SelectTimeChip

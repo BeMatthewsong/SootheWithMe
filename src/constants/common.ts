@@ -43,3 +43,6 @@ export const REVIEW_SORT_OPTIONS_MAP: Record<string, string> = {
 
 // 업로드할 이미지 최대 크기
 export const MAX_IMAGE_SIZE_BYTES = 1 * 1024 * 1024; // 1MB
+
+// 모임 만들기 내 모임 날짜 기한
+export const MAKING_GATHERING_DATE_DEADLINE = 365;
