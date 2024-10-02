@@ -18,11 +18,19 @@ const getGatherings = async (
   params: GetGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
-    const { limit = 10, offset = 0, ...rest } = params;
+    const {
+      limit = 10,
+      offset = 0,
+      sortBy = 'dateTime',
+      sortOrder = 'desc',
+      ...rest
+    } = params;
 
     const queryString = new URLSearchParams({
       limit: String(limit),
       offset: String(offset),
+      sortBy: String(sortBy),
+      sortOrder: String(sortOrder),
       ...rest,
     }).toString();
 
@@ -36,11 +44,17 @@ const getGatherings = async (
       },
     );
 
+    if (!res.ok) {
+      throw new Error('모임을 불러오지 못했습니다.');
+    }
+
     const data: GatheringsListData[] = await res.json();
 
     return data;
   } catch (error) {
-    throw new Error('모임을 불러오지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '모임을 불러오지 못했습니다.',
+    );
   }
 };
 

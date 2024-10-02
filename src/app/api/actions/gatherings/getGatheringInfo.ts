@@ -16,11 +16,18 @@ const getGatheringInfo = async (
       },
     );
 
+    if (!res.ok) {
+      const { message } = await res.json();
+      throw new Error(message);
+    }
+
     const data: GatheringInfoType = await res.json();
 
     return data;
   } catch (error) {
-    throw new Error('모임을 불러오지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '모임을 찾을 수 없습니다.',
+    );
   }
 };
 

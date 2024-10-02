@@ -1,14 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
 import { UserData } from '@/types/client.type';
 import Button from '../Button/Button';
 import useCopyUrlToClipboard from '@/hooks/useCopyUrlToClipboard';
 import useCancelGathering from '@/hooks/useCancelGathering';
-import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoin';
-import deleteGatheringToWithdraw from '@/app/api/actions/gatherings/deleteGatheringToWithdraw';
+import useParticipation from '@/hooks/useParticipation';
 import { GatheringParticipantsType } from '@/types/data.type';
 import Popup from '../Popup/Popup';
 
@@ -37,8 +36,14 @@ const ParticipationButton = ({
   const { copyUrlToClipboard } = useCopyUrlToClipboard();
   const { cancelGathering } = useCancelGathering(Number(params.id));
 
-  const [hasParticipated, setHasParticipated] = useState<boolean>(false);
-  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
+  const {
+    hasParticipated,
+    setHasParticipated,
+    isShowPopup,
+    setIsShowPopup,
+    handleJoinClick,
+    handleWithdrawClick,
+  } = useParticipation(user);
 
   useEffect(() => {
     if (user) {
@@ -47,6 +52,7 @@ const ParticipationButton = ({
       );
       setHasParticipated(isParticipated);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, participantsData]);
 
   const isFull = participantCount === capacity; //참여인원이 가득찼는지 검사
@@ -60,26 +66,6 @@ const ParticipationButton = ({
     : isParticipationDisabled
       ? 'gray'
       : 'default';
-
-  const handleJoinClick = async () => {
-    if (!user) {
-      // 유저가 없는 경우
-      setIsShowPopup(true); // 팝업 표시
-      return;
-    }
-
-    if (!hasParticipated) {
-      await postGatheringToJoin(Number(params.id));
-      setHasParticipated(true);
-    }
-  };
-
-  const handleWithdrawClick = async () => {
-    if (hasParticipated) {
-      await deleteGatheringToWithdraw(Number(params.id));
-      setHasParticipated(false);
-    }
-  };
 
   /* 버튼 렌더링 함수 */
   const renderButton = (

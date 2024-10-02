@@ -2,19 +2,23 @@ import { useRouter } from 'next/navigation';
 
 import putGatheringToCancelled from '@/app/api/actions/gatherings/putGatheringToCancelled';
 
+import toast from 'react-hot-toast';
+
 const useCancelGathering = (gatheringId: number) => {
   const router = useRouter();
 
   const cancelGathering = async () => {
-    try {
-      await putGatheringToCancelled(gatheringId);
+    const { success, message } = await putGatheringToCancelled(gatheringId);
 
-      alert('모임이 취소되었습니다!');
+    if (!success) {
+      toast.error(message);
 
-      router.push('/gatherings');
-    } catch (error) {
-      throw new Error('모임을 취소하지 못했습니다.');
+      return;
     }
+
+    toast.success(message);
+
+    router.push('/gatherings');
   };
 
   return { cancelGathering };

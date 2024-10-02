@@ -11,6 +11,15 @@ const nextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/gatherings',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

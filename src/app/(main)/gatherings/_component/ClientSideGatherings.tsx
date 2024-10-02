@@ -16,6 +16,7 @@ import Popup from '@/app/components/Popup/Popup';
 import { UserData } from '@/types/client.type';
 import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
+import { PulseLoader } from 'react-spinners';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -82,8 +83,11 @@ const ClientSideGatherings = ({
       </div>
       <GatheringCardList gatherings={filteredData} />
 
-      {/* TODO: Spinner 넣기 */}
-      {isLoading && <p>로딩 스피너</p>}
+      {isLoading && (
+        <div className='flex justify-center'>
+          <PulseLoader color='#EA580C' />
+        </div>
+      )}
 
       {hasMore && <div ref={ref} className='h-20' />}
 

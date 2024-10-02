@@ -5,13 +5,13 @@ import { revalidatePath } from 'next/cache';
 import { getCookie } from '@/actions/auth/cookie/cookie';
 
 const deleteGatheringToWithdraw = async (gatheringId: number) => {
+  const token = await getCookie('token');
+
+  if (!token) {
+    return { success: false, message: '로그인이 필요합니다.' };
+  }
+
   try {
-    const token = await getCookie('token');
-
-    if (!token) {
-      throw new Error('토큰이 없습니다.');
-    }
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings/${gatheringId}/leave`,
       {
@@ -23,14 +23,22 @@ const deleteGatheringToWithdraw = async (gatheringId: number) => {
       },
     );
 
-    const data = await res.json();
+    if (!res.ok) {
+      const { message } = await res.json();
+      return { success: false, message };
+    }
+
+    const { data, message } = await res.json();
 
     revalidatePath('/');
     revalidatePath('/(main)/gatherings/[id]', 'page');
 
-    return data;
+    return { success: true, data, message };
   } catch (error) {
-    throw new Error('모임 참여를 취소하지 못했습니다.');
+    return {
+      success: false,
+      message: '취소에 실패했습니다. 다시 시도해주세요.',
+    };
   }
 };
 

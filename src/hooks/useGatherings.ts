@@ -32,7 +32,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     null,
   );
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [sortOption, setSortOption] = useState<string | undefined>();
+  const [sortOption, setSortOption] = useState<string | undefined>('dateTime');
   const [offset, setOffset] = useState<number>(0);
 
   // 필터링된 모임 데이터를 가져오는 훅

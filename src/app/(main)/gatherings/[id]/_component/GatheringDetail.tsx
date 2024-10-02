@@ -11,21 +11,21 @@ import {
   GatheringParticipantsType,
   ReviewsType,
 } from '@/types/data.type';
-import { useUser } from '@/app/(auth)/context/UserContext';
+import { UserData } from '@/types/client.type';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;
   gatheringParticipants: GatheringParticipantsType[];
   reviews: ReviewsType[];
+  user: UserData | null;
 }
 
 const GatheringDetail = ({
   gatheringInfo,
   gatheringParticipants,
   reviews,
+  user,
 }: GatheringDetailProps) => {
-  const { user } = useUser();
-
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const handlePageChange = (page: number) => {
@@ -40,7 +40,7 @@ const GatheringDetail = ({
           <div className='flex flex-col items-center gap-y-16 md:flex md:flex-row md:gap-x-[14px] md:gap-y-0 lg:gap-x-24'>
             <GatheringImage image={gatheringInfo.image} />
             <GatheringInfo
-              name='테스트'
+              name={gatheringInfo.name || ''}
               location={gatheringInfo.location}
               dateTime={gatheringInfo.dateTime}
               participantCount={gatheringInfo.participantCount}
