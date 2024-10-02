@@ -38,7 +38,7 @@ const ParticipationButton = ({
   const { cancelGathering } = useCancelGathering(Number(params.id));
 
   const [hasParticipated, setHasParticipated] = useState<boolean>(false);
-  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
 
   useEffect(() => {
     if (user) {
@@ -64,7 +64,7 @@ const ParticipationButton = ({
   const handleJoinClick = async () => {
     if (!user) {
       // 유저가 없는 경우
-      setShowPopup(true); // 팝업 표시
+      setIsShowPopup(true); // 팝업 표시
       return;
     }
 
@@ -118,13 +118,13 @@ const ParticipationButton = ({
         hasParticipated ? handleWithdrawClick : handleJoinClick,
         isParticipationDisabled, // disable 여부
       )}
-      {showPopup && ( // 팝업 렌더링
+      {isShowPopup && ( // 팝업 렌더링
         <Popup
           type='login'
           hasCancelButton={true}
-          onClickClose={() => setShowPopup(false)}
+          onClickClose={() => setIsShowPopup(false)}
           onClickConfirm={() => {
-            setShowPopup(false);
+            setIsShowPopup(false);
             router.push('/signin');
           }}
         />

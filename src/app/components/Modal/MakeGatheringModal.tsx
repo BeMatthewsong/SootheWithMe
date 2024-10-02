@@ -81,7 +81,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     <ModalFrame onClose={onClose}>
       <form
         onSubmit={handleSubmit}
-        className='flex h-full w-full overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:max-h-[90lvh] md:w-532 md:overflow-y-hidden md:rounded-xl md:pr-0'
+        className='flex h-full max-h-[100lvh] w-full overflow-y-auto rounded-none bg-var-white p-24 md:h-auto md:max-h-[90lvh] md:w-532 md:overflow-y-hidden md:rounded-xl md:pr-0'
       >
         <div className='scrollbar-hide flex w-full flex-col gap-24 overflow-auto p-4 md:pr-24'>
           {/* 헤더 */}

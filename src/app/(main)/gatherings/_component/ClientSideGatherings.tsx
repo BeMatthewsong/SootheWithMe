@@ -2,25 +2,45 @@
 
 import { useEffect, useState } from 'react';
 
-import Filters from './Filters';
-import GatheringCardList from './GatheringCardList';
-import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from '@/app/components/Chips/Chips';
-import CreateGatheringButton from './CreateGatheringButton';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
+import Tabs from '@/app/components/Tabs/Tabs';
 import useGatherings from '@/hooks/useGatherings';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
+import CreateGatheringButton from './CreateGatheringButton';
+import Filters from './Filters';
+import GatheringCardList from './GatheringCardList';
 
+import Popup from '@/app/components/Popup/Popup';
+import { UserData } from '@/types/client.type';
+import { useRouter } from 'next/navigation';
 import { useInView } from 'react-intersection-observer';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
+  user: UserData | null;
 }
 
-const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
+const ClientSideGatherings = ({
+  gatherings,
+  user,
+}: ClientSideGatheringsProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isShowPopup, setIsShowPopup] = useState<boolean>(false);
   const { ref, inView } = useInView({ threshold: 1.0 });
+  const router = useRouter();
+
+  const isUserNull = (user: UserData | null) => {
+    return user === null;
+  };
+
+  const handleModalButtonClick = () => {
+    if (!isUserNull(user)) {
+      return setIsModalOpen(true);
+    }
+    setIsShowPopup(true);
+  };
 
   const {
     filteredData,
@@ -50,7 +70,7 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
         <div className='mt-32'>
           <div className='flex justify-between'>
             <Tabs activeTab={activeTab} onTabClick={handleTabClick} />
-            <CreateGatheringButton onClick={() => setIsModalOpen(true)} />
+            <CreateGatheringButton onClick={handleModalButtonClick} />
           </div>
           <Chips activeTab={activeTab} onChipClick={handleChipClick} />
         </div>
@@ -69,6 +89,18 @@ const ClientSideGatherings = ({ gatherings }: ClientSideGatheringsProps) => {
 
       {isModalOpen && (
         <MakeGatheringModal onClose={() => setIsModalOpen(false)} />
+      )}
+
+      {isShowPopup && ( // 팝업 렌더링
+        <Popup
+          type='login'
+          hasCancelButton={true}
+          onClickClose={() => setIsShowPopup(false)}
+          onClickConfirm={() => {
+            setIsShowPopup(false);
+            router.push('/signin');
+          }}
+        />
       )}
     </>
   );
