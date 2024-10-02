@@ -2,6 +2,7 @@
 
 import Card from '@/app/components/Card/Card';
 import { GatheringsListData } from '@/types/data.type';
+import Link from 'next/link';
 
 interface GatheringListProps {
   dataList: GatheringsListData[];
@@ -22,9 +23,11 @@ const GatheringList = ({ dataList }: GatheringListProps) => {
   return (
     <div className='grow'>
       {updateDataList().map((data) => (
-        <Card key={data.id} handleSaveDiscard={handleSaveDiscard} data={data}>
-          <Card.Info />
-        </Card>
+        <Link key={data.id} href={`/gatherings/${data.id}`}>
+          <Card handleSaveDiscard={handleSaveDiscard} data={data}>
+            <Card.Info />
+          </Card>
+        </Link>
       ))}
     </div>
   );

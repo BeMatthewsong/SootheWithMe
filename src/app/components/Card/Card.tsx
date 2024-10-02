@@ -11,6 +11,7 @@ import StateChip from '@/app/components/Chip/StateChip';
 import { formatDate, formatTime } from '@/utils/formatDate';
 import { UserJoinedGatheringsData } from '@/types/data.type';
 import { createContext, PropsWithChildren, useContext } from 'react';
+import { MIN_PARTICIPANTS } from '@/constants/common';
 
 interface CardProps {
   data: UserJoinedGatheringsData;
@@ -71,7 +72,6 @@ const CardChips = (): JSX.Element => {
     );
   }
 
-  const MIN_PARTICIPANTS = 5;
   const isConfirmed = participantCount >= MIN_PARTICIPANTS;
   return (
     <div className='mb-[6px] flex gap-8'>
