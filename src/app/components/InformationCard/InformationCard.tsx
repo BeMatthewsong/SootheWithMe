@@ -13,6 +13,7 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 import { GatheringParticipantsType } from '@/types/data.type';
 import { MIN_PARTICIPANTS } from '@/constants/common';
 import { formatDate, formatTimeColon } from '@/utils/formatDate';
+import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 
 interface InformationCardProps {
   title: string;
@@ -36,8 +37,16 @@ const InformationCard = ({
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
+  // 로컬스토리지
+  // const { savedGatherings, updateGathering } = useSavedGatheringList();
+  // TODO : 모임 ID를 받아 해당 모임을 찜한 상태인지 확인
+  // const isSaved = (id: number) => savedGatherings.includes(id);
+
+
   const handleToggleSave = () => {
     setIsSaved((prev) => !prev);
+    // TODO : 모임 ID를 받아 스토리지 업데이트
+    // updateGathering(id);
   };
 
   const handleMouseEnter = () => {

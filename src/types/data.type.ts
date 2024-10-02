@@ -128,3 +128,16 @@ export interface ReviewPostType {
   comment: string;
   createdAt: string;
 }
+
+// GetGatherings API Params Type
+export interface GetGatheringsParams {
+  id?: string;
+  limit?: number;
+  offset?: number;
+  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
+  location?: string;
+  date?: string;
+  createdBy?: string;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}

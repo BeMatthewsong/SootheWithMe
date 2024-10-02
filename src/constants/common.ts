@@ -29,9 +29,15 @@ export const DEFAULT_LIMIT = 5;
 
 export const LIMIT_PER_REQUEST = 10;
 
-export const SORT_OPTIONS_MAP: { [key: string]: string } = {
+export const SORT_OPTIONS_MAP: Record<string, string> = {
   최신순: 'dateTime',
   '마감 임박': 'registrationEnd',
+  '참여 인원 순': 'participantCount',
+};
+
+export const REVIEW_SORT_OPTIONS_MAP: Record<string, string> = {
+  최신순: 'createdAt',
+  '평점 높은 순': 'score',
   '참여 인원 순': 'participantCount',
 };
 

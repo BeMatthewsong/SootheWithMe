@@ -3,6 +3,7 @@
 import CardList from '@/app/components/CardList/CardList';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { GatheringsListData } from '@/types/data.type';
+import Link from 'next/link';
 
 interface SavedListProps {
   dataList: GatheringsListData[];
@@ -20,12 +21,13 @@ const SavedList = ({ dataList }: SavedListProps) => {
   return (
     <>
       {dataList.map((item) => (
-        <CardList
-          key={item.id}
-          data={item}
-          isSaved={isSaved(item.id)}
-          handleButtonClick={handleButtonClick}
-        />
+        <Link href={`/gatherings/${item.id}`} key={item.id}>
+          <CardList
+            data={item}
+            isSaved={isSaved(item.id)}
+            handleButtonClick={handleButtonClick}
+          />
+        </Link>
       ))}
     </>
   );

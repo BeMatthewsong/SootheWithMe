@@ -4,14 +4,7 @@ import { ReviewScoreType, ReviewsType } from '@/types/data.type';
 import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
-import { LIMIT_PER_REQUEST } from '@/constants/common';
-
-// sorting 시 한글 옵션을 영어로 변환해주는 기능
-export const sortOptionsMap: { [key: string]: string } = {
-  최신순: 'createdAt',
-  '평점 높은 순': 'score',
-  '참여 인원 순': 'participantCount',
-};
+import { LIMIT_PER_REQUEST, REVIEW_SORT_OPTIONS_MAP } from '@/constants/common';
 
 interface GetReviewListParams {
   type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
@@ -109,7 +102,7 @@ const useReviews = (
       params.date = formatCalendarDate(options.date);
     }
     if (options.sortOption) {
-      params.sortBy = sortOptionsMap[options.sortOption];
+      params.sortBy = REVIEW_SORT_OPTIONS_MAP[options.sortOption];
       params.sortOrder = 'desc';
     }
 

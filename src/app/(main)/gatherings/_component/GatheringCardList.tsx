@@ -2,12 +2,21 @@ import Link from 'next/link';
 
 import CardList from '@/app/components/CardList/CardList';
 import { GatheringsListData } from '@/types/data.type';
+import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 
 interface GatheringCardListProps {
   gatherings: GatheringsListData[];
 }
 
 const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
+  const { savedGatherings, updateGathering } = useSavedGatheringList();
+
+  const isSaved = (id: number) => savedGatherings.includes(id);
+
+  const handleButtonClick = (id: number) => {
+    updateGathering(id);
+  };
+
   return (
     <div className='mt-24 space-y-24'>
       {/* 모임이 없는 경우 */}
@@ -23,7 +32,11 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         gatherings.map((gathering) => (
           <div key={gathering.id}>
             <Link href={`/gatherings/${gathering.id}`}>
-              <CardList data={gathering} />
+              <CardList
+                data={gathering}
+                isSaved={isSaved(gathering.id)}
+                handleButtonClick={handleButtonClick}
+              />
             </Link>
           </div>
         ))
