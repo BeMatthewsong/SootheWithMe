@@ -3,9 +3,9 @@ import '@/styles/reset.css';
 import '@/styles/style.css';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
-import { getUserData } from './api/actions/mypage/getUserData';
 import Gnb from './components/Gnb/Gnb';
 import Providers from './providers';
+import { getUserData } from './api/actions/mypage/getUserData';
 
 export const metadata: Metadata = {
   title: 'Soothe With Me',

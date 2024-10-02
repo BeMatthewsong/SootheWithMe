@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
-import { revalidate } from '@/lib/revalidate';
+import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 
 interface UserStatusProps {
   user: UserData | null;
@@ -35,10 +35,11 @@ const UserStatus = ({ user }: UserStatusProps) => {
   }, []);
 
   const handleLogout = async () => {
+    await postUserLogoutData();
+    localStorage.removeItem('timeLeft');
     deleteCookie('token');
+    router.push('/');
     setIsOpen(false);
-    router.push('/gatherings');
-    revalidate('/auths/user');
   };
 
   return (

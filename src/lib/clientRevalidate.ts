@@ -2,6 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 
-export async function revalidate(url: string) {
+export async function clientRevalidate(url: string) {
   revalidatePath(url);
 }

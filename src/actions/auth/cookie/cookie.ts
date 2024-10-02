@@ -1,5 +1,6 @@
 'use server';
 
+import { EXPIRY_TIME } from '@/constants/common';
 import { cookies } from 'next/headers';
 
 // 쿠키를 받아오는 함수
@@ -10,7 +11,7 @@ export const getCookie = async (key: string) => {
 
 // 쿠키를 저장하는 함수
 export const setCookie = async (key: string, value: string) => {
-  const expirationDate = new Date(Date.now() + 3600 * 1000);
+  const expirationDate = new Date(Date.now() + EXPIRY_TIME);
   cookies().set(key, value, { expires: expirationDate });
 };
 

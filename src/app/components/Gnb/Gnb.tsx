@@ -9,11 +9,12 @@ import Badge from '../Badge/Badge';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { useEffect, useState } from 'react';
 import { UserData } from '@/types/client.type';
+import TokenExpirationTimer from './TokenExpirationTimer';
 
 const navList = [
   {
     name: '모임 찾기',
-    link: '/gatherings', // @todo link 변경 시 수정
+    link: '/',
   },
   {
     name: '찜한 모임',
@@ -50,7 +51,13 @@ const Gnb = ({ user }: GnbProps) => {
             {navList.map((nav, index) => (
               <li key={index} className='flex items-center gap-[5px]'>
                 <Link href={nav.link}>
-                  <TopTab isActive={pathname.includes(nav.link)}>
+                  <TopTab
+                    isActive={
+                      nav.link === '/'
+                        ? pathname === '/'
+                        : pathname.startsWith(nav.link)
+                    }
+                  >
                     {nav.name}
                   </TopTab>
                 </Link>
@@ -64,7 +71,10 @@ const Gnb = ({ user }: GnbProps) => {
             ))}
           </ul>
         </nav>
-        <UserStatus user={user} />
+        <div className='flex items-center gap-12'>
+          {user && <TokenExpirationTimer user={user} />}
+          <UserStatus user={user} />
+        </div>
       </div>
     </header>
   );
