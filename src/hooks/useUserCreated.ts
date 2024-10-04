@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { GatheringsListData } from '@/types/data.type';
-import { LIMIT_PER_REQUEST } from '@/constants/common';
+import { LIMIT_PER_REQUEST, SORT_OPTIONS_MAP } from '@/constants/common';
 
 export const useUserCreated = (
   initialGatheringList: GatheringsListData[],
@@ -27,6 +27,8 @@ export const useUserCreated = (
         createdBy: createdBy,
         offset: newOffset,
         limit: LIMIT_PER_REQUEST,
+        sortBy: SORT_OPTIONS_MAP['최신순'],
+        sortOrder: 'desc',
       });
 
       if (gatherings.length < LIMIT_PER_REQUEST) {

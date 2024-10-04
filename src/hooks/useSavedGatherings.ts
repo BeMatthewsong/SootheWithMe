@@ -56,6 +56,9 @@ const useSavedGatherings = (savedGatherings: number[]) => {
       if (sortOption) {
         params.sortBy = SORT_OPTIONS_MAP[sortOption];
         params.sortOrder = 'desc';
+      } else {
+        params.sortBy = SORT_OPTIONS_MAP['최신순'];
+        params.sortOrder = 'desc';
       }
 
       getSavedGatherings(params);
