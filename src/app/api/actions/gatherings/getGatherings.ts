@@ -18,13 +18,7 @@ const getGatherings = async (
   params: GetGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
-    const {
-      limit = 10,
-      offset = 0,
-      sortBy = 'dateTime',
-      sortOrder = 'desc',
-      ...rest
-    } = params;
+    const { limit = 10, offset = 0, sortBy, sortOrder, ...rest } = params;
 
     const queryString = new URLSearchParams({
       limit: String(limit),

@@ -1,11 +1,7 @@
-import { PulseLoader } from 'react-spinners';
+import Loader from '@/app/components/Loader/Loader';
 
 const Loading = () => {
-  return (
-    <div className='flex min-h-screen items-center justify-center'>
-      <PulseLoader color='#EA580C' />
-    </div>
-  );
+  return <Loader />;
 };
 
 export default Loading;

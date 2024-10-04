@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import Chips from '@/app/components/Chips/Chips';
 import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
@@ -11,12 +12,11 @@ import { GatheringsListData } from '@/types/data.type';
 import CreateGatheringButton from './CreateGatheringButton';
 import Filters from './Filters';
 import GatheringCardList from './GatheringCardList';
-
+import Loader from '@/app/components/Loader/Loader';
 import Popup from '@/app/components/Popup/Popup';
 import { UserData } from '@/types/client.type';
-import { useRouter } from 'next/navigation';
+
 import { useInView } from 'react-intersection-observer';
-import { PulseLoader } from 'react-spinners';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -83,11 +83,7 @@ const ClientSideGatherings = ({
       </div>
       <GatheringCardList gatherings={filteredData} />
 
-      {isLoading && (
-        <div className='flex justify-center'>
-          <PulseLoader color='#EA580C' />
-        </div>
-      )}
+      {isLoading && <Loader />}
 
       {hasMore && <div ref={ref} className='h-20' />}
 

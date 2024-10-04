@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 
 import {
   IconCheckCircle,
@@ -34,19 +35,25 @@ const InformationCard = ({
   participantCount,
   maxParticipants,
 }: InformationCardProps) => {
-  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const params = useParams();
+  const gatheringId = Number(params.id);
+
+  const { savedGatherings, updateGathering } = useSavedGatheringList();
+
+  const checkGatheringSaved = (id: number | undefined, savedList: number[]) => {
+    return id ? savedList.includes(id) : false;
+  };
+
+  const [isSaved, setIsSaved] = useState<boolean>(() =>
+    checkGatheringSaved(gatheringId, savedGatherings),
+  );
   const [isHovered, setIsHovered] = useState<boolean>(false);
-
-  // 로컬스토리지
-  // const { savedGatherings, updateGathering } = useSavedGatheringList();
-  // TODO : 모임 ID를 받아 해당 모임을 찜한 상태인지 확인
-  // const isSaved = (id: number) => savedGatherings.includes(id);
-
 
   const handleToggleSave = () => {
     setIsSaved((prev) => !prev);
-    // TODO : 모임 ID를 받아 스토리지 업데이트
-    // updateGathering(id);
+    if (gatheringId) {
+      updateGathering(gatheringId);
+    }
   };
 
   const handleMouseEnter = () => {

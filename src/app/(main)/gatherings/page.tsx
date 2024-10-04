@@ -4,7 +4,11 @@ import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 
 const GatheringsPage = async () => {
-  const gatherings = await getGatherings();
+  const gatherings = await getGatherings({
+    type: 'DALLAEMFIT',
+    sortBy: 'dateTime',
+    sortOrder: 'desc',
+  });
   const userData = await getUserData();
 
   return (
