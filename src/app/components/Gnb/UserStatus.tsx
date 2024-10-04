@@ -34,11 +34,18 @@ const UserStatus = ({ user }: UserStatusProps) => {
     };
   }, []);
 
+  // 로그아웃 로직
   const handleLogout = async () => {
-    await postUserLogoutData();
-    localStorage.removeItem('timeLeft');
-    deleteCookie('token');
-    router.push('/');
+    const result = await postUserLogoutData();
+    if (result) {
+      localStorage.removeItem('timeLeft'); //로그아웃 시 토큰 만료시간 로컬스토리지에서 삭제
+      deleteCookie('token');
+      router.push('/gatherings');
+      router.refresh();
+    } else {
+      alert('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+    }
+
     setIsOpen(false);
   };
 
@@ -56,8 +63,11 @@ const UserStatus = ({ user }: UserStatusProps) => {
             )}
           </div>
           {isOpen && (
-            <ul className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0'>
-              <Link href='/mypage' onClick={() => setIsOpen(false)}>
+            <ul
+              onClick={() => setIsOpen(false)}
+              className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0'
+            >
+              <Link href='/mypage'>
                 <li className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'>
                   마이페이지
                 </li>

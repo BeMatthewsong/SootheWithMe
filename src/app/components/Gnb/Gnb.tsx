@@ -14,7 +14,7 @@ import TokenExpirationTimer from './TokenExpirationTimer';
 const navList = [
   {
     name: '모임 찾기',
-    link: '/',
+    link: '/gatherings',
   },
   {
     name: '찜한 모임',
@@ -44,20 +44,14 @@ const Gnb = ({ user }: GnbProps) => {
     <header className='fixed left-0 top-0 z-nav w-full border-b-2 border-var-gray-900 bg-var-orange-600'>
       <div className='mx-16 flex max-w-[1200px] items-center justify-between md:mx-24 lg:mx-auto'>
         <nav className='flex items-center'>
-          <Link href='/'>
+          <Link href='/gatherings'>
             <Logo className='mr-20 h-40 w-72' />
           </Link>
           <ul className='flex gap-24'>
             {navList.map((nav, index) => (
               <li key={index} className='flex items-center gap-[5px]'>
                 <Link href={nav.link}>
-                  <TopTab
-                    isActive={
-                      nav.link === '/'
-                        ? pathname === '/'
-                        : pathname.startsWith(nav.link)
-                    }
-                  >
+                  <TopTab isActive={pathname.includes(nav.link)}>
                     {nav.name}
                   </TopTab>
                 </Link>
