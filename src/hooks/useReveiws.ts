@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { formatCalendarDate } from '@/utils/formatDate';
 import { ReviewScoreType, ReviewsType } from '@/types/data.type';
-import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
+import {
+  GatheringChipsType,
+  GatheringsType,
+  GatheringTabsType,
+} from '@/types/client.type';
 import getReviewList from '@/app/api/actions/reviews/getReviewList';
 import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
 import { LIMIT_PER_REQUEST, REVIEW_SORT_OPTIONS_MAP } from '@/constants/common';
 
 interface GetReviewListParams {
-  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
+  type?: GatheringsType;
   limit?: number;
   offset?: number;
   location?: string; // 건대입구, 을지로3가, 신림, 홍대입구
@@ -90,7 +94,7 @@ const useReviews = (
 
   // 공통된 필터링 로직을 별도 함수로 분리
   const buildParams = (
-    type: 'OFFICE_STRETCHING' | 'MINDFULNESS' | GatheringTabsType,
+    type: GatheringsType,
     options: FilteringOptionsType,
   ): GetReviewListParams => {
     const params: GetReviewListParams = { type };

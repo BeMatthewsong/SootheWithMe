@@ -21,9 +21,12 @@ export interface UserData {
 
 export type GatheringTabsType = 'WORKATION' | 'DALLAEMFIT';
 export type GatheringChipsType = 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
+export type GatheringsType =
+  | GatheringTabsType
+  | Omit<GatheringChipsType, 'ALL'>;
 
 export type GatheringFilters = Partial<{
-  type: 'WORKATION' | 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS';
+  type: GatheringsType;
   location: string | undefined;
   date: Date | null;
   sortBy: string | undefined;

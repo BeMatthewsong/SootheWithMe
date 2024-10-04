@@ -100,7 +100,14 @@ describe('Tag Component Render', () => {
 // SAVED 아이콘 클릭으로 토글 테스트
 describe('Saved button Test', () => {
   it('should toggle isSaved state when handleToggleSave is called', () => {
-    render(<CardList data={MOCK_DATA_BASE} />);
+    const handleToggleSave = jest.fn();
+    render(
+      <CardList
+        data={MOCK_DATA_BASE}
+        isSaved={false}
+        handleButtonClick={handleToggleSave}
+      />,
+    );
 
     let inactiveButton: HTMLElement | null;
     let activeButton: HTMLElement | null;
@@ -149,24 +156,42 @@ describe('Saved button Test', () => {
 describe('isChallengeEnded Layer Render', () => {
   const handleToggleSave = jest.fn();
 
-  beforeEach(() => {
-    const date = new Date();
-    date.setDate(date.getDate() - 1); // 하루 전 날짜로 설정
+  const date = new Date();
+  date.setDate(date.getDate() - 1); // 하루 전 날짜로 설정
 
-    const MOCK_DATA = {
-      ...MOCK_DATA_BASE,
-      dateTime: date.toISOString(),
-    };
-
-    render(<CardList data={MOCK_DATA} handleButtonClick={handleToggleSave} />);
-  });
+  const MOCK_DATA = {
+    ...MOCK_DATA_BASE,
+    dateTime: date.toISOString(),
+  };
 
   it('should render isChallengeEnded layer when isChallengeEnded is true', () => {
+    render(<CardList data={MOCK_DATA} handleButtonClick={handleToggleSave} />);
     const challengeEndedElement = screen.getByText(/마감된 챌린지예요/);
     expect(challengeEndedElement).toBeInTheDocument();
   });
 
-  it('should call handleButtonClick when IconSaveDiscardBtn is clicked', () => {
+  it('should do not called handleButtonClick when IconSaveDiscardBtn is clicked and isSaved is false', () => {
+    render(
+      <CardList
+        data={MOCK_DATA}
+        isSaved={false}
+        handleButtonClick={handleToggleSave}
+      />,
+    );
+    const discardButton = screen.getByTestId('IconSaveDiscard');
+    fireEvent.click(discardButton);
+
+    expect(handleToggleSave).not.toHaveBeenCalled();
+  });
+
+  it('should called handleButtonClick when IconSaveDiscardBtn is clicked and isSaved is true', () => {
+    render(
+      <CardList
+        data={MOCK_DATA}
+        isSaved={true}
+        handleButtonClick={handleToggleSave}
+      />,
+    );
     const discardButton = screen.getByTestId('IconSaveDiscard');
     fireEvent.click(discardButton);
 

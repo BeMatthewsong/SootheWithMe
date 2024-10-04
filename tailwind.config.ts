@@ -122,6 +122,9 @@ const config: Config = {
           },
         },
       },
+      dropShadow: {
+        text: '4px 4px 10px rgba(165, 70, 15, 0.25)',
+      },
     },
   },
   plugins: [],

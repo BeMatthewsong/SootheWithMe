@@ -1,10 +1,11 @@
 'use server';
 
+import { GatheringsType } from '@/types/client.type';
 import { ReviewScoreType } from '@/types/data.type';
 
 interface GetReviewScoreParams {
   gatheringId?: number[];
-  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
+  type?: GatheringsType;
 }
 
 const getReviewScore = async (
@@ -20,7 +21,7 @@ const getReviewScore = async (
     }
 
     if (type) {
-      queryParams.append('type', type);
+      queryParams.append('type', String(type));
     }
 
     const res = await fetch(

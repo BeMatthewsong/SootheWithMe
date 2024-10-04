@@ -67,7 +67,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
     setHasMore(true);
 
     updateQueryParams({
-      type: filters.type,
+      type: String(filters.type),
       location: filters.location,
       date: filters.date ? formatCalendarDate(filters.date) : undefined,
       sortBy: filters.sortBy,

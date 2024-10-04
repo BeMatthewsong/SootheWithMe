@@ -1,12 +1,13 @@
 'use server';
 
+import { GatheringsType } from '@/types/client.type';
 import { GatheringsListData } from '@/types/data.type';
 
 interface GetGatheringsParams {
   id?: string;
   limit?: number;
   offset?: number;
-  type?: 'DALLAEMFIT' | 'OFFICE_STRETCHING' | 'MINDFULNESS' | 'WORKATION';
+  type?: GatheringsType;
   location?: string;
   date?: string;
   createdBy?: string;
@@ -18,13 +19,14 @@ const getGatherings = async (
   params: GetGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
-    const { limit = 10, offset = 0, sortBy, sortOrder, ...rest } = params;
+    const { limit = 10, offset = 0, sortBy, sortOrder, type, ...rest } = params;
 
     const queryString = new URLSearchParams({
       limit: String(limit),
       offset: String(offset),
       sortBy: String(sortBy),
       sortOrder: String(sortOrder),
+      ...(type && { type: String(type) }),
       ...rest,
     }).toString();
 

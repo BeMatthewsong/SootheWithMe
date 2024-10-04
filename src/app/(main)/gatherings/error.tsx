@@ -10,11 +10,19 @@ export default function Error({
   const router = useRouter();
 
   return (
-    <div className='flex min-h-screen flex-col items-center justify-center text-14 font-medium text-var-gray-500'>
-      <div>{error.message}</div>
-      <div className='cursor-pointer' onClick={() => router.back()}>
+    <div className='flex h-full flex-col items-center justify-center text-14 font-medium text-var-gray-500'>
+      <h2 className='drop-shadow-text text-center text-[100px] font-bold leading-normal text-var-orange-600'>
+        ERROR
+      </h2>
+      <h3 className='text-center text-16 font-medium md:text-[16px]'>
+        {error.message}
+      </h3>
+      <button
+        className='mt-40 flex items-center justify-center rounded-xl bg-var-orange-600 px-40 py-16 font-pretendard text-[14px] font-semibold text-var-white hover:bg-var-orange-700 md:text-[16px]'
+        onClick={() => router.back()}
+      >
         돌아가기
-      </div>
+      </button>
     </div>
   );
 }

@@ -37,10 +37,17 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
 
   const handleToggleSave = (e: MouseEvent) => {
     e.preventDefault();
-    setSavedActive(!isSavedActive);
-    if (handleButtonClick) {
-      handleButtonClick(data.id);
+
+    if (!handleButtonClick) {
+      return;
     }
+
+    if (isChallengeEnded && !isSaved) {
+      return;
+    }
+
+    setSavedActive((prev) => !prev);
+    handleButtonClick(data.id);
   };
 
   return (

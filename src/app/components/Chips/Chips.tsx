@@ -3,20 +3,17 @@
 import { useState } from 'react';
 
 import Chip from '@/app/components/Chip/Chip';
+import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 
 interface ChipsProps {
-  activeTab: 'DALLAEMFIT' | 'WORKATION';
-  onChipClick: (label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS') => void;
+  activeTab: GatheringTabsType;
+  onChipClick: (label: GatheringChipsType) => void;
 }
 
 const Chips = ({ activeTab, onChipClick }: ChipsProps) => {
-  const [activeChip, setActiveChip] = useState<
-    'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS'
-  >('ALL');
+  const [activeChip, setActiveChip] = useState<GatheringChipsType>('ALL');
 
-  const handleChipClick = (
-    label: 'ALL' | 'OFFICE_STRETCHING' | 'MINDFULNESS',
-  ) => {
+  const handleChipClick = (label: GatheringChipsType) => {
     setActiveChip(label);
     onChipClick(label);
   };

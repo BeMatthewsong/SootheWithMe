@@ -8,7 +8,7 @@ import IconCheckBoxActive from './checkbox-active.svg';
 import IconCheckCircle from './check-circle.svg';
 import IconChevronLeft from './chevron-left.svg';
 import IconChevronRight from './chevron-right.svg';
-import IconDalaemfit from './dalaemfit.svg';
+import IconDallaemfit from './dallaemfit.svg';
 import IconHeart from './heart.svg';
 import IconX from './icon-x.svg';
 import IconPerson from './person.svg';
@@ -32,7 +32,7 @@ export {
   IconCheckCircle,
   IconChevronLeft,
   IconChevronRight,
-  IconDalaemfit,
+  IconDallaemfit,
   IconHeart,
   IconX,
   IconPerson,
