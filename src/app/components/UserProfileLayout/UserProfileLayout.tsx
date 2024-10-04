@@ -10,6 +10,7 @@ import UserProfileHeader from './UserProfileHeader';
 import UserInfo from './UserInfo';
 import { UserData } from '@/types/client.type';
 import { putProfileData } from '@/app/api/actions/mypage/putProfileData';
+import toast from 'react-hot-toast';
 
 interface MyGatheringListProps {
   user: UserData | null;
@@ -28,9 +29,9 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   /* 수정된 프로필 제출 함수 */
-  const onSubmit = async () => {
+  const handleSubmit = async () => {
     if (!profileImage || !profileInput) {
-      alert('프로필 이미지와 회사명을 입력해주세요.');
+      toast.error('프로필 이미지와 회사명을 입력해주세요.');
       return null;
     }
     const formData = new FormData();
@@ -40,7 +41,7 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
     const updatedUser = await putProfileData(formData);
 
     if (!updatedUser) {
-      alert('프로필 업데이트에 실패했습니다.');
+      toast.error('프로필 업데이트에 실패했습니다.');
     }
 
     setIsModalOpen(false);
@@ -74,21 +75,20 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
         </div>
         <UserInfo user={user} />
       </div>
+
       {isModalOpen && (
-        <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
-          <ProfileEditModal
-            user={user}
-            onCloseClick={toggleModal}
-            onUploadProfileImage={onChangeProfileImage({
-              setProfileImage,
-              setImagePreview,
-            })}
-            profileInput={profileInput}
-            setProfileInput={setProfileInput}
-            imagePreview={imagePreview}
-            onSubmit={onSubmit}
-          />
-        </div>
+        <ProfileEditModal
+          user={user}
+          onClose={toggleModal}
+          onUploadProfileImage={onChangeProfileImage({
+            setProfileImage,
+            setImagePreview,
+          })}
+          profileInput={profileInput}
+          setProfileInput={setProfileInput}
+          imagePreview={imagePreview}
+          onSubmit={handleSubmit}
+        />
       )}
     </div>
   );

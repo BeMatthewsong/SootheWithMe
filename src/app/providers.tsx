@@ -1,8 +1,9 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { UserProvider } from './(auth)/context/UserContext';
 import { SavedGatheringProvider } from '@/context/SavedGatheringContext';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactNode } from 'react';
+import { UserProvider } from './(auth)/context/UserContext';
 
 // QueryClient 인스턴스를 생성하는 함수
 function makeQueryClient() {
@@ -34,7 +35,7 @@ function getQueryClient() {
 }
 
 // 애플리케이션의 Provider를 설정하는 컴포넌트
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({ children }: { children: ReactNode }) {
   const queryClient = getQueryClient(); // 현재 환경에 맞는 QueryClient를 가져옴
 
   // QueryClientProvider로 자식 컴포넌트들을 감싸서 QueryClient를 제공

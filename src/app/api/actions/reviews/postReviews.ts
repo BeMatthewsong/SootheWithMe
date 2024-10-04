@@ -1,7 +1,6 @@
 'use server';
 
 import { getCookie } from '@/actions/auth/cookie/cookie';
-import { ReviewPostType } from '@/types/data.type';
 
 interface PostReviewsParams {
   gatheringId: number;
@@ -9,29 +8,31 @@ interface PostReviewsParams {
   comment: string;
 }
 
-const postReviews = async (
-  params: PostReviewsParams,
-): Promise<ReviewPostType> => {
+const postReviews = async (params: PostReviewsParams) => {
   try {
     const token = await getCookie('token');
 
     if (!token) {
-      throw new Error('토큰이 없습니다.');
+      return { success: false, message: '로그인이 필요합니다.' };
     }
 
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews`, {
       method: 'POST',
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(params),
     });
 
-    const data: ReviewPostType = await res.json();
+    const { data, message } = await res.json();
 
-    return data;
+    return { success: true, data, message };
   } catch (error) {
-    throw new Error('모임 생성이 실패하였습니다.');
+    return {
+      success: false,
+      message: '리뷰 생성이 실패하였습니다.',
+    };
   }
 };
 
