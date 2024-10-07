@@ -83,9 +83,13 @@ const ClientSideGatherings = ({
       </div>
       <GatheringCardList gatherings={filteredData} />
 
-      {isLoading && <Loader />}
+      {isLoading && (
+        <div className='flex items-center justify-center pt-24'>
+          <Loader />
+        </div>
+      )}
 
-      {hasMore && <div ref={ref} className='h-20' />}
+      {hasMore && <div ref={ref} className='h-24' />}
 
       {isModalOpen && (
         <MakeGatheringModal onClose={() => setIsModalOpen(false)} />

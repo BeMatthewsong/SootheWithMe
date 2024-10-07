@@ -5,6 +5,7 @@ import GatheringList from './GatheringList';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
 import { GatheringsListData } from '@/types/data.type';
+import Loader from '@/app/components/Loader/Loader';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -32,10 +33,13 @@ const ClientSideGatherings = ({
   return (
     <>
       <GatheringList dataList={gatheringsList} />
-      {/* TODO : 로딩 상태에 대해 논의 후 디자인 통일 */}
-      {isLoading && <p>로딩 스피너</p>}
+      {isLoading && (
+        <div className='flex items-center justify-center pt-24'>
+          <Loader />
+        </div>
+      )}
 
-      {hasMore && <div ref={ref} className='h-20' />}
+      {hasMore && <div ref={ref} className='h-24' />}
     </>
   );
 };

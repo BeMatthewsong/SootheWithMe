@@ -9,6 +9,7 @@ import Chips from './Chips';
 import Filters from './Filters';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import Loader from '@/app/components/Loader/Loader';
 
 interface ClientSideReviewsProps {
   reviewListData: ReviewsType[];
@@ -58,7 +59,9 @@ const ClientSideReviews = ({
       {/* 별점칸 */}
       <ReviewScore initialScore={filteredSortData} />
 
-      <div className='mt-24 flex grow flex-col border-t-2 border-t-var-gray-900 bg-white p-24 pt-8'>
+      <div
+        className={`mt-24 flex grow flex-col border-t-2 border-t-var-gray-900 bg-white px-24 pt-8 ${!hasMore && 'pb-24'}`}
+      >
         <Filters
           onLocationChange={handleLocationChange}
           onDateChange={handleDateChange}
@@ -69,10 +72,13 @@ const ClientSideReviews = ({
           <>
             <ReviewList reviewList={filteredData} />
 
-            {/* TODO : 로딩 컴포넌트 */}
-            {isLoading && <p>로딩...</p>}
+            {isLoading && (
+              <div className='flex items-center justify-center pt-24'>
+                <Loader />
+              </div>
+            )}
 
-            {hasMore && <div ref={ref} className='h-20' />}
+            {hasMore && <div ref={ref} className='h-24' />}
           </>
         ) : (
           <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>

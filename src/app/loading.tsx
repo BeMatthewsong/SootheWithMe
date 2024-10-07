@@ -1,7 +1,13 @@
-import Loader from './components/Loader/Loader';
+'use client';
+
+import Loader from '@/app/components/Loader/Loader';
 
 const Loading = () => {
-  return <Loader />;
+  return (
+    <div className='flex min-h-screen items-center justify-center'>
+      <Loader />;
+    </div>
+  );
 };
 
 export default Loading;
