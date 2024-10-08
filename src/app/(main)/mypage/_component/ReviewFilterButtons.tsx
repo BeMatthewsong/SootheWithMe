@@ -1,7 +1,6 @@
 'use client';
 
 import Chip from '@/app/components/Chip/Chip';
-import { useState } from 'react';
 
 interface ReviewFilterButtonsProps {
   filterType: string;
@@ -15,7 +14,7 @@ const ReviewFilterButtons = ({
   const filterTypeList = ['작성 가능한 리뷰', '작성한 리뷰'] as const;
 
   const handleChangeFilterType = (type: (typeof filterTypeList)[number]) => {
-    setFilterType(filterType === type ? '' : type);
+    setFilterType(type);
   };
 
   return (

@@ -9,6 +9,7 @@ import Review from '@/app/components/Review/Review';
 import { MYPAGE_REVIEW_TABS } from '@/constants/common';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { useQueries } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useState } from 'react';
 import ReviewFilterButtons from '../_component/ReviewFilterButtons';
 
@@ -47,8 +48,10 @@ const Page = () => {
         switch (filterType) {
           case MYPAGE_REVIEW_TABS.WRITABLE: // 작성 가능한 리뷰
             return data?.isCompleted && !data?.isReviewed;
+
           case MYPAGE_REVIEW_TABS.WRITTEN: // 작성한 리뷰
             return data?.isCompleted && data?.isReviewed;
+
           default:
             return true;
         }
@@ -75,39 +78,50 @@ const Page = () => {
           setFilterType={setFilterType}
         />
         {/* cards */}
-        {/* 전체 혹은 작성 가능한 리뷰 */}
-        {filterType === MYPAGE_REVIEW_TABS.WRITABLE && filteredData?.length ? (
-          filteredData.map((data) => (
-            <Card key={data.id} data={data}>
-              <Card.Chips />
-              <Card.Info />
-              <Card.Button
-                handleButtonClick={() =>
-                  data.isCompleted && handleOpenModal(data.id)
-                }
-              />
-            </Card>
-          ))
-        ) : (
-          <EmptyPage />
-        )}
-        {/* 작성한 리뷰 */}
-        <div className='my-24 flex flex-col gap-24'>
-          {filterType === MYPAGE_REVIEW_TABS.WRITTEN && reviewData?.length ? (
-            reviewData.map((review) => (
-              <Review
-                key={review.id}
-                rating={review.score}
-                image_source={review.Gathering.image}
-                description={review.comment}
-                user_name={review.User.name}
-                date={review.createdAt}
-              />
-            ))
-          ) : (
-            <EmptyPage />
-          )}
-        </div>
+        {(() => {
+          switch (filterType) {
+            // 전체 혹은 작성 가능한 리뷰
+            case MYPAGE_REVIEW_TABS.WRITABLE:
+              return filteredData?.length ? (
+                filteredData.map((data) => (
+                  <Card key={data.id} data={data}>
+                    <Card.Chips />
+                    <Card.Info />
+                    <Card.Button
+                      handleButtonClick={() =>
+                        data.isCompleted && handleOpenModal(data.id)
+                      }
+                    />
+                  </Card>
+                ))
+              ) : (
+                <EmptyPage />
+              );
+            // 작성한 리뷰
+            case MYPAGE_REVIEW_TABS.WRITTEN:
+              return reviewData?.length ? (
+                <div className='my-24 flex flex-col gap-24'>
+                  {reviewData.map((review) => (
+                    <Link
+                      href={`/gatherings/${review.Gathering.id}`}
+                      key={review.id}
+                    >
+                      <Review
+                        key={review.id}
+                        rating={review.score}
+                        image_source={review.Gathering.image}
+                        description={review.comment}
+                        user_name={review.User.name}
+                        date={review.createdAt}
+                      />
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <EmptyPage />
+              );
+          }
+        })()}
       </div>
 
       {isModalOpen && (

@@ -83,6 +83,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
 
     onClose();
     toast.success(message);
+    // TODO : 모임 생성 후 페이지 리로드
   };
 
   return (

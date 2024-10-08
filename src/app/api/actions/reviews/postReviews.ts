@@ -27,7 +27,11 @@ const postReviews = async (params: PostReviewsParams) => {
 
     const { data, message } = await res.json();
 
-    return { success: true, data, message };
+    return {
+      success: true,
+      data,
+      message: '리뷰가 성공적으로 작성되었습니다.',
+    };
   } catch (error) {
     return {
       success: false,
