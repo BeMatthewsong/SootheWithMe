@@ -1,17 +1,23 @@
 import Filter from '@/app/components/Filter/Filter';
 import FilterDate from '@/app/components/Filter/FilterDate';
-import { LOCATION_OPTIONS, SORT_OPTIONS } from '@/constants/common';
+import {
+  LOCATION_OPTIONS,
+  REVIEW_SORT_OPTIONS,
+  SORT_OPTIONS,
+} from '@/constants/common';
 
 interface FiltersProps {
   onLocationChange: (location: string | undefined) => void;
   onDateChange: (date: Date | null) => void;
   onSortChange: (sortOption: string | undefined) => void;
+  sortOptions: typeof SORT_OPTIONS | typeof REVIEW_SORT_OPTIONS;
 }
 
 const Filters = ({
   onLocationChange,
   onDateChange,
   onSortChange,
+  sortOptions,
 }: FiltersProps) => {
   const handleLocationSelect = (selectedOption: string | undefined) => {
     onLocationChange(selectedOption);
@@ -40,7 +46,7 @@ const Filters = ({
         <Filter
           type='sort'
           state='default'
-          options={SORT_OPTIONS}
+          options={sortOptions}
           onSelect={handleSortSelect}
         >
           정렬

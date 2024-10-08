@@ -10,13 +10,14 @@ import useGatherings from '@/hooks/useGatherings';
 import usePreventScroll from '@/hooks/usePreventScroll';
 import { GatheringsListData } from '@/types/data.type';
 import CreateGatheringButton from './CreateGatheringButton';
-import Filters from './Filters';
+import Filters from '@/app/components/Filters/Filters';
 import GatheringCardList from './GatheringCardList';
 import Loader from '@/app/components/Loader/Loader';
 import Popup from '@/app/components/Popup/Popup';
 import { UserData } from '@/types/client.type';
 
 import { useInView } from 'react-intersection-observer';
+import { SORT_OPTIONS } from '@/constants/common';
 
 interface ClientSideGatheringsProps {
   gatherings: GatheringsListData[];
@@ -54,6 +55,7 @@ const ClientSideGatherings = ({
     loadMore,
     isLoading,
     hasMore,
+    selectedChip,
   } = useGatherings(gatherings);
 
   usePreventScroll(isModalOpen);
@@ -73,12 +75,17 @@ const ClientSideGatherings = ({
             <Tabs activeTab={activeTab} onTabClick={handleTabClick} />
             <CreateGatheringButton onClick={handleModalButtonClick} />
           </div>
-          <Chips activeTab={activeTab} onChipClick={handleChipClick} />
+          <Chips
+            activeTab={activeTab}
+            onChipClick={handleChipClick}
+            activeChip={selectedChip}
+          />
         </div>
         <Filters
           onLocationChange={handleLocationChange}
           onDateChange={handleDateChange}
           onSortChange={handleSortChange}
+          sortOptions={SORT_OPTIONS}
         />
       </div>
       <GatheringCardList gatherings={filteredData} />

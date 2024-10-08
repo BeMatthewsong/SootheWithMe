@@ -28,9 +28,7 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
   const [selectedLocation, setSelectedLocation] = useState<string | undefined>(
     undefined,
   );
-  const [selectedChip, setSelectedChip] = useState<GatheringChipsType | null>(
-    null,
-  );
+  const [selectedChip, setSelectedChip] = useState<GatheringChipsType>('ALL');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [sortOption, setSortOption] = useState<string | undefined>('dateTime');
   const [offset, setOffset] = useState<number>(0);
@@ -94,19 +92,19 @@ const useGatherings = (initialGatherings: GatheringsListData[]) => {
   // 활성화된 탭이나 필터가 변경될 때 데이터 업데이트
   useEffect(() => {
     resetFilters({
-      type: activeTab,
+      type: selectedChip === 'ALL' ? activeTab : selectedChip,
       location: selectedLocation,
       date: selectedDate,
       sortBy: sortOption,
     });
     updateFilteredData({
-      type: activeTab,
+      type: selectedChip === 'ALL' ? activeTab : selectedChip,
       location: selectedLocation,
       date: selectedDate,
       sortBy: sortOption,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, selectedLocation, selectedDate, sortOption]);
+  }, [activeTab, selectedChip, selectedLocation, selectedDate, sortOption]);
 
   return {
     filteredData,

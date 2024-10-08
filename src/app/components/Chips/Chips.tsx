@@ -1,21 +1,17 @@
 'use client';
 
-import { useState } from 'react';
-
 import Chip from '@/app/components/Chip/Chip';
 import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
 
 interface ChipsProps {
   activeTab: GatheringTabsType;
+  activeChip: GatheringChipsType;
   onChipClick: (label: GatheringChipsType) => void;
 }
 
-const Chips = ({ activeTab, onChipClick }: ChipsProps) => {
-  const [activeChip, setActiveChip] = useState<GatheringChipsType>('ALL');
-
+const Chips = ({ activeTab, onChipClick, activeChip }: ChipsProps) => {
   const handleChipClick = (label: GatheringChipsType) => {
-    setActiveChip(label);
-    onChipClick(label);
+    activeChip !== label && onChipClick(label);
   };
 
   return (

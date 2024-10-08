@@ -13,7 +13,7 @@ const Chip = ({ state = 'default', children, onClick }: ChipProps) => {
   return (
     <span
       onClick={onClick}
-      className={`inline-block cursor-pointer rounded-[12px] px-[12px] py-8 text-14 font-medium md:px-16 md:py-[10px] ${stateClasses[state]}`}
+      className={`inline-block cursor-pointer rounded-[12px] px-[12px] py-8 text-14 font-medium md:px-16 md:py-[10px] ${stateClasses[state]} transition-colors duration-150`}
     >
       {children}
     </span>

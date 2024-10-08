@@ -9,7 +9,7 @@ import { SORT_OPTIONS_MAP } from '@/constants/common';
 
 const useHandlers = (
   setActiveTab: (tab: GatheringTabsType) => void,
-  setSelectedChip: (chip: GatheringChipsType | null) => void,
+  setSelectedChip: (chip: GatheringChipsType) => void,
   setSelectedLocation: (location: string | undefined) => void,
   setSelectedDate: (date: Date | null) => void,
   setSortOption: (sortBy: string | undefined) => void,
@@ -19,7 +19,7 @@ const useHandlers = (
   const handleTabClick = useCallback(
     (type: GatheringTabsType) => {
       setActiveTab(type);
-      setSelectedChip(null);
+      setSelectedChip('ALL');
       resetFilters({ type });
       updateFilteredData({ type });
     },

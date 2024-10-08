@@ -1,12 +1,13 @@
 'use client';
 
 import Tabs from '@/app/components/Tabs/Tabs';
-import Chips from './_component/Chips';
-import Header from './_component/Header';
+import Chips from '@/app/components/Chips/Chips';
 import Filters from '@/app/components/Filters/Filters';
-import { useSavedGatheringList } from '@/context/SavedGatheringContext';
+import Header from './_component/Header';
 import SavedList from './_component/SavedList';
 import useSavedGatherings from '@/hooks/useSavedGatherings';
+import { useSavedGatheringList } from '@/context/SavedGatheringContext';
+import { SORT_OPTIONS } from '@/constants/common';
 
 const SavedPage = () => {
   const { savedGatherings } = useSavedGatheringList();
@@ -32,7 +33,7 @@ const SavedPage = () => {
         <div className='flex flex-col gap-16 divide-y'>
           <Chips
             activeTab={activeTab}
-            selectedChip={activeChip}
+            activeChip={activeChip}
             onChipClick={handleChipClick}
           />
 
@@ -40,6 +41,7 @@ const SavedPage = () => {
             onLocationChange={handleLocationChange}
             onDateChange={handleDateChange}
             onSortChange={handleSortChange}
+            sortOptions={SORT_OPTIONS}
           />
         </div>
 
