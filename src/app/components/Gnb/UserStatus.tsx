@@ -8,12 +8,15 @@ import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { UserData } from '@/types/client.type';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
+import toast from 'react-hot-toast';
+import TokenExpirationTimerLayout from './TokenExpirationTimerLayout';
 
 interface UserStatusProps {
   user: UserData | null;
+  token: string | undefined;
 }
 
-const UserStatus = ({ user }: UserStatusProps) => {
+const UserStatus = ({ user, token }: UserStatusProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropDownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -38,15 +41,22 @@ const UserStatus = ({ user }: UserStatusProps) => {
   const handleLogout = async () => {
     const result = await postUserLogoutData();
     if (result) {
-      localStorage.removeItem('timeLeft'); //로그아웃 시 토큰 만료시간 로컬스토리지에서 삭제
-      deleteCookie('token');
-      router.push('/gatherings');
-      router.refresh();
+      Promise.resolve()
+        .then(() => {
+          toast.success('로그아웃이 완료되었습니다.');
+        })
+        .then(() => {
+          localStorage.removeItem('timeLeft'); // 로컬 스토리지에서 시간 삭제
+        })
+        .then(() => {
+          deleteCookie('token'); // 쿠키에서 토큰 삭제
+        })
+        .then(() => {
+          router.push('/gatherings');
+        });
     } else {
-      alert('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+      toast.error('로그아웃에 실패했습니다. 다시 시도해 주세요.');
     }
-
-    setIsOpen(false);
   };
 
   return (
@@ -77,6 +87,9 @@ const UserStatus = ({ user }: UserStatusProps) => {
                 className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'
               >
                 로그아웃
+              </li>
+              <li className='block md:hidden'>
+                <TokenExpirationTimerLayout token={token} variant='dropdown' />
               </li>
             </ul>
           )}

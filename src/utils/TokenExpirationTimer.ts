@@ -1,16 +1,11 @@
-'use client';
-
-import { EXPIRY_TIME } from '@/constants/common';
-import { UserData } from '@/types/client.type';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
+import toast from 'react-hot-toast';
+import { deleteCookie } from '@/actions/auth/cookie/cookie';
+import { EXPIRY_TIME } from '@/constants/common';
 
-interface TokenExpirationTimerProps {
-  user: UserData | null;
-}
-
-const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
+export const TokenExpirationTimer = (token: string | undefined) => {
   const router = useRouter();
   const [timeLeft, setTimeLeft] = useState<number>(EXPIRY_TIME / 1000); // 남은 시간 초기값
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false); // 로그인 상태 관리
@@ -53,35 +48,40 @@ const TokenExpirationTimer = ({ user }: TokenExpirationTimerProps) => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (token) {
       setIsLoggedIn(true);
       loadRemainingTime(); // 남은 시간 불러오기
 
-      const cleanupTimer = startTimer(); // 타이머 시작
+      const cleanupTimer = startTimer();
 
       return cleanupTimer; // 클린업 함수 반환
     } else {
       setIsLoggedIn(false);
+      logout();
     }
-  }, []); // user가 변경될 때마다 실행
+  }, [token]);
 
+  // 로그아웃 로직
   const logout = async () => {
-    alert('토큰이 만료되었습니다. 다시 로그인해주세요.');
-    await postUserLogoutData();
-    router.push('/gatherings');
-    router.refresh();
+    const result = await postUserLogoutData();
+    if (result) {
+      Promise.resolve()
+        .then(() => {
+          toast.success('로그아웃이 완료되었습니다.');
+        })
+        .then(() => {
+          localStorage.removeItem('timeLeft'); // 로컬 스토리지에서 시간 삭제
+        })
+        .then(() => {
+          deleteCookie('token'); // 쿠키에서 토큰 삭제
+        })
+        .then(() => {
+          router.push('/gatherings');
+        });
+    } else {
+      toast.error('로그아웃에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
-  // 로그인 상태가 아닐 때는 타이머를 표시하지 않음
-  if (!isLoggedIn) {
-    return null;
-  }
-
-  return timeLeft > 0 ? (
-    <p className='text-14 font-semibold text-var-orange-50 md:text-16'>
-      남은 시간: {Math.floor(timeLeft / 60)}분 {timeLeft % 60}초
-    </p>
-  ) : null;
+  return { timeLeft, isLoggedIn };
 };
-
-export default TokenExpirationTimer;
