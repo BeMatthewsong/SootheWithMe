@@ -1,31 +1,28 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+import toast from 'react-hot-toast';
+import Tabs from '@/app/components/Tabs/Tabs';
 import ReviewList from './ReviewList';
 import ReviewScore from './ReviewScore/ReviewScore';
-import Loader from '@/app/components/Loader/Loader';
-import Tabs from '@/app/components/Tabs/Tabs';
 import Chips from '@/app/components/Chips/Chips';
 import Filters from '@/app/components/Filters/Filters';
-import useReviews from '@/hooks/useReveiws';
 import { ReviewScoreType, ReviewsType } from '@/types/data.type';
+import useReviews from '@/hooks/useReviews/useReveiws';
 import { REVIEW_SORT_OPTIONS } from '@/constants/common';
 
 interface ClientSideReviewsProps {
-  reviewListData: ReviewsType[];
-  reviewScoreData: ReviewScoreType[];
+  initialReviewList: ReviewsType[];
+  initialReviewScore: ReviewScoreType[];
 }
 
 const ClientSideReviews = ({
-  reviewListData,
-  reviewScoreData,
+  initialReviewList,
+  initialReviewScore,
 }: ClientSideReviewsProps) => {
-  const { ref, inView } = useInView({ threshold: 1.0 });
-
   const {
     filteredData,
-    filteredSortData,
+    score,
     activeTab,
     selectedChip,
     handleTabClick,
@@ -36,15 +33,15 @@ const ClientSideReviews = ({
     loadMore,
     isLoading,
     hasMore,
-  } = useReviews(reviewListData, reviewScoreData);
+    isError,
+    error,
+  } = useReviews(initialReviewList, initialReviewScore);
 
   useEffect(() => {
-    if (inView && hasMore) {
-      loadMore();
+    if (isError) {
+      toast.error(error?.message || '오류가 발생했습니다.');
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, hasMore]);
+  }, [isError, error]);
 
   return (
     <section className='mt-24 flex grow flex-col md:mt-32'>
@@ -58,7 +55,7 @@ const ClientSideReviews = ({
       <div className='mb-16 w-full border-y border-var-gray-200' />
 
       {/* 별점칸 */}
-      <ReviewScore initialScore={filteredSortData} />
+      <ReviewScore score={score} />
 
       <div
         className={`mt-24 flex grow flex-col border-t-2 border-t-var-gray-900 bg-white px-24 pt-8 ${!hasMore && 'pb-24'}`}
@@ -70,18 +67,13 @@ const ClientSideReviews = ({
           sortOptions={REVIEW_SORT_OPTIONS}
         />
 
-        {filteredData.length > 0 ? (
-          <>
-            <ReviewList reviewList={filteredData} />
-
-            {isLoading && (
-              <div className='flex items-center justify-center pt-24'>
-                <Loader />
-              </div>
-            )}
-
-            {hasMore && <div ref={ref} className='h-24' />}
-          </>
+        {filteredData[0].length > 0 ? (
+          <ReviewList
+            reviewList={filteredData}
+            loadMore={loadMore}
+            isLoading={isLoading}
+            hasMore={hasMore}
+          />
         ) : (
           <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
             아직 리뷰가 없어요

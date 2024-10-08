@@ -12,8 +12,8 @@ const ReviewsPage = async () => {
       <Header />
 
       <ClientSideReviews
-        reviewListData={reviewList}
-        reviewScoreData={reviewScore}
+        initialReviewList={reviewList}
+        initialReviewScore={reviewScore}
       />
     </main>
   );

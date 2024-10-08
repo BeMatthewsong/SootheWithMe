@@ -3,11 +3,11 @@ import { ReviewScoreType } from '@/types/data.type';
 import { calculateBarWidth, calculateTotalRatings } from './calculates';
 
 interface ScoresProps {
-  ratingData: ReviewScoreType[];
+  rating: ReviewScoreType[];
 }
 
-const Scores = ({ ratingData }: ScoresProps) => {
-  const count = calculateTotalRatings(ratingData);
+const Scores = ({ rating }: ScoresProps) => {
+  const count = calculateTotalRatings(rating);
   const barWidth = calculateBarWidth(count);
 
   const ratingLevels = [

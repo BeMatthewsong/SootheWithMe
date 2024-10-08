@@ -32,9 +32,6 @@ const getReviewScore = async (
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'cache-control': 'no-cache',
-
-          // TODO : cache 관련 처리 협의 필요
         },
       },
     );
@@ -48,7 +45,9 @@ const getReviewScore = async (
     return data;
   } catch (error) {
     throw new Error(
-      error instanceof Error ? error.message : '리뷰를 불러오지 못했습니다.',
+      error instanceof Error
+        ? error.message
+        : '리뷰 평점을 불러오지 못했습니다.',
     );
   }
 };

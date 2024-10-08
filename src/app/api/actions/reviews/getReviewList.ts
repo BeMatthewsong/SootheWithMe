@@ -40,8 +40,6 @@ const getReviewList = async (
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'cache-control': 'no-cache',
-          // TODO : cache 관련 처리 협의 필요
         },
       },
     );
@@ -50,7 +48,9 @@ const getReviewList = async (
 
     return data;
   } catch (error) {
-    throw new Error('리뷰를 불러오지 못했습니다.');
+    throw new Error(
+      error instanceof Error ? error.message : '리뷰를 불러오지 못했습니다.',
+    );
   }
 };
 

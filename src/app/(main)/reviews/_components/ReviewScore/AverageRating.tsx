@@ -3,20 +3,24 @@ import { ReviewScoreType } from '@/types/data.type';
 import { useEffect, useState } from 'react';
 
 interface AverageRatingProps {
-  ratingData: ReviewScoreType[];
+  rating: ReviewScoreType[];
 }
 
-const AverageRating = ({ ratingData }: AverageRatingProps) => {
-  const averageScore = ratingData.length > 0 ? ratingData[0].averageScore : 0.0;
+const AverageRating = ({ rating }: AverageRatingProps) => {
+  const averageScore = rating.length > 0 ? rating[0].averageScore : 0.0;
 
   const [width, setWidth] = useState(0);
   const [opacity, setOpacity] = useState(0.5);
 
   useEffect(() => {
-    setTimeout(() => {
+    const animationTimeout = setTimeout(() => {
       setWidth(averageScore * 20);
       setOpacity(1);
     }, 5);
+
+    return () => {
+      clearTimeout(animationTimeout);
+    };
   }, [averageScore]);
 
   return (

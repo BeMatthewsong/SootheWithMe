@@ -144,3 +144,15 @@ export interface GetGatheringsParams {
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
 }
+
+// GetReviews API Params Type
+export interface GetReviewsParams {
+  type?: GatheringsType;
+  limit?: number;
+  offset?: number;
+  location?: string;
+  date?: string;
+  sortBy?: string; //createdAt, score, participantCount
+  sortOrder?: 'asc' | 'desc';
+  gatheringId?: number;
+}

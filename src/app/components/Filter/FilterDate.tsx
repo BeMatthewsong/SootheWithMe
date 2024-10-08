@@ -77,6 +77,7 @@ const FilterDate = ({
           <CalendarModal
             initialSelectedData={selectedDate}
             handleClickButtons={handleClickButtons}
+            CalendarProps={{ changeEndDays: 0 }}
           />
         </div>
       )}
