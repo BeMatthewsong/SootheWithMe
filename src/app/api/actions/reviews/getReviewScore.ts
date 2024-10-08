@@ -1,5 +1,6 @@
 'use server';
 
+import qs from 'qs';
 import { GatheringsType } from '@/types/client.type';
 import { ReviewScoreType } from '@/types/data.type';
 
@@ -14,10 +15,16 @@ const getReviewScore = async (
   try {
     const { gatheringId, type } = params;
 
-    const queryString = new URLSearchParams({
-      ...(gatheringId && { gatheringId: gatheringId.join(',') }),
-      ...(type && { type: String(type) }),
-    }).toString();
+    const queryString = qs.stringify(
+      {
+        gatheringId: gatheringId?.join(','),
+        type,
+      },
+      {
+        skipNulls: true, // null 값을 건너뛰도록 설정
+        strictNullHandling: true, // undefined 값도 건너뛰도록 설정
+      },
+    );
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews/scores?${queryString}`,

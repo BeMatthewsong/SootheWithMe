@@ -1,5 +1,6 @@
 'use server';
 
+import qs from 'qs';
 import { GatheringsType } from '@/types/client.type';
 import { GatheringsListData } from '@/types/data.type';
 
@@ -19,16 +20,19 @@ const getGatherings = async (
   params: GetGatheringsParams = {},
 ): Promise<GatheringsListData[]> => {
   try {
-    const { limit = 10, offset = 0, sortBy, sortOrder, type, ...rest } = params;
+    const { limit = 10, offset = 0, ...rest } = params;
 
-    const queryString = new URLSearchParams({
-      limit: String(limit),
-      offset: String(offset),
-      sortBy: String(sortBy),
-      sortOrder: String(sortOrder),
-      ...(type && { type: String(type) }),
-      ...rest,
-    }).toString();
+    const queryString = qs.stringify(
+      {
+        limit,
+        offset,
+        ...rest,
+      },
+      {
+        skipNulls: true, // null 값을 건너뛰도록 설정
+        strictNullHandling: true, // undefined 값도 건너뛰도록 설정
+      },
+    );
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings?${queryString}`,

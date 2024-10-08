@@ -1,5 +1,6 @@
 'use server';
 
+import qs from 'qs';
 import { GatheringsType } from '@/types/client.type';
 import { ReviewsType } from '@/types/data.type';
 
@@ -19,24 +20,19 @@ const getReviewList = async (
   params: GetReviewListParams = {},
 ): Promise<ReviewsType[]> => {
   try {
-    const {
-      limit = 10,
-      offset = 0,
-      type,
-      gatheringId,
-      userId,
-      ...rest
-    } = params;
+    const { limit = 10, offset = 0, ...rest } = params;
 
-    // TODO : 쿼리스트링 라이브러리 사용하여 리팩토링 (ex. qs, query-string)
-    const queryString = new URLSearchParams({
-      limit: String(limit),
-      offset: String(offset),
-      ...(type && { type: String(type) }),
-      ...(gatheringId && { gatheringId: String(gatheringId) }),
-      ...(userId && { userId: String(userId) }),
-      ...rest,
-    }).toString();
+    const queryString = qs.stringify(
+      {
+        limit,
+        offset,
+        ...rest,
+      },
+      {
+        skipNulls: true, // null 값을 건너뛰도록 설정
+        strictNullHandling: true, // undefined 값도 건너뛰도록 설정
+      },
+    );
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews?${queryString}`,

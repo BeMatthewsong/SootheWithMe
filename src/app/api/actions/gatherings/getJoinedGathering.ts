@@ -1,5 +1,6 @@
 'use server';
 
+import qs from 'qs';
 import { getCookie } from '@/actions/auth/cookie/cookie';
 import { UserJoinedGatheringsData } from '@/types/data.type';
 
@@ -25,14 +26,20 @@ const getJoinedGatherings = async (
       sortOrder = 'desc',
     } = params;
 
-    const queryString = new URLSearchParams({
-      completed: String(completed),
-      reviewed: String(reviewed),
-      limit: String(limit),
-      offset: String(offset),
-      sortBy,
-      sortOrder,
-    }).toString();
+    const queryString = qs.stringify(
+      {
+        completed,
+        reviewed,
+        limit,
+        offset,
+        sortBy,
+        sortOrder,
+      },
+      {
+        skipNulls: true, // null 값을 건너뛰도록 설정
+        strictNullHandling: true, // undefined 값도 건너뛰도록 설정
+      },
+    );
 
     const token = await getCookie('token');
 

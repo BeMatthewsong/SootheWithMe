@@ -46,20 +46,11 @@ const useSavedGatherings = (savedGatherings: number[]) => {
         id: savedGatherings.join(','),
         type: activeChip === 'ALL' ? activeTab : activeChip,
         limit: savedGatherings.length,
+        location: selectedLocation ? selectedLocation : undefined,
+        date: selectedDate ? formatCalendarDate(selectedDate) : undefined,
+        sortBy: sortOption ? SORT_OPTIONS_MAP[sortOption] : undefined,
+        sortOrder: sortOption ? 'desc' : undefined,
       };
-      if (selectedLocation) {
-        params.location = selectedLocation;
-      }
-      if (selectedDate) {
-        params.date = formatCalendarDate(selectedDate);
-      }
-      if (sortOption) {
-        params.sortBy = SORT_OPTIONS_MAP[sortOption];
-        params.sortOrder = 'desc';
-      } else {
-        params.sortBy = SORT_OPTIONS_MAP['최신순'];
-        params.sortOrder = 'desc';
-      }
 
       getSavedGatherings(params);
     } else {
