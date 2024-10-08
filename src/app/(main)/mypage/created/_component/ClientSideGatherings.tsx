@@ -1,5 +1,6 @@
 'use client';
 
+import toast from 'react-hot-toast';
 import { useUserCreated } from '@/hooks/useUserCreated';
 import GatheringList from './GatheringList';
 import { useInView } from 'react-intersection-observer';
@@ -8,18 +9,22 @@ import { GatheringsListData } from '@/types/data.type';
 import Loader from '@/app/components/Loader/Loader';
 
 interface ClientSideGatheringsProps {
-  gatherings: GatheringsListData[];
+  initialGatheringList: GatheringsListData[];
   createdBy: string;
 }
 
 const ClientSideGatherings = ({
-  gatherings,
+  initialGatheringList,
   createdBy,
 }: ClientSideGatheringsProps) => {
-  const { gatheringsList, isLoading, hasMore, loadMore } = useUserCreated(
-    gatherings,
-    createdBy,
-  );
+  const { gatheringsList, isLoading, hasMore, loadMore, isError, error } =
+    useUserCreated(initialGatheringList, createdBy);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error?.message || '오류가 발생했습니다.');
+    }
+  }, [isError, error]);
 
   const { ref, inView } = useInView({ threshold: 1.0 });
 
@@ -32,7 +37,7 @@ const ClientSideGatherings = ({
 
   return (
     <>
-      <GatheringList dataList={gatheringsList} />
+      <GatheringList dataList={gatheringsList.pages.flat()} />
       {isLoading && (
         <div className='flex items-center justify-center pt-24'>
           <Loader />
