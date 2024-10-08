@@ -15,6 +15,11 @@ interface BoxSelectProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
+const stateClasses = {
+  default: 'bg-var-gray-50 text-var-black',
+  active: 'bg-var-gray-900 text-var-white',
+};
+
 const BoxSelect = ({
   title = '',
   subTitle = '',
@@ -23,7 +28,8 @@ const BoxSelect = ({
 }: BoxSelectProps) => {
   return (
     <label
-      className={`flex h-76 w-full items-start gap-8 rounded-lg ${isSelected ? 'bg-var-gray-900 text-var-white' : 'bg-var-gray-50 text-var-black'} md:h-70 lg:h-70 px-8 py-[6px] transition-colors duration-200 ease-in-out md:px-16 md:py-12`}
+      data-testid='box-select'
+      className={`flex h-76 w-full items-start gap-8 rounded-lg ${isSelected ? stateClasses.active : stateClasses.default} md:h-70 lg:h-70 px-8 py-[6px] transition-colors duration-200 ease-in-out md:px-16 md:py-12`}
     >
       <input
         id='checkbox'
