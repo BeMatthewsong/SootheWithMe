@@ -14,6 +14,7 @@ import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
+import NameInput from './MakeGatheringModal/NameInput';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -22,6 +23,7 @@ interface MakeGatheringModalProps {
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const router = useRouter();
 
+  const [name, setName] = useState<string>('');
   const [location, setLocation] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
@@ -55,6 +57,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   }
 
   const isFormValid = () =>
+    name &&
     location &&
     image &&
     !isAllGatheringTypeFalse() &&
@@ -102,6 +105,9 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
         <div className='scrollbar-hide flex w-full flex-col gap-24 overflow-auto p-4 md:pr-24'>
           {/* 헤더 */}
           <ModalHeader title={'모임 만들기'} onClose={onClose} />
+
+          {/* 모임 이름 */}
+          <NameInput setName={setName} />
 
           {/* 장소 */}
           <PlaceDropdown
