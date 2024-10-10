@@ -2,7 +2,7 @@
 
 import qs from 'qs';
 import { GatheringsType } from '@/types/client.type';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 
 interface GetGatheringsParams {
   id?: string;
@@ -18,7 +18,7 @@ interface GetGatheringsParams {
 
 const getGatherings = async (
   params: GetGatheringsParams = {},
-): Promise<GatheringsListData[]> => {
+): Promise<GatheringType[]> => {
   try {
     const { limit = 10, offset = 0, ...rest } = params;
 
@@ -48,7 +48,7 @@ const getGatherings = async (
       throw new Error('모임을 불러오지 못했습니다.');
     }
 
-    const data: GatheringsListData[] = await res.json();
+    const data: GatheringType[] = await res.json();
 
     return data;
   } catch (error) {

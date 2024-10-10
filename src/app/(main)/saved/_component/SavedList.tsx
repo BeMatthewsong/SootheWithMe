@@ -2,11 +2,11 @@
 
 import CardList from '@/app/components/CardList/CardList';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import Link from 'next/link';
 
 interface SavedListProps {
-  dataList: GatheringsListData[];
+  dataList: GatheringType[];
 }
 
 const SavedList = ({ dataList }: SavedListProps) => {

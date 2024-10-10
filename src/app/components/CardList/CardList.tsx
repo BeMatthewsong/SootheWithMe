@@ -13,7 +13,7 @@ import {
   formatTimeHours,
   isSameDate,
 } from '@/utils/formatDate';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
@@ -21,7 +21,7 @@ import { MouseEvent, useState } from 'react';
 
 // TODO : optional props를 필수로 변경
 interface CardProps {
-  data: GatheringsListData;
+  data: GatheringType;
   isSaved?: boolean;
   handleButtonClick?: (id: number) => void;
 }

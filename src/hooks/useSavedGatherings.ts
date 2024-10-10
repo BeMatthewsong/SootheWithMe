@@ -1,14 +1,14 @@
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
 import { SORT_OPTIONS_MAP } from '@/constants/common';
 import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
-import { GatheringsListData, GetGatheringsParams } from '@/types/data.type';
+import { GatheringType, GetGatheringsParams } from '@/types/data.type';
 import { formatCalendarDate } from '@/utils/formatDate';
 import { useEffect, useState } from 'react';
 
 const useSavedGatherings = (savedGatherings: number[]) => {
-  const [gatheringListData, setGatheringListData] = useState<
-    GatheringsListData[]
-  >([]);
+  const [gatheringListData, setGatheringListData] = useState<GatheringType[]>(
+    [],
+  );
 
   const [activeTab, setActiveTab] = useState<GatheringTabsType>('DALLAEMFIT');
   const [activeChip, setActiveChip] = useState<GatheringChipsType>('ALL');

@@ -2,12 +2,12 @@ import React, { MouseEventHandler } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CardList from './CardList';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 
 const date = new Date();
 date.setDate(date.getDate() + 3);
 
-const MOCK_DATA_BASE: GatheringsListData = {
+const MOCK_DATA_BASE: GatheringType = {
   teamId: 1,
   id: 1,
   type: 'test',

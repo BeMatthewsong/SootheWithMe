@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import getGatherings from '@/app/api/actions/gatherings/getGatherings';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import {
   DEFAULT_OFFSET,
   LIMIT_PER_REQUEST,
@@ -8,7 +8,7 @@ import {
 } from '@/constants/common';
 
 export const useUserCreated = (
-  initialGatheringList: GatheringsListData[],
+  initialGatheringList: GatheringType[],
   createdBy: string,
 ) => {
   const {

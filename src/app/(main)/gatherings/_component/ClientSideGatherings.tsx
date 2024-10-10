@@ -8,7 +8,7 @@ import MakeGatheringModal from '@/app/components/Modal/MakeGatheringModal';
 import Tabs from '@/app/components/Tabs/Tabs';
 import useGatherings from '@/hooks/useGatherings';
 import usePreventScroll from '@/hooks/usePreventScroll';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import CreateGatheringButton from './CreateGatheringButton';
 import Filters from '@/app/components/Filters/Filters';
 import GatheringCardList from './GatheringCardList';
@@ -20,7 +20,7 @@ import { useInView } from 'react-intersection-observer';
 import { SORT_OPTIONS } from '@/constants/common';
 
 interface ClientSideGatheringsProps {
-  gatherings: GatheringsListData[];
+  gatherings: GatheringType[];
   user: UserData | null;
 }
 

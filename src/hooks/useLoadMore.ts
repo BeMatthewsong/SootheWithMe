@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
 import { LIMIT_PER_REQUEST } from '@/constants/common';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 
 const useLoadMore = (
   fetchFilteredGatherings: (filters: {
     offset: number;
-  }) => Promise<GatheringsListData[]>,
+  }) => Promise<GatheringType[]>,
   offset: number,
   setOffset: (offset: number) => void,
   setFilteredData: (
-    data: (prevData: GatheringsListData[]) => GatheringsListData[],
+    data: (prevData: GatheringType[]) => GatheringType[],
   ) => void,
 ) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

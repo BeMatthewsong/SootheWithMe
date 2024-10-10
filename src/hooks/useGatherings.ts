@@ -3,7 +3,7 @@
  * 이 훅은 초기 모임 데이터를 상태로 관리하며, 다양한 필터와 정렬 옵션을 설정할 수 있는 핸들러 함수를 제공합니다.
  * 또한, 필터 변경 시 쿼리 파라미터를 업데이트하고, 필터링된 데이터를 서버에서 가져오는 기능을 포함합니다.
  *
- * @param {GatheringsListData[]} initialGatherings - 초기 모임 데이터 배열
+ * @param {GatheringType[]} initialGatherings - 초기 모임 데이터 배열
  */
 
 import { useEffect, useState } from 'react';
@@ -18,11 +18,11 @@ import {
   GatheringFilters,
   GatheringTabsType,
 } from '@/types/client.type';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 
-const useGatherings = (initialGatherings: GatheringsListData[]) => {
+const useGatherings = (initialGatherings: GatheringType[]) => {
   const [filteredData, setFilteredData] =
-    useState<GatheringsListData[]>(initialGatherings);
+    useState<GatheringType[]>(initialGatherings);
 
   const [activeTab, setActiveTab] = useState<GatheringTabsType>('DALLAEMFIT');
   const [selectedLocation, setSelectedLocation] = useState<string | undefined>(

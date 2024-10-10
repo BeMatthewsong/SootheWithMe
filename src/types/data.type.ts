@@ -1,8 +1,7 @@
 import { GatheringsType } from './client.type';
 
-// GET : /{teamId}/gatherings/joined
-// 로그인된 사용자가 참석한 모임 목록 조회 시 Response Data
-export interface UserJoinedGatheringsData {
+// GET : /{teamId}/gatherings
+export interface GatheringType {
   teamId: number | string;
   id: number;
   type: string;
@@ -15,44 +14,20 @@ export interface UserJoinedGatheringsData {
   image: string;
   createdBy: number;
   canceledAt?: string | null;
+}
+
+// GET : /{teamId}/gatherings/joined
+export interface UserJoinedGatheringsData extends GatheringType {
   joinedAt?: string;
   isCompleted?: boolean;
   isReviewed?: boolean;
 }
 
-// GET : /{teamId}/gatherings
-// 모임 목록 조회 시 Response Data
-export interface GatheringsListData {
-  teamId: number | string;
-  id: number;
-  type: string;
-  name: string;
-  dateTime: string;
-  registrationEnd: string;
-  location: string;
-  participantCount: number;
-  capacity: number;
-  image: string;
-  createdBy: number;
-  canceledAt?: string | null;
-}
-
 // GET : /{teamId}/gatherings/{gatheringId}
 // POST: /{teamId}/gatherings
-export interface GatheringInfoType {
-  teamId: number | string;
-  id: number;
-  type: string;
+export type GatheringInfoType = Omit<GatheringType, 'name'> & {
   name: string | null;
-  dateTime: string;
-  registrationEnd: string;
-  location: string;
-  participantCount: number;
-  capacity: number;
-  image: string;
-  createdBy: number;
-  canceledAt?: string | null;
-}
+};
 
 // GET : /{teamId}/gatherings/{id}/participants
 export interface GatheringParticipantsType {
@@ -70,12 +45,12 @@ export interface GatheringParticipantsType {
 }
 
 // GET : /{teamId}/gatherings/joined
-// 참석한 모임 목록 조회 시 Response Data
-export interface myGatheringData extends GatheringsListData {
+export interface myGatheringData extends GatheringType {
   joinedAt: string;
   isCompleted: boolean;
   isReviewed: boolean;
 }
+
 // GET : mockdata
 // 무한스크롤 구현을 위한 mock data의 인터페이스입니다. 수정 및 삭제될 수 있음
 export interface FetchGatheringsResponse {

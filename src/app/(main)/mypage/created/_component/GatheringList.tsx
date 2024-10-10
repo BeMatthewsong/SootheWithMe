@@ -1,11 +1,11 @@
 'use client';
 
 import Card from '@/app/components/Card/Card';
-import { GatheringsListData } from '@/types/data.type';
+import { GatheringType } from '@/types/data.type';
 import Link from 'next/link';
 
 interface GatheringListProps {
-  dataList: GatheringsListData[];
+  dataList: GatheringType[];
 }
 
 const GatheringList = ({ dataList }: GatheringListProps) => {
