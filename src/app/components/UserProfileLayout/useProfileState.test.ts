@@ -1,9 +1,8 @@
-// useProfileState.test.ts
 import { renderHook, act } from '@testing-library/react';
 import { useProfileState } from './useProfileState';
 import { UserData } from '@/types/client.type';
 
-describe('useProfileState 훅 테스트', () => {
+describe('useProfileState', () => {
   // 테스트 전에 사용할 기본 유저 데이터
   let user: UserData;
 
