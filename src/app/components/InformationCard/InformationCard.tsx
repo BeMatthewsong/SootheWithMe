@@ -158,7 +158,7 @@ const InformationCard = ({
         <div className='flex justify-between'>
           <div className='flex items-center'>
             <div className='text-14 font-semibold'>
-              모집 정원 {participantCount}명
+              현재 인원 {participantCount}명
             </div>
             <div className='ml-12 flex -space-x-6'>{renderAvatars()}</div>
           </div>
@@ -184,9 +184,9 @@ const InformationCard = ({
         />
 
         <div className='mt-10 flex justify-between text-12 font-semibold'>
-          <div>최소인원 {MIN_PARTICIPANTS}명</div>
+          <div>최소 인원 {MIN_PARTICIPANTS}명</div>
           <div className='text-var-orange-500'>
-            최대인원 {maxParticipants}명
+            최대 인원 {maxParticipants}명
           </div>
         </div>
       </div>

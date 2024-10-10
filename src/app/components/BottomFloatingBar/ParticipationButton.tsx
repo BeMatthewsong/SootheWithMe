@@ -87,10 +87,11 @@ const ParticipationButton = ({
 
   // 주최자일 경우
   if (isHost) {
-    const disabled = isRegistrationEnded || isCancelled; // 마감일이 지났거나 취소되었을 경우 button 비활성화
+    const disabled = isRegistrationEnded; // 마감일이 지난 경우 버튼 비활성화
+
     return (
       <div className='flex w-[330px] gap-[10px]'>
-        {renderButton('취소하기', 'white', cancelGathering, disabled)}
+        {renderButton('취소하기', 'white', cancelGathering)}
         {renderButton('공유하기', 'default', copyUrlToClipboard, disabled)}
       </div>
     );
