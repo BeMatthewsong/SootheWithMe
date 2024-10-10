@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import postGatherings from '@/app/api/actions/gatherings/postGatherings';
 import { LOCATION_OPTIONS, MIN_PARTICIPANTS } from '@/constants/common';
 import { FormEvent, useState } from 'react';
@@ -19,6 +20,8 @@ interface MakeGatheringModalProps {
 }
 
 const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
+  const router = useRouter();
+
   const [location, setLocation] = useState<string | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [gatheringType, setGatheringType] = useState<Record<string, boolean>>({
@@ -67,13 +70,14 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
       return;
     }
 
-    const { success, message } = await postGatherings({
-      location: location as string,
-      type: getSelectedGatheringType(),
-      dateTime: (combinedDateTime as Date).toISOString(),
-      capacity,
-      image: image as File,
-    });
+    const formData = new FormData();
+    formData.append('location', location!);
+    formData.append('type', getSelectedGatheringType());
+    formData.append('dateTime', (combinedDateTime as Date).toISOString());
+    formData.append('capacity', capacity.toString());
+    formData.append('image', image as File);
+
+    const { success, message, data } = await postGatherings(formData);
 
     if (!success) {
       toast.error(message);
@@ -82,6 +86,9 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     onClose();
+
+    router.push(`/gatherings/${data.id}`);
+
     toast.success(message);
     // TODO : 모임 생성 후 페이지 리로드
   };
