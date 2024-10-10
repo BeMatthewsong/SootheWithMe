@@ -5,8 +5,8 @@ interface ChipProps {
 }
 
 const stateClasses = {
-  default: 'bg-var-gray-200 text-var-bg-gray-900',
-  active: 'bg-var-gray-900 text-white',
+  default: 'bg-var-gray-200 text-var-bg-gray-900 dark:text-var-gray-900',
+  active: 'bg-var-gray-900 text-white dark:border',
 };
 
 const Chip = ({ state = 'default', children, onClick }: ChipProps) => {

@@ -11,6 +11,11 @@ import { useEffect, useState } from 'react';
 import { UserData } from '@/types/client.type';
 import TokenExpirationTimerLayout from './TokenExpirationTimerLayout';
 
+import { useTheme } from 'next-themes';
+
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { IoSettingsOutline } from 'react-icons/io5';
+
 const navList = [
   {
     name: '모임 찾기',
@@ -32,6 +37,8 @@ interface GnbProps {
 }
 
 const Gnb = ({ user, token }: GnbProps) => {
+  const { setTheme, resolvedTheme } = useTheme();
+
   const pathname = usePathname();
 
   const { savedGatherings } = useSavedGatheringList();
@@ -40,6 +47,12 @@ const Gnb = ({ user, token }: GnbProps) => {
   useEffect(() => {
     setSavedCount(savedGatherings.length);
   }, [savedGatherings]);
+
+  useEffect(() => {
+    if (resolvedTheme === undefined) {
+      setTheme('system');
+    }
+  }, [resolvedTheme, setTheme]);
 
   return (
     <header className='fixed left-0 top-0 z-popup w-full border-b-2 border-var-gray-900 bg-var-orange-600'>
@@ -67,6 +80,18 @@ const Gnb = ({ user, token }: GnbProps) => {
           </ul>
         </nav>
         <div className='flex items-center gap-12'>
+          <button
+            onClick={() =>
+              setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
+            }
+            className='flex items-center'
+          >
+            {resolvedTheme === 'dark' ? (
+              <FaSun size={24} />
+            ) : (
+              <FaMoon size={24} />
+            )}
+          </button>
           {user && <TokenExpirationTimerLayout token={token} variant='gnb' />}
           <UserStatus user={user} token={token} />
         </div>

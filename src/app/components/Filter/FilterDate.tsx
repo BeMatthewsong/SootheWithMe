@@ -7,7 +7,7 @@ import { formatDate } from '@/utils/formatDate';
 
 const stateClasses = {
   default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-800',
-  active: 'text-var-gray-50 bg-var-gray-900',
+  active: 'text-var-gray-50 bg-var-gray-900 dark:border',
 };
 
 interface FilterDateProps {

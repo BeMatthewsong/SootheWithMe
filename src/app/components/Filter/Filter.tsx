@@ -56,7 +56,7 @@ const FilterSort = ({
 // state 별 클래스명
 const stateClasses = {
   default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-800',
-  active: 'text-var-gray-50 bg-var-gray-900',
+  active: 'text-var-gray-50 bg-var-gray-900 dark:border',
 };
 
 // Filter Wrapper 컴포넌트

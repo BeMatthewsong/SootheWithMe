@@ -40,7 +40,7 @@ const Popup = ({
           </button>
         </div>
         {/* 팝업 내용 */}
-        <p className='text-center text-16 font-medium'>
+        <p className='text-center text-16 font-medium dark:text-var-gray-900'>
           {type === 'exit' ? (
             <>
               정말 나가시겠어요? <br /> 작성된 내용이 모두 삭제됩니다.

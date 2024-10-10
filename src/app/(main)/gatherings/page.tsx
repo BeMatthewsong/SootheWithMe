@@ -13,7 +13,7 @@ const GatheringsPage = async () => {
 
   return (
     <div className='mx-auto max-w-[1200px]'>
-      <div className='min-h-screen bg-var-gray-50 px-16 pt-24 md:px-24 md:pt-40 lg:px-100'>
+      <div className='min-h-screen bg-var-gray-50 px-16 pt-24 md:px-24 md:pt-40 lg:px-100 dark:bg-var-gray-900'>
         <Header />
         <ClientSideGatherings gatherings={gatherings} user={userData} />
       </div>
