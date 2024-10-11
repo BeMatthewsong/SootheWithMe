@@ -12,6 +12,7 @@ import { formatDate, formatTime } from '@/utils/formatDate';
 import { UserJoinedGatheringsData } from '@/types/data.type';
 import { createContext, PropsWithChildren, useContext } from 'react';
 import { MIN_PARTICIPANTS } from '@/constants/common';
+import Link from 'next/link';
 
 interface CardProps {
   data: UserJoinedGatheringsData;
@@ -32,16 +33,18 @@ const Card = ({
     <div className='w-full border-b-2 border-dashed border-var-gray-200 py-24'>
       <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-xl md:flex-row md:rounded-3xl'>
         {/* 이미지 */}
-        <div className='relative flex h-156 w-full flex-col gap-16 md:w-280'>
-          <Image
-            className='rounded-3xl object-cover'
-            src={data.image || '/images/mock-image.png'}
-            alt='모임 이미지'
-            fill
-            quality={85}
-            sizes='(max-width: 768px) 100vw, 378px'
-          />
-        </div>
+        <Link href={`/gatherings/${data.id}`}>
+          <div className='relative flex h-156 w-full flex-col gap-16 md:w-280'>
+            <Image
+              className='rounded-3xl object-cover'
+              src={data.image || '/images/mock-image.png'}
+              alt='모임 이미지'
+              fill
+              quality={85}
+              sizes='(max-width: 768px) 100vw, 378px'
+            />
+          </div>
+        </Link>
 
         {/* content - chip, info, button */}
         <CardContext.Provider value={data}>
@@ -131,7 +134,7 @@ const CardInfo = (): JSX.Element => {
   const { name, location, dateTime, participantCount, capacity } = data;
 
   return (
-    <>
+    <Link href={`/gatherings/${data.id}`}>
       <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
         <p>{name}</p>
         <span>|</span>
@@ -146,7 +149,7 @@ const CardInfo = (): JSX.Element => {
           {participantCount}/{capacity}
         </p>
       </div>
-    </>
+    </Link>
   );
 };
 

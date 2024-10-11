@@ -18,8 +18,8 @@ const getJoinedGatherings = async (
 ): Promise<UserJoinedGatheringsData[]> => {
   try {
     const {
-      completed = true,
-      reviewed = false,
+      completed,
+      reviewed,
       limit = 10,
       offset = 0,
       sortBy = 'dateTime',

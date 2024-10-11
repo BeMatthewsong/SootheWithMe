@@ -6,15 +6,15 @@ import { usePathname } from 'next/navigation';
 const tabList = [
   {
     name: '나의 모임',
-    link: '/mypage',
+    link: ['/mypage'],
   },
   {
     name: '나의 리뷰',
-    link: '/mypage/review',
+    link: ['/mypage/review/writable', '/mypage/review/written'],
   },
   {
     name: '내가 만든 모임',
-    link: '/mypage/created',
+    link: ['/mypage/created'],
   },
 ];
 
@@ -26,8 +26,11 @@ const Tab = () => {
   return (
     <ul className='flex items-start gap-12 text-18 font-semibold text-var-gray-400'>
       {tabList.map((item, index) => (
-        <li key={index} className={pathname === item.link ? activeClass : ''}>
-          <Link href={item.link}>{item.name}</Link>
+        <li
+          key={index}
+          className={item.link.includes(pathname) ? activeClass : ''}
+        >
+          <Link href={item.link[0]}>{item.name}</Link>
         </li>
       ))}
     </ul>
