@@ -52,13 +52,13 @@ const ClientSideReviews = ({
         onChipClick={handleChipClick}
       />
 
-      <div className='mb-16 w-full border-y border-var-gray-200' />
+      <div className='mb-16 w-full border-y border-var-gray-200 dark:border-neutral-700' />
 
       {/* 별점칸 */}
       <ReviewScore score={score} />
 
       <div
-        className={`mt-24 flex grow flex-col border-t-2 border-t-var-gray-900 bg-white px-24 pt-8 ${!hasMore && 'pb-24'}`}
+        className={`mt-24 flex grow flex-col border-t-2 border-t-var-gray-900 bg-white px-24 pt-8 dark:border-neutral-700 dark:bg-transparent ${!hasMore && 'pb-24'}`}
       >
         <Filters
           onLocationChange={handleLocationChange}
@@ -75,7 +75,7 @@ const ClientSideReviews = ({
             hasMore={hasMore}
           />
         ) : (
-          <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
+          <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500 dark:text-neutral-200'>
             아직 리뷰가 없어요
           </div>
         )}

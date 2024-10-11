@@ -53,7 +53,7 @@ const SignInForm = () => {
   };
   return (
     <form
-      className='rounded-[24px] bg-var-white'
+      className='rounded-[24px] bg-transparent'
       onSubmit={handleSubmit(submit)}
     >
       <div className='flex flex-col gap-24'>

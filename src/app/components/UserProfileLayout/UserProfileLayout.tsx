@@ -57,9 +57,9 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
   };
 
   return (
-    <div className='relative w-full rounded-[24px] border-2 border-var-gray-200'>
+    <div className='relative w-full rounded-[24px] border-2 border-var-gray-200 dark:border-neutral-700'>
       <UserProfileHeader toggleModal={toggleModal} />
-      <div className='rounded-b-[24px] bg-var-white px-92 py-16'>
+      <div className='rounded-b-[24px] bg-var-white px-92 py-16 dark:bg-neutral-800'>
         {/* 프로필 이미지 */}
         <div className='absolute left-24 top-56 size-56'>
           {user?.image ? (

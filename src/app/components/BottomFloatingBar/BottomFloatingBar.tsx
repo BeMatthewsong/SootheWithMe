@@ -26,7 +26,7 @@ const BottomFloatingBar = ({
   const isHost = createdBy === user?.id; //주최자인지 검사
 
   return (
-    <section className='fixed bottom-0 w-full border-t-2 border-var-black bg-var-white px-16 py-20 md:px-24'>
+    <section className='fixed bottom-0 w-full border-t-2 border-var-gray-900 bg-var-white px-16 py-20 md:px-24 dark:border-neutral-400 dark:bg-neutral-950'>
       <div
         className={`flex max-w-[996px] justify-between lg:mx-auto ${isHost && 'flex-col items-center gap-[10px] md:flex-row'}`}
       >

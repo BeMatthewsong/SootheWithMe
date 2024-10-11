@@ -67,3 +67,41 @@
 .react-datepicker__day--keyboard-selected {
   @apply !bg-var-white !text-var-orange-600;
 }
+
+/* Dark mode */
+html.dark .react-datepicker__month-container {
+  @apply !bg-neutral-800;
+}
+
+html.dark .react-datepicker__header {
+  @apply !bg-neutral-800;
+}
+
+html.dark .react-datepicker__current-month,
+html.dark .react-datepicker-time__header,
+html.dark .react-datepicker-year-header {
+  @apply !text-neutral-100;
+}
+
+html.dark .react-datepicker__day-name,
+html.dark .react-datepicker__day,
+html.dark .react-datepicker__time-name {
+  @apply !text-white;
+}
+
+html.dark .react-datepicker__day--disabled,
+html.dark .react-datepicker__day--outside-month {
+  @apply !text-neutral-500;
+}
+
+html.dark .react-datepicker__day--selected {
+  @apply !bg-var-orange-600 !text-var-white;
+}
+
+html.dark .react-datepicker__day:hover {
+  @apply !bg-neutral-600 !text-neutral-50;
+}
+
+html.dark .react-datepicker__day--keyboard-selected {
+  @apply !bg-neutral-800 !text-var-orange-600;
+}

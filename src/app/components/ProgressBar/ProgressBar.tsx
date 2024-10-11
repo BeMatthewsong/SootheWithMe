@@ -51,7 +51,7 @@ const ProgressBar = ({
           {/* 참가 인원 렌더링 선택 */}
           {hasParticipantNumber && (
             <div
-              className={`flex items-center gap-[2px] text-14 font-medium ${isClosedGathering ? 'text-var-orange-400' : 'text-var-black'}`}
+              className={`flex items-center gap-[2px] text-14 font-medium ${isClosedGathering ? 'text-var-orange-400 dark:text-var-orange-600' : 'text-var-black dark:text-neutral-400'}`}
               data-testid='number-of-participant'
             >
               <IconPerson className='h-16 w-16' />
@@ -61,19 +61,21 @@ const ProgressBar = ({
           {/* 개설확정 렌더링 선택 */}
           {hasOpeningConfirmed && isOpeningConfirmed && !isClosedGathering && (
             <div
-              className='flex items-center gap-4 text-14 text-var-orange-400'
+              className='flex items-center gap-4 text-14 text-var-orange-400 dark:text-var-orange-500'
               data-testid='opening-confirmed-badge'
             >
-              <IconCheckCircle className='h-24 w-24' />
+              <IconCheckCircle className='h-24 w-24 brightness-90' />
               개설확정
             </div>
           )}
         </div>
         {/* progress bar */}
-        <div className='flex h-4 w-full rounded-md bg-var-orange-100'>
+        <div className='flex h-4 w-full rounded-md bg-var-orange-100 dark:bg-neutral-500'>
           <div
             className={`h-full ${
-              isClosedGathering ? 'bg-var-orange-400' : 'bg-var-orange-600'
+              isClosedGathering
+                ? 'bg-var-orange-400 dark:bg-var-orange-600'
+                : 'bg-var-orange-600'
             } transition-all duration-500 ease-in-out`}
             style={{ width: `${currentWidth}%` }}
             data-testid='colored-progress-bar'
@@ -83,13 +85,13 @@ const ProgressBar = ({
       {/* user action */}
       {isClosedGathering ? (
         <div
-          className={`${hasText ? 'block' : 'hidden'} flex items-center text-16 font-semibold text-var-orange-400`}
+          className={`${hasText ? 'block' : 'hidden'} flex items-center text-16 font-semibold text-var-orange-400 dark:text-var-orange-600`}
         >
           Closed
         </div>
       ) : (
         <div
-          className={`${hasText ? 'block' : 'hidden'} flex items-center gap-8 whitespace-nowrap text-16 font-semibold text-var-orange-600`}
+          className={`${hasText ? 'block' : 'hidden'} flex items-center gap-8 whitespace-nowrap text-16 font-semibold text-var-orange-600 dark:text-var-orange-600`}
         >
           join now
           <IconArrow className='h-[18px] w-[18px]' />

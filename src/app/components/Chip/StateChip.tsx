@@ -5,10 +5,13 @@ interface StateChipProps {
 }
 
 const stateClasses = {
-  scheduled: 'bg-var-orange-100 text-var-orange-600',
-  done: 'bg-var-gray-200 text-var-gray-500',
-  confirmed: 'bg-white text-var-orange-500 border border-var-orange-100',
-  pending: 'bg-white text-var-gray-500 border border-var-gray-200',
+  scheduled:
+    'bg-var-orange-100 text-var-orange-600 dark:bg-neutral-300 dark:text-var-orange-600 dark:font-semibold',
+  done: 'bg-var-gray-200 text-var-gray-500 dark:bg-neutral-900 dark:text-neutral-100 dark:border dark:border-neutral-600',
+  confirmed:
+    'bg-white text-var-orange-500 border border-var-orange-100 dark:bg-var-orange-600 dark:text-white dark:border dark:border-var-orange-600 dark:font-semibold',
+  pending:
+    'bg-white text-var-gray-500 border border-var-gray-200 dark:bg-neutral-600 dark:text-neutral-200 dark:border dark:border-neutral-600',
 };
 
 const stateContents = {
@@ -23,7 +26,9 @@ const StateChip = ({ state }: StateChipProps) => {
     <span
       className={`inline-flex h-32 items-center rounded-full px-[12px] py-[6px] text-14 font-medium ${stateClasses[state]}`}
     >
-      {state === 'confirmed' ? <IconCheck className='mr-4 h-16 w-16' /> : null}
+      {state === 'confirmed' ? (
+        <IconCheck className='mr-4 h-16 w-16 dark:brightness-[30]' />
+      ) : null}
       {stateContents[state]}
     </span>
   );

@@ -37,14 +37,17 @@ const InformationCardHeader = ({
         <div className='text-[18px] font-semibold' data-testid='title'>
           {title}
         </div>
-        <div className='text-[14px] font-medium' data-testid='address'>
+        <div
+          className='text-[14px] font-medium text-var-gray-700 dark:text-neutral-200'
+          data-testid='address'
+        >
           {address}
         </div>
       </div>
 
       {isSaved ? (
         <IconSaveActive
-          className='h-48 w-48 animate-heartPulse cursor-pointer'
+          className='h-48 w-48 animate-heartPulse cursor-pointer dark:brightness-90'
           onClick={handleToggleSave}
         />
       ) : (

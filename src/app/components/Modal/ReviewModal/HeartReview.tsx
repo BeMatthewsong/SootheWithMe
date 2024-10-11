@@ -14,7 +14,7 @@ const HeartReview = ({ score, setScore }: HeartReviewProps) => {
           {i + 1 <= score ? (
             <IconHeart className='h-24 w-24 cursor-pointer text-var-orange-600 transition-all duration-100 ease-in-out' />
           ) : (
-            <IconHeart className='h-24 w-24 cursor-pointer text-gray-200 transition-all duration-100 ease-in-out' />
+            <IconHeart className='h-24 w-24 cursor-pointer text-gray-200 transition-all duration-100 ease-in-out dark:text-neutral-500' />
           )}
         </span>,
       );

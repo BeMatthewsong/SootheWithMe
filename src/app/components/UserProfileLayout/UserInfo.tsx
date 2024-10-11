@@ -7,10 +7,10 @@ const UserInfo = ({ user }: UserInfoProps) => {
   return (
     <>
       {/* 이름 */}
-      <div className='text-16 font-semibold text-var-gray-800'>
+      <div className='text-16 font-semibold text-var-gray-800 dark:text-neutral-100'>
         {user?.name}
       </div>
-      <div className='text-14 font-medium text-var-gray-800'>
+      <div className='text-14 font-medium text-var-gray-800 dark:text-neutral-100'>
         {/* 회사명 */}
         <div>
           company.

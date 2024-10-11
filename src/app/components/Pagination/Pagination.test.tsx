@@ -5,13 +5,28 @@ import '@testing-library/jest-dom';
 
 // icon mocking
 jest.mock('@/public/icons', () => ({
-  IconChevronLeft: ({ onClick }: { onClick?: () => void }) => (
-    <div data-testid='IconChevronLeft' onClick={onClick} />
-  ),
-  IconChevronRight: ({ onClick }: { onClick?: () => void }) => (
-    <div data-testid='IconChevronRight' onClick={onClick} />
+  IconChevronLeft: ({
+    onClick,
+    className,
+  }: {
+    onClick?: () => void;
+    className?: string;
+  }) => (
+    <div
+      data-testid='IconChevronLeft'
+      onClick={onClick}
+      className={className}
+    />
   ),
 }));
+
+// 이전 페이지 버튼과 다음 페이지 버튼을 가져오는 유틸 함수
+const getIconButton = () => {
+  const icons = screen.getAllByTestId('IconChevronLeft');
+  const prevButton = icons[0];
+  const nextButton = icons[1];
+  return { icons, prevButton, nextButton };
+};
 
 describe('Pagination Component', () => {
   // 렌더링 시 이전 페이지 버튼과 다음 페이지 버튼이 표시되는지 확인
@@ -20,8 +35,15 @@ describe('Pagination Component', () => {
       <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />,
     );
 
-    expect(screen.getByTestId('IconChevronLeft')).toBeInTheDocument();
-    expect(screen.getByTestId('IconChevronRight')).toBeInTheDocument();
+    const { icons, prevButton, nextButton } = getIconButton();
+
+    expect(icons).toHaveLength(2);
+
+    // 이전 페이지 버튼은 rotate-180 클래스를 갖지 않음
+    expect(prevButton).not.toHaveClass('rotate-180');
+
+    // 다음 페이지 버튼은 rotate-180 클래스를 가져야 함
+    expect(nextButton).toHaveClass('rotate-180');
   });
 
   // 현재 페이지가 1일 때 이전 페이지 버튼이 비활성화되는지 확인
@@ -30,7 +52,8 @@ describe('Pagination Component', () => {
       <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />,
     );
 
-    const prevButton = screen.getByTestId('IconChevronLeft').parentElement;
+    const { prevButton: prev } = getIconButton();
+    const prevButton = prev.parentElement;
 
     expect(prevButton).toBeDisabled();
   });
@@ -41,7 +64,8 @@ describe('Pagination Component', () => {
       <Pagination currentPage={5} totalPages={5} onPageChange={() => {}} />,
     );
 
-    const nextButton = screen.getByTestId('IconChevronRight').parentElement;
+    const { nextButton: next } = getIconButton();
+    const nextButton = next.parentElement;
 
     expect(nextButton).toBeDisabled();
   });
@@ -64,7 +88,7 @@ describe('Pagination Component', () => {
       <Pagination currentPage={3} totalPages={5} onPageChange={onPageChange} />,
     );
 
-    const prevButton = screen.getByTestId('IconChevronLeft');
+    const { prevButton } = getIconButton();
 
     fireEvent.click(prevButton);
     expect(onPageChange).toHaveBeenCalledWith(2);
@@ -77,7 +101,7 @@ describe('Pagination Component', () => {
       <Pagination currentPage={3} totalPages={5} onPageChange={onPageChange} />,
     );
 
-    const nextButton = screen.getByTestId('IconChevronRight');
+    const { nextButton } = getIconButton();
 
     fireEvent.click(nextButton);
     expect(onPageChange).toHaveBeenCalledWith(4);

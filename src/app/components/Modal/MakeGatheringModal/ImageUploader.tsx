@@ -41,9 +41,13 @@ const ImageUploader = ({ setImage }: ImageUploaderProps) => {
           onChange={handleChange}
         />
         <div className='flex gap-12'>
-          <div className='flex w-full items-center rounded-xl bg-gray-50 px-16 py-[10px]'>
+          <div
+            className={`flex w-full items-center rounded-xl bg-gray-50 px-16 py-[10px] ${fileName ? 'dark:bg-var-gray-100 dark:text-var-gray-800' : 'dark:bg-neutral-900 dark:text-neutral-100'}`}
+          >
             {fileName ?? (
-              <p className='text-gray-400'>이미지를 첨부해 주세요 (1MB 이하)</p>
+              <p className='text-gray-400 dark:text-neutral-400'>
+                이미지를 첨부해 주세요 (1MB 이하)
+              </p>
             )}
           </div>
           <div className='w-100'>

@@ -6,8 +6,10 @@ import CalendarModal from '../Modal/CalendarModal';
 import { formatDate } from '@/utils/formatDate';
 
 const stateClasses = {
-  default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-800',
-  active: 'text-var-gray-50 bg-var-gray-900 dark:border',
+  default:
+    'border border-var-gray-100 bg-var-gray-50 text-var-gray-800 dark:bg-neutral-900 dark:border-neutral-500 dark:text-neutral-100',
+  active:
+    'text-var-gray-50 bg-var-gray-900 dark:border dark:border dark:bg-var-gray-50 dark:border-var-gray-100 dark:text-var-gray-800',
 };
 
 interface FilterDateProps {
@@ -67,17 +69,20 @@ const FilterDate = ({
         data-testid='filterDate'
       >
         {selectedDate ? formatDate(selectedDate.toString()) : children}
-        <IconCaret className='h-24 w-24' />
+        <IconCaret
+          className={`h-24 w-24 ${isOpen ? 'rotate-180' : ''} transition-transform duration-200`}
+        />
       </div>
 
       {isOpen && (
         <div
-          className={`absolute z-dropdown mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400`}
+          className={`absolute z-dropdown mt-4 h-auto w-full min-w-max overflow-y-auto rounded-xl bg-var-gray-50 ring-2 ring-var-gray-400 dark:bg-neutral-800 dark:ring-neutral-700`}
         >
           <CalendarModal
             initialSelectedData={selectedDate}
             handleClickButtons={handleClickButtons}
             CalendarProps={{ changeEndDays: 0 }}
+            onCloseModal={() => setIsOpen(false)}
           />
         </div>
       )}

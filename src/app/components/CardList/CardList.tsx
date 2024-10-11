@@ -51,7 +51,7 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
   };
 
   return (
-    <div className='relative flex w-full flex-col overflow-hidden rounded-[24px] border-2 border-var-gray-100 bg-white transition-all duration-300 hover:shadow-lg md:flex-row'>
+    <div className='relative flex w-full flex-col overflow-hidden rounded-[24px] border-2 border-var-gray-100 bg-white transition-all duration-300 hover:shadow-lg md:flex-row dark:border-neutral-700 dark:bg-neutral-800'>
       {/* 이미지 */}
       <div className='relative flex h-156 w-full flex-col gap-16 md:h-auto md:w-280'>
         <Image
@@ -71,10 +71,10 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
       <div className='flex grow flex-col gap-[20px] p-16 pb-24'>
         <div className='flex items-start justify-between'>
           <div className='flex flex-col gap-8'>
-            <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
+            <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900 dark:text-neutral-50'>
               <p>{data.name}</p>
-              <span>|</span>
-              <p className='text-14 font-medium text-var-gray-700'>
+              <span className='dark:text-neutral-200'>|</span>
+              <p className='text-14 font-medium text-var-gray-700 dark:text-neutral-200'>
                 {data.location}
               </p>
             </div>
@@ -85,12 +85,12 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
           </div>
           {isSavedActive ? (
             <IconSaveActive
-              className='h-48 w-48 animate-heartPulse cursor-pointer'
+              className='h-48 w-48 animate-heartPulse cursor-pointer dark:brightness-90'
               onClick={handleToggleSave}
             />
           ) : (
             <IconSaveInactive
-              className='h-48 w-48 cursor-pointer'
+              className='h-48 w-48 cursor-pointer dark:brightness-50'
               onClick={handleToggleSave}
             />
           )}

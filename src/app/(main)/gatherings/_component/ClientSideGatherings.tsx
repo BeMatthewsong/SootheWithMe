@@ -69,7 +69,7 @@ const ClientSideGatherings = ({
 
   return (
     <>
-      <div className='divide-y'>
+      <div className='divide-y dark:divide-neutral-700'>
         <div className='mt-32'>
           <div className='flex justify-between'>
             <Tabs activeTab={activeTab} onTabClick={handleTabClick} />

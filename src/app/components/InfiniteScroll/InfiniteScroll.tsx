@@ -51,7 +51,7 @@ const InfiniteScroll = <T extends ItemWithId>({
   // 데이터가 없거나 비어있을 때 emptyText를 표시
   if (!data || data.pages.length === 0) {
     return (
-      <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
+      <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500 dark:text-neutral-200'>
         {emptyText}
       </div>
     );
@@ -59,7 +59,7 @@ const InfiniteScroll = <T extends ItemWithId>({
 
   if (isError)
     return (
-      <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500'>
+      <div className='flex grow items-center justify-center text-[14px] font-medium text-gray-500 dark:text-neutral-200'>
         모임을 불러오지 못했습니다.
       </div>
     );

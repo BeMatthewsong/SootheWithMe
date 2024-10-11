@@ -24,14 +24,14 @@ const GatheringReviews = ({
   );
 
   return (
-    <div className='mt-24 border-t-2 p-24'>
+    <div className='mt-24 border-t-2 p-24 dark:border-neutral-700'>
       <div className='text-[18px] font-semibold'>
         이용자들은 이 프로그램을 이렇게 느꼈어요!
       </div>
       <div>
         {reviews.length === 0 ? (
           <div className='flex h-[400px] items-center justify-center'>
-            <p className='text-center text-14 font-medium text-var-gray-500'>
+            <p className='text-center text-14 font-medium text-var-gray-500 dark:text-neutral-200'>
               아직 리뷰가 없어요.
             </p>
           </div>

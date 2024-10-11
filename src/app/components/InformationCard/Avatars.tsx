@@ -34,7 +34,7 @@ const Avatars = ({ participants, participantCount }: AvatarsProps) => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold'>
+        <div className='z-base flex h-28 w-28 items-center justify-center rounded-full bg-gray-200 text-14 font-semibold dark:bg-neutral-600 dark:text-neutral-200'>
           +{participantCount - maxVisible}
         </div>
         <div

@@ -3,8 +3,9 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 
 export const InputStyles = {
-  base: 'w-full bg-var-gray-50 text-16 items-center gap-4 rounded-lg px-16 py-8 focus:ring-2',
-  hover: 'hover:ring-2 hover:ring-var-orange-300',
+  base: 'w-full bg-var-gray-50 text-16 items-center gap-4 rounded-lg px-16 py-8 focus:ring-2 dark:bg-neutral-900',
+  hover:
+    'hover:ring-2 hover:ring-var-orange-300 dark:hover:ring-var-orange-800',
   focus: 'focus:ring-var-orange-600',
   error: 'ring-var-red ring-2', // form 사용시 에러메시지용 레이아웃
 };

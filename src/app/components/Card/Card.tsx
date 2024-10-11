@@ -30,7 +30,7 @@ const Card = ({
   children,
 }: PropsWithChildren<CardProps>): JSX.Element => {
   return (
-    <div className='w-full border-b-2 border-dashed border-var-gray-200 py-24'>
+    <div className='w-full border-b-2 border-dashed border-var-gray-200 py-24 dark:border-neutral-700'>
       <div className='relative flex w-full flex-col gap-16 overflow-hidden rounded-xl md:flex-row md:rounded-3xl'>
         {/* 이미지 */}
         <Link href={`/gatherings/${data.id}`}>
@@ -135,12 +135,14 @@ const CardInfo = (): JSX.Element => {
 
   return (
     <Link href={`/gatherings/${data.id}`}>
-      <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900'>
+      <div className='flex items-center gap-8 text-18 font-semibold text-var-gray-900 dark:text-neutral-50'>
         <p>{name}</p>
         <span>|</span>
-        <p className='text-14 font-medium text-var-gray-700'>{location}</p>
+        <p className='text-14 font-medium text-var-gray-700 dark:text-neutral-200'>
+          {location}
+        </p>
       </div>
-      <div className='flex items-center gap-4 text-14 font-medium text-var-gray-700'>
+      <div className='flex items-center gap-4 text-14 font-medium text-var-gray-700 dark:text-neutral-300'>
         <p>{formatDate(dateTime)}</p>
         <span>·</span>
         <p>{formatTime(dateTime)}</p>

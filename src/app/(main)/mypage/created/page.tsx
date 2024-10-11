@@ -25,7 +25,7 @@ const CreatedPage = async () => {
           initialGatheringList={gatherings}
         />
       ) : (
-        <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500'>
+        <div className='flex grow items-center justify-center text-14 font-medium text-var-gray-500 dark:text-neutral-200'>
           아직 만든 모임이 없어요
         </div>
       )}

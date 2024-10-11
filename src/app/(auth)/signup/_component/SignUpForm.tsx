@@ -63,7 +63,7 @@ const SignUpForm = () => {
   return (
     <div className='relative'>
       <form
-        className='rounded-[24px] bg-var-white'
+        className='rounded-[24px] bg-transparent'
         onSubmit={handleSubmit(submit)}
       >
         <div className='flex w-full flex-col gap-24'>
@@ -98,7 +98,7 @@ const SignUpForm = () => {
             type='password'
           />
           {!errors.password && (
-            <div className='text-12 text-gray-700'>
+            <div className='-mt-12 text-12 text-gray-700 dark:text-neutral-300'>
               ※ 비밀번호는 영문과 숫자가 포함된 8자 이상이 되도록 해 주세요.
             </div>
           )}

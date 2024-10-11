@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { IconChevronLeft, IconChevronRight } from '@/public/icons';
+import { IconChevronLeft } from '@/public/icons';
 
 const MAX_PAGES_TO_SHOW_TABLET = 4; // 태블릿에서 표시할 최대 페이지 수
 const MAX_PAGES_TO_SHOW_DESKTOP = 6; // 데스크톱에서 표시할 최대 페이지 수
@@ -95,7 +95,7 @@ const Pagination = ({
         onClick={() => handlePageClick(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        <IconChevronLeft />
+        <IconChevronLeft className='text-var-gray-800 dark:text-neutral-50' />
       </button>
 
       {/* 페이지 버튼 */}
@@ -106,8 +106,8 @@ const Pagination = ({
             data-testid={`page-button-${item}`}
             className={`rounded-lg border p-[10px] ${
               currentPage === item
-                ? 'text-16 font-semibold text-var-black'
-                : 'text-16 font-normal text-var-gray-200'
+                ? 'text-16 font-semibold text-var-black dark:text-white'
+                : 'text-16 font-normal text-var-gray-200 dark:text-neutral-500'
             }`}
             onClick={() => handlePageClick(item)}
           >
@@ -131,7 +131,7 @@ const Pagination = ({
         onClick={() => handlePageClick(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <IconChevronRight />
+        <IconChevronLeft className='rotate-180 text-var-gray-800 dark:text-neutral-50' />
       </button>
     </div>
   );

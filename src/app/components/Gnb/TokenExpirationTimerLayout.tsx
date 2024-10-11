@@ -3,7 +3,7 @@
 import { TokenExpirationTimer } from '@/utils/TokenExpirationTimer';
 
 const TimerStyle = {
-  gnb: 'hidden text-14 font-semibold text-var-orange-50 md:block md:text-16',
+  gnb: 'hidden text-14 font-semibold text-var-orange-50 md:block md:text-16 w-140',
   dropdown:
     'px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16',
 };

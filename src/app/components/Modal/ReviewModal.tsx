@@ -43,7 +43,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
     <ModalFrame onClose={onClose}>
       <div
         onClick={(e: MouseEvent<HTMLDivElement>) => e.stopPropagation()}
-        className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'
+        className='flex max-h-408 w-344 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520 dark:border dark:border-neutral-600 dark:bg-neutral-800'
       >
         {/* 헤더 */}
         <ModalHeader title={'리뷰 쓰기'} onClose={onClose} />

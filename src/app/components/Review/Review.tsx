@@ -25,7 +25,7 @@ const Review = ({
   date,
 }: ReviewProps) => {
   return (
-    <div className='flex-col space-x-6 border-b-2 border-dashed border-var-gray-200 pb-20 font-medium md:flex md:flex-row'>
+    <div className='flex-col space-x-6 border-b-2 border-dashed border-var-gray-200 pb-20 font-medium md:flex md:flex-row dark:border-neutral-500'>
       {image_source ? (
         <div className='relative h-156 w-312 md:w-280'>
           <Image
@@ -45,30 +45,34 @@ const Review = ({
             <IconHeart
               key={index}
               className={`h-24 w-24 ${
-                index < rating ? 'text-var-orange-600' : 'text-gray-200'
+                index < rating
+                  ? 'text-var-orange-600'
+                  : 'text-gray-200 dark:text-neutral-500'
               }`}
             />
           ))}
         </div>
 
-        <div className='mt-[10px] text-[14px] text-black'>
+        <div className='mt-[10px] text-[14px]'>
           <div>{description}</div>
         </div>
 
         {place && location && (
-          <div className='mt-[10px] text-var-gray-700'>
+          <div className='mt-[10px] text-var-gray-700 dark:text-neutral-200'>
             {place} 이용 · {location}
           </div>
         )}
 
-        <div className='mt-8 flex items-center space-x-[8px] divide-x divide-var-gray-700 md:mt-10'>
+        <div className='mt-8 flex items-center space-x-[8px] divide-x divide-var-gray-700 md:mt-10 dark:divide-neutral-400'>
           <div>
             <div className='flex items-center space-x-[8px]'>
               <Profile className='h-24 w-24' />
-              <div className='text-[12px] text-var-gray-700'>{user_name}</div>
+              <div className='text-[12px] text-var-gray-700 dark:text-neutral-200'>
+                {user_name}
+              </div>
             </div>
           </div>
-          <div className='pl-[12px] text-[12px] text-var-gray-500'>
+          <div className='pl-[12px] text-[12px] text-var-gray-500 dark:text-neutral-400'>
             {date.split('T')[0]}
           </div>
         </div>

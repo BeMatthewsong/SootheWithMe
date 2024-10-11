@@ -31,16 +31,16 @@ const Popup = ({
     <div className='fixed inset-0 z-popup flex items-center justify-center bg-black bg-opacity-50'>
       {/* 어두운 배경 추가 */}
       <div
-        className={`flex ${type === 'exit' ? 'h-212 w-[450px]' : 'h-200 w-300'} flex-col items-center justify-between gap-24 rounded-lg bg-var-white p-24 shadow-lg`}
+        className={`flex ${type === 'exit' ? 'h-212 w-[450px]' : 'h-200 w-300'} flex-col items-center justify-between gap-24 rounded-lg bg-var-white p-24 shadow-lg dark:border dark:border-neutral-700 dark:bg-neutral-800`}
       >
         {/* 닫기 버튼 */}
         <div className='flex w-full justify-end'>
           <button data-testid='close-modal-button' onClick={onClickClose}>
-            <IconX className='h-24 w-24' />
+            <IconX className='h-24 w-24 text-var-gray-900 dark:text-neutral-100' />
           </button>
         </div>
         {/* 팝업 내용 */}
-        <p className='text-center text-16 font-medium dark:text-var-gray-900'>
+        <p className='text-center text-16 font-medium'>
           {type === 'exit' ? (
             <>
               정말 나가시겠어요? <br /> 작성된 내용이 모두 삭제됩니다.

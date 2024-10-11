@@ -21,10 +21,11 @@ const tabList = [
 const Tab = () => {
   const pathname = usePathname();
 
-  const activeClass = 'border-b-2 border-var-gray-900 pb-4 text-var-gray-900';
+  const activeClass =
+    'border-b-2 border-var-gray-900 pb-4 text-var-gray-900 dark:text-white dark:border-neutral-50';
 
   return (
-    <ul className='flex items-start gap-12 text-18 font-semibold text-var-gray-400'>
+    <ul className='flex items-start gap-12 text-18 font-semibold text-var-gray-400 dark:text-neutral-500'>
       {tabList.map((item, index) => (
         <li
           key={index}

@@ -16,8 +16,10 @@ interface BoxSelectProps {
 }
 
 const stateClasses = {
-  default: 'bg-var-gray-50 text-var-black',
-  active: 'bg-var-gray-900 text-var-white',
+  default:
+    'bg-var-gray-50 text-var-black dark:bg-transparent dark:border dark:border-neutral-600 dark:text-neutral-400',
+  active:
+    'bg-var-gray-900 text-var-white dark:bg-neutral-200 dark:text-neutral-950 dark:border dark:border-neutral-200',
 };
 
 const BoxSelect = ({

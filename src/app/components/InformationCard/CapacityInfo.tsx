@@ -20,7 +20,7 @@ const CapacityInfo = ({
         hasText={false}
       />
 
-      <div className='mt-10 flex justify-between text-12 font-semibold'>
+      <div className='mt-10 flex justify-between text-12 font-semibold text-var-gray-700 dark:text-neutral-200'>
         <div>최소 인원 {MIN_PARTICIPANTS}명</div>
         <div className='text-var-orange-500'>최대 인원 {maxParticipants}명</div>
       </div>

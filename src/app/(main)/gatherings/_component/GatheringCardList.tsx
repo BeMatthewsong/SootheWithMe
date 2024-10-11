@@ -39,14 +39,14 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
     <div className='gathering-list mt-24 space-y-24'>
       {/* Top gradient */}
       <div
-        className={`fixed left-0 right-0 top-56 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10 transition-opacity duration-500 ease-in-out md:top-60 ${
+        className={`fixed left-0 right-0 top-56 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10 transition-opacity duration-500 ease-in-out md:top-60 dark:from-neutral-900 ${
           topGradientVisible ? 'opacity-100' : 'opacity-0'
         }`}
       />
 
       {/* Bottom gradient */}
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10 transition-opacity duration-500 ease-in-out ${
+        className={`fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10 transition-opacity duration-500 ease-in-out dark:from-neutral-900 ${
           bottomGradientVisible ? 'opacity-100' : 'opacity-0'
         }`}
       />
@@ -54,7 +54,7 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
       {/* 모임이 없는 경우 */}
       {gatherings.length === 0 ? (
         <div className='flex h-[400px] items-center justify-center'>
-          <p className='text-center text-14 font-medium text-var-gray-500'>
+          <p className='text-center text-14 font-medium text-var-gray-500 dark:text-neutral-200'>
             아직 모임이 없어요.
             <br />
             지금 바로 모임을 만들어보세요.

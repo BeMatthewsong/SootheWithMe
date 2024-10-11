@@ -31,7 +31,7 @@ const InformationCard = ({
   const gatheringId = Number(params.id);
 
   return (
-    <div className='h-full w-full divide-y divide-dashed rounded-[24px] border p-6 text-var-gray-900'>
+    <div className='h-full w-full divide-y divide-dashed rounded-[24px] border p-6 dark:divide-neutral-600 dark:border-neutral-700'>
       <div className='pb-44'>
         <InformationCardHeader
           title={title}

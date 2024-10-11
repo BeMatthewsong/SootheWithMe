@@ -75,7 +75,7 @@ const UserStatus = ({ user, token }: UserStatusProps) => {
           {isOpen && (
             <ul
               onClick={() => setIsOpen(false)}
-              className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0'
+              className='absolute right-0 mt-8 max-h-240 w-120 overflow-y-auto rounded-xl bg-var-gray-50 lg:left-0 dark:bg-neutral-200'
             >
               <Link href='/mypage'>
                 <li className='cursor-pointer px-16 py-12 text-[12px] font-medium text-var-black hover:bg-var-orange-100 md:px-16'>

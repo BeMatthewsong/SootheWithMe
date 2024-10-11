@@ -25,10 +25,13 @@ const AverageRating = ({ rating }: AverageRatingProps) => {
 
   return (
     <div>
-      <p className='text-center text-24 font-semibold text-var-gray-400'>
-        <span className='mr-2 text-var-gray-900'>{averageScore}</span>/ 5
+      <p className='text-center text-24 font-semibold text-var-gray-400 dark:text-neutral-400'>
+        <span className='mr-2 text-var-gray-900 dark:text-white'>
+          {averageScore}
+        </span>
+        / 5
       </p>
-      <div className='relative flex gap-[2px] text-var-gray-200'>
+      <div className='relative flex gap-[2px] text-var-gray-200 dark:text-neutral-500'>
         {Array(5)
           .fill(null)
           .map((_, index) => (

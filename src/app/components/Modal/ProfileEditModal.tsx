@@ -36,7 +36,7 @@ const ProfileEditModal = ({
 
   return (
     <ModalFrame onClose={onClose}>
-      <div className='w-342 flex max-h-328 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520'>
+      <div className='w-342 flex max-h-328 flex-col gap-24 rounded-xl bg-var-white p-24 md:w-520 dark:border dark:border-neutral-600 dark:bg-neutral-800'>
         {/* 헤더 */}
         <ModalHeader title={'프로필 수정하기'} onClose={onClose} />
 

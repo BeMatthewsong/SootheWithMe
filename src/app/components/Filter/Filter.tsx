@@ -19,6 +19,7 @@ interface FilterChildProps {
   currentState: 'default' | 'active';
   toggleDropDown: () => void;
   text: string;
+  iconClass?: string;
 }
 
 // 하위 컴포넌트 - FilterList
@@ -26,6 +27,7 @@ const FilterList = ({
   currentState,
   toggleDropDown,
   text,
+  iconClass,
 }: FilterChildProps) => (
   <div
     className={`flex h-36 w-[110px] cursor-pointer items-center justify-between rounded-[12px] py-[6px] pl-12 pr-8 text-14 font-medium md:h-40 md:w-120 md:py-8 ${stateClasses[currentState]}`}
@@ -33,7 +35,9 @@ const FilterList = ({
     data-testid='filter-component'
   >
     {text}
-    <IconCaret className='h-24 w-24' />
+    <IconCaret
+      className={`h-24 w-24 ${iconClass} transition-transform duration-200`}
+    />
   </div>
 );
 
@@ -48,15 +52,17 @@ const FilterSort = ({
     onClick={toggleDropDown}
     data-testid='filter-component'
   >
-    <IconSort className='h-24 w-24' />
+    <IconSort className='${iconClass} h-24 w-24' />
     <span className='hidden md:mr-8 md:inline'>{text}</span>
   </div>
 );
 
 // state 별 클래스명
 const stateClasses = {
-  default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-800',
-  active: 'text-var-gray-50 bg-var-gray-900 dark:border',
+  default:
+    'border border-var-gray-100 bg-var-gray-50 text-var-gray-800 dark:bg-neutral-900 dark:border-neutral-500 dark:text-neutral-100',
+  active:
+    'text-var-gray-50 bg-var-gray-900 dark:border dark:bg-var-gray-100 dark:border-var-gray-100 dark:text-var-gray-800',
 };
 
 // Filter Wrapper 컴포넌트
@@ -115,6 +121,7 @@ const Filter = ({
           currentState={currentState}
           toggleDropDown={toggleDropDown}
           text={selectedOption || children}
+          iconClass={isOpen ? 'rotate-180' : ''}
         />
       ) : (
         <FilterSort

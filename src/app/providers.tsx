@@ -4,6 +4,7 @@ import { SavedGatheringProvider } from '@/context/SavedGatheringContext';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactNode } from 'react';
 import { UserProvider } from './(auth)/context/UserContext';
+import { ThemeProvider } from './theme-provider';
 
 // QueryClient 인스턴스를 생성하는 함수
 function makeQueryClient() {
@@ -40,12 +41,14 @@ export default function Providers({ children }: { children: ReactNode }) {
 
   // QueryClientProvider로 자식 컴포넌트들을 감싸서 QueryClient를 제공
   return (
-    <UserProvider>
-      <SavedGatheringProvider>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
-      </SavedGatheringProvider>
-    </UserProvider>
+    <ThemeProvider attribute='class' defaultTheme='system'>
+      <UserProvider>
+        <SavedGatheringProvider>
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        </SavedGatheringProvider>
+      </UserProvider>
+    </ThemeProvider>
   );
 }

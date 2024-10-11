@@ -14,8 +14,10 @@ interface PlaceDropdownProps {
 }
 
 const stateClasses = {
-  default: 'border border-var-gray-100 bg-var-gray-50 text-var-gray-400',
-  active: 'text-var-gray-800 bg-var-gray-50',
+  default:
+    'border border-var-gray-100 bg-var-gray-50 text-var-gray-400 dark:bg-neutral-900 dark:border-none dark:text-neutral-100',
+  active:
+    'text-var-gray-800 bg-var-gray-50 dark:border dark:bg-var-gray-100 dark:border-var-gray-100 dark:text-var-gray-800',
 };
 
 const PlaceDropdown = ({
@@ -72,7 +74,9 @@ const PlaceDropdown = ({
           onClick={toggleDropDown}
         >
           {selectedOption || children}
-          <IconCaret className={`h-24 w-24 text-var-gray-800`} />
+          <IconCaret
+            className={`h-24 w-24 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          />
         </div>
       </div>
 
