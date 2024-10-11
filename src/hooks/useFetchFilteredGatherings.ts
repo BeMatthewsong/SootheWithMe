@@ -24,7 +24,7 @@ const useFetchFilteredGatherings = (
         ? formatCalendarDate(selectedDate)
         : undefined;
     const sortBy = overrides.sortBy || sortOption;
-    const sortOrder = sortBy ? 'desc' : undefined;
+    const sortOrder = sortBy === 'registrationEnd' ? 'asc' : 'desc';
 
     const newData = await getGatherings({
       type,
