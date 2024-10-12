@@ -1,20 +1,26 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import postGatherings from '@/app/api/actions/gatherings/postGatherings';
+import postGatheringToJoin from '@/app/api/actions/gatherings/postGatheringToJoin';
+
 import { LOCATION_OPTIONS, MIN_PARTICIPANTS } from '@/constants/common';
+import objectCheckFalseValue from '@/utils/objectCheckFalseValue';
+import objectExtractTrueValue from '@/utils/objectExtractTrueValue';
+
+import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import toast from 'react-hot-toast';
+
 import Button from '../Button/Button';
 import BoxSelectGroup from './MakeGatheringModal/BoxSelectGroup';
 import CalendarSelect from './MakeGatheringModal/CalendarSelect';
 import ImageUploader from './MakeGatheringModal/ImageUploader';
+import NameInput from './MakeGatheringModal/NameInput';
 import PlaceDropdown from './MakeGatheringModal/PlaceDropdown';
 import RecruitmentNumber from './MakeGatheringModal/RecruitmentNumber';
 import SelectTimeChip from './MakeGatheringModal/SelectTimeChip';
 import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
-import NameInput from './MakeGatheringModal/NameInput';
 
 interface MakeGatheringModalProps {
   onClose: () => void;
@@ -35,19 +41,6 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [capacity, setCapacity] = useState<number>(0);
 
-  // true인 key 값만 필터링
-  const getSelectedGatheringType = () => {
-    const selectedGatheringType = String(
-      Object.keys(gatheringType).filter((key) => gatheringType[key]),
-    );
-    return selectedGatheringType;
-  };
-
-  // 모든 gatheringType이 false인지 확인
-  const isAllGatheringTypeFalse = () => {
-    return Object.values(gatheringType).every((value) => value === false);
-  };
-
   // 캘린더의 날짜와 타임칩의 시간을 결합
   let combinedDateTime: Date | null = null;
   if (dateTime && selectedTime) {
@@ -60,7 +53,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     name &&
     location &&
     image &&
-    !isAllGatheringTypeFalse() &&
+    !objectCheckFalseValue(gatheringType) &&
     dateTime &&
     selectedTime &&
     combinedDateTime &&
@@ -76,7 +69,7 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('location', location!);
-    formData.append('type', getSelectedGatheringType());
+    formData.append('type', objectExtractTrueValue(gatheringType));
     formData.append('dateTime', (combinedDateTime as Date).toISOString());
     formData.append('capacity', capacity.toString());
     formData.append('image', image as File);
@@ -90,6 +83,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     onClose();
+
+    await postGatheringToJoin(data.id);
 
     router.push(`/gatherings/${data.id}`);
 
