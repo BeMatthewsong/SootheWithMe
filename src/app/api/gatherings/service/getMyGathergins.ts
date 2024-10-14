@@ -1,10 +1,14 @@
 'use client';
 
+import {
+  DEFAULT_GATHERINGS_LIMIT,
+  DEFAULT_GATHERINGS_OFFSET,
+} from '@/constants/common';
 import { FetchGatheringsResponse } from '@/types/data.type';
 
 const getMyGathergins = async (
-  offset = 0,
-  limit = 5,
+  offset = DEFAULT_GATHERINGS_OFFSET,
+  limit = DEFAULT_GATHERINGS_LIMIT,
 ): Promise<FetchGatheringsResponse> => {
   const response = await fetch(
     `/api/gatherings/joined?offset=${offset}&limit=${limit}`,

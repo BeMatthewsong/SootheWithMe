@@ -61,6 +61,7 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
             name='리뷰 등록'
             type='button'
             variant={score !== 0 && comment ? 'default' : 'gray'}
+            disabled={score === 0 || comment.length === 0}
             onClick={handleSubmit}
           />
         </div>

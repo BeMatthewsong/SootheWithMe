@@ -25,13 +25,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  const userData = await getUserData();
+  const user = await getUserData();
   const token = await getCookie('token');
   return (
     <html lang='ko'>
       <body className='flex min-h-dvh flex-col bg-var-gray-100 font-pretendard text-var-gray-900 dark:bg-neutral-950 dark:text-neutral-50'>
         <Providers>
-          <Gnb user={userData} token={token} />
+          <Gnb user={user} token={token} />
           <div className='grow pt-60'>{children}</div>
           <div id='modal-root'></div>
           <Toaster toastOptions={toastOptions} />

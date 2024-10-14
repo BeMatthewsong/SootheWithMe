@@ -5,7 +5,10 @@ import getReviewScore from '@/app/api/actions/reviews/getReviewScore';
 import useFilterState from './useFilterState';
 import buildParams from './buildParams';
 import { ReviewScoreType, ReviewsType } from '@/types/data.type';
-import { DEFAULT_OFFSET, LIMIT_PER_REQUEST } from '@/constants/common';
+import {
+  DEFAULT_GATHERINGS_OFFSET,
+  LIMIT_PER_REQUEST,
+} from '@/constants/common';
 
 const useReviews = (
   initialReviewsData: ReviewsType[],
@@ -57,7 +60,7 @@ const useReviews = (
     error: reviewsError,
   } = useInfiniteQuery({
     queryKey: ['reviews', filteringOptions, activeTab, selectedChip],
-    queryFn: async ({ pageParam = DEFAULT_OFFSET }) => {
+    queryFn: async ({ pageParam = DEFAULT_GATHERINGS_OFFSET }) => {
       try {
         const params = getParams();
         const response = await getReviewList({
@@ -78,10 +81,10 @@ const useReviews = (
         ? allPages.length * LIMIT_PER_REQUEST
         : undefined;
     },
-    initialPageParam: DEFAULT_OFFSET,
+    initialPageParam: DEFAULT_GATHERINGS_OFFSET,
     initialData: {
       pages: [initialReviewsData],
-      pageParams: [DEFAULT_OFFSET],
+      pageParams: [DEFAULT_GATHERINGS_OFFSET],
     },
   });
 

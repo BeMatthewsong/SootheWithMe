@@ -1,10 +1,12 @@
 'use client';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, RenderOptions } from '@testing-library/react';
 import { useRouter } from 'next/navigation';
 import BottomFloatingBar from './BottomFloatingBar';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { UserData } from '@/types/client.type';
 import { GatheringParticipantsType } from '@/types/data.type';
+import { ReactNode } from 'react';
 import '@testing-library/jest-dom';
 
 // 유저데이터 모킹
@@ -24,6 +26,16 @@ jest.mock('next/navigation', () => ({
   useParams: jest.fn(() => ({ id: '1' })),
 }));
 
+// QueryClient 인스턴스 생성
+const queryClient = new QueryClient();
+
+// QueryClientProvider로 감싸주는 헬퍼 함수 정의
+const renderWithQueryClient = (ui: ReactNode, options?: RenderOptions) =>
+  render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+    options,
+  );
+
 describe('BottomFloatingBar 컴포넌트 테스트', () => {
   const mockRouter = { push: jest.fn() };
 
@@ -33,7 +45,8 @@ describe('BottomFloatingBar 컴포넌트 테스트', () => {
 
   // 참가자일 때 기본 렌더링 확인
   it('renders correctly when the user is a participant', () => {
-    render(
+    renderWithQueryClient(
+      // 헬퍼 함수 사용
       <BottomFloatingBar
         user={mockUser}
         createdBy={12}
@@ -63,7 +76,8 @@ describe('BottomFloatingBar 컴포넌트 테스트', () => {
 
   // 주최자일 때 기본 렌더링 확인
   it('renders correctly when the user is the organizer', () => {
-    render(
+    renderWithQueryClient(
+      // 헬퍼 함수 사용
       <BottomFloatingBar
         user={mockUser}
         createdBy={1}
