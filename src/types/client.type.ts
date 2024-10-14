@@ -33,3 +33,9 @@ export type GatheringFilters = Partial<{
   sortOrder: 'asc' | 'desc';
   offset: number;
 }>;
+
+export interface FilteringOptionsType {
+  location: string | undefined;
+  date: Date | null;
+  sortOption: string | undefined;
+}

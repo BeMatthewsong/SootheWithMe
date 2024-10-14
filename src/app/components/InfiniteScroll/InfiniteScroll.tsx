@@ -18,7 +18,7 @@ interface InfiniteQueryResponse<T extends ItemWithId> {
 
 interface InfiniteScrollProps<T extends ItemWithId> {
   initData: T[];
-  queryKey: string[];
+  queryKey: readonly string[];
   queryFn: (offset?: number) => Promise<InfiniteQueryResponse<T>>;
   limit?: number;
   emptyText: string;

@@ -1,13 +1,7 @@
 import { REVIEW_SORT_OPTIONS_MAP } from '@/constants/common';
-import { GatheringsType } from '@/types/client.type';
+import { FilteringOptionsType, GatheringsType } from '@/types/client.type';
 import { GetReviewsParams } from '@/types/data.type';
 import { formatCalendarDate } from '@/utils/formatDate';
-
-interface FilteringOptionsType {
-  location: string | undefined;
-  date: Date | null;
-  sortOption: string | undefined;
-}
 
 const buildParams = (
   type: GatheringsType,

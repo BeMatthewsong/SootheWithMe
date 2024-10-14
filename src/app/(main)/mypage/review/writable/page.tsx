@@ -8,13 +8,14 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
+import { queries } from '@/queries';
 
 const WritableReviewsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cardId, setCardId] = useState<number>(0);
 
   const { data: writableReviews } = useQuery({
-    queryKey: ['reviews', 'writable'],
+    ...queries.writableReview.all(),
     queryFn: () => getJoinedGatherings({ completed: true, reviewed: false }),
   });
 

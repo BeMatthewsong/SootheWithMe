@@ -50,7 +50,10 @@ export default function useParticipation(user: UserData | null) {
     }
   };
 
-  const handleWithdrawClickWithId = async (id: number, queryKey: string[]) => {
+  const handleWithdrawClickWithId = async (
+    id: number,
+    queryKey: readonly string[],
+  ) => {
     const { success, message } = await deleteGatheringToWithdraw(id);
 
     if (!success) {

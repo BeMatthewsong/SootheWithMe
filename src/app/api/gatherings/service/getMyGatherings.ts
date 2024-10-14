@@ -6,7 +6,7 @@ import {
 } from '@/constants/common';
 import { FetchGatheringsResponse } from '@/types/data.type';
 
-const getMyGathergins = async (
+const getMyGatherings = async (
   offset = DEFAULT_GATHERINGS_OFFSET,
   limit = DEFAULT_GATHERINGS_LIMIT,
 ): Promise<FetchGatheringsResponse> => {
@@ -20,4 +20,4 @@ const getMyGathergins = async (
   return response.json();
 };
 
-export default getMyGathergins;
+export default getMyGatherings;

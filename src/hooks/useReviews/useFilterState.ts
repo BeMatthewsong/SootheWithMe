@@ -1,11 +1,9 @@
-import { GatheringChipsType, GatheringTabsType } from '@/types/client.type';
+import {
+  FilteringOptionsType,
+  GatheringChipsType,
+  GatheringTabsType,
+} from '@/types/client.type';
 import { useState } from 'react';
-
-interface FilteringOptionsType {
-  location: string | undefined;
-  date: Date | null;
-  sortOption: string | undefined;
-}
 
 const useFilterState = () => {
   const [activeTab, setActiveTab] = useState<GatheringTabsType>('DALLAEMFIT');
