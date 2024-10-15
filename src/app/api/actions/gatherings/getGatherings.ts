@@ -3,6 +3,7 @@
 import qs from 'qs';
 import { GatheringsType } from '@/types/client.type';
 import { GatheringType } from '@/types/data.type';
+import { LIMIT_PER_REQUEST } from '@/constants/common';
 
 interface GetGatheringsParams {
   id?: string;
@@ -20,7 +21,7 @@ const getGatherings = async (
   params: GetGatheringsParams = {},
 ): Promise<GatheringType[]> => {
   try {
-    const { limit = 10, offset = 0, ...rest } = params;
+    const { limit = LIMIT_PER_REQUEST, offset = 0, ...rest } = params;
 
     const queryString = qs.stringify(
       {

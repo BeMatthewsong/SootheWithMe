@@ -1,23 +1,24 @@
 'use client';
 
+import { MouseEvent, useState } from 'react';
+import Image from 'next/image';
+
 import {
   IconSaveActive,
   IconSaveDiscard,
   IconSaveDiscardBtn,
   IconSaveInactive,
 } from '@/public/icons';
-import Image from 'next/image';
 import {
   formatDate,
   formatTimeColon,
   formatTimeHours,
-  isSameDate,
 } from '@/utils/formatDate';
+import getDaysUntilRegistrationEnd from '@/utils/getDaysUntilRegistrationEnd';
 import { GatheringType } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
-import { MouseEvent, useState } from 'react';
 
 // TODO : optional props를 필수로 변경
 interface CardProps {
@@ -27,8 +28,10 @@ interface CardProps {
 }
 
 const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
+  const daysRemaining = getDaysUntilRegistrationEnd(data.registrationEnd);
+
   // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
-  const isRenderTag = isSameDate(data.registrationEnd);
+  const isRenderTag = daysRemaining >= 0 && daysRemaining <= 7;
 
   // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
   const isChallengeEnded = new Date(data.dateTime) <= new Date();
@@ -63,7 +66,11 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
           sizes='(max-width: 768px) 100vw, 280px'
         />
         {isRenderTag && (
-          <Tag>오늘 {formatTimeHours(data.registrationEnd)}시 마감</Tag>
+          <Tag>
+            {daysRemaining === 0
+              ? `오늘 ${formatTimeHours(data.registrationEnd)}시 마감`
+              : `${daysRemaining}일 후 마감`}
+          </Tag>
         )}
       </div>
 

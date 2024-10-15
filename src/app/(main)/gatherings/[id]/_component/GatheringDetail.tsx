@@ -38,7 +38,10 @@ const GatheringDetail = ({
         <div className='min-h-full bg-var-gray-50 px-16 pb-60 pt-24 md:px-24 md:pt-40 lg:px-100 dark:bg-neutral-900'>
           {/* 사진, Information Card */}
           <div className='flex flex-col items-center gap-y-16 md:flex md:flex-row md:gap-x-[14px] md:gap-y-0 lg:gap-x-24'>
-            <GatheringImage image={gatheringInfo.image} />
+            <GatheringImage
+              image={gatheringInfo.image}
+              endTime={gatheringInfo.registrationEnd}
+            />
             <GatheringInfo
               name={gatheringInfo.name || ''}
               location={gatheringInfo.location}

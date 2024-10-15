@@ -30,7 +30,7 @@ const useGatherings = (initialGatherings: GatheringType[]) => {
   );
   const [selectedChip, setSelectedChip] = useState<GatheringChipsType>('ALL');
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [sortOption, setSortOption] = useState<string | undefined>('dateTime');
+  const [sortOption, setSortOption] = useState<string | undefined>();
   const [offset, setOffset] = useState<number>(0);
 
   // 필터링된 모임 데이터를 가져오는 훅
