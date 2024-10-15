@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteCookie } from '@/actions/auth/cookie/cookie';
+import { deleteCookie } from '@/app/api/actions/cookie/cookie';
 import { Profile } from '@/public/images';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { getCookie } from '@/actions/auth/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 import { GatheringInfoType } from '@/types/data.type';
 
 interface GatheringResponse {

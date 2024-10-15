@@ -1,6 +1,6 @@
 'use server';
 
-import { getCookie } from '@/actions/auth/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 
 interface PostReviewsParams {
   gatheringId: number;

@@ -13,7 +13,6 @@ import { clientRevalidate } from '@/lib/clientRevalidate';
 const SignInForm = () => {
   const router = useRouter();
   const {
-    control,
     register,
     handleSubmit,
     formState: { errors, isValid },
@@ -35,22 +34,31 @@ const SignInForm = () => {
       router.push('/gatherings');
     } catch (error) {
       if (error instanceof Error) {
-        // 로그인 오류 처리
-        if (error.message.includes('잘못된 이메일 또는 비밀번호입니다')) {
-          setError('email', {
-            type: 'manual',
-            message: '잘못된 이메일 또는 비밀번호입니다',
-          });
-          setError('password', {
-            type: 'manual',
-            message: '잘못된 이메일 또는 비밀번호입니다',
-          });
-        } else {
-          console.error('Error:', error.message);
+        switch (true) {
+          case error.message.includes('잘못된 이메일 또는 비밀번호입니다'):
+            setError('email', {
+              type: 'manual',
+              message: '잘못된 이메일 또는 비밀번호입니다',
+            });
+            setError('password', {
+              type: 'manual',
+              message: '잘못된 이메일 또는 비밀번호입니다',
+            });
+            break;
+          case error.message.includes('유효한 이메일 주소를 입력하세요'):
+            setError('email', {
+              type: 'manual',
+              message: '유효한 이메일 주소를 입력하세요',
+            });
+            break;
+          default:
+            console.error('Error:', error.message);
+            break;
         }
       }
     }
   };
+
   return (
     <form
       className='rounded-[24px] bg-transparent'

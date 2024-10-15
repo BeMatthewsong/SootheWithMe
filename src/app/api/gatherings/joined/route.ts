@@ -1,4 +1,4 @@
-import { getCookie } from '@/actions/auth/cookie/cookie';
+import { getCookie } from '../../actions/cookie/cookie';
 import {
   DEFAULT_GATHERINGS_LIMIT,
   DEFAULT_GATHERINGS_OFFSET,

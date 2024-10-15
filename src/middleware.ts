@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getCookie } from './actions/auth/cookie/cookie';
+import { getCookie } from './app/api/actions/cookie/cookie';
 
 export async function middleware(req: NextRequest) {
   const token = await getCookie('token');

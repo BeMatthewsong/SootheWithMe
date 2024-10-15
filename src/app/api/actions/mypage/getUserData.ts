@@ -1,6 +1,6 @@
 'use server';
 
-import { getCookie } from '@/actions/auth/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 import { UserData } from '@/types/client.type';
 
 export const getUserData = async () => {

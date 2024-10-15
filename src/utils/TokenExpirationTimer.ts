@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { postUserLogoutData } from '@/app/api/actions/mypage/postUserLogoutData';
 import toast from 'react-hot-toast';
-import { deleteCookie } from '@/actions/auth/cookie/cookie';
+
 import { EXPIRY_TIME } from '@/constants/common';
+import { deleteCookie } from '@/app/api/actions/cookie/cookie';
 
 export const TokenExpirationTimer = (token: string | undefined) => {
   const router = useRouter();

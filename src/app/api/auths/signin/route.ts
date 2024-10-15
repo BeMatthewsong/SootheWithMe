@@ -1,4 +1,4 @@
-import { setCookie } from '@/actions/auth/cookie/cookie';
+import { setCookie } from '../../actions/cookie/cookie';
 import { NextResponse } from 'next/server';
 
 export interface LoginResponse {

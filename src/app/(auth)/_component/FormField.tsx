@@ -1,5 +1,4 @@
 import Input from '../../components/Input/Input';
-import PasswordInput from '../../components/Input/PasswordInput';
 import { errorMessageStyle } from './FormOptions';
 
 interface SignUpData {
@@ -30,22 +29,14 @@ const FormField = ({
   return (
     <div className='flex flex-col gap-4'>
       <label className='text-14 font-semibold'>{label}</label>
-      {type === 'password' ? (
-        <PasswordInput
-          placeholder={placeholder}
-          className='h-44'
-          hasError={!!error}
-          {...register(name)}
-        />
-      ) : (
-        <Input
-          placeholder={placeholder}
-          className='h-44'
-          hasError={!!error}
-          type={type}
-          {...register(name)}
-        />
-      )}
+      <Input
+        placeholder={placeholder}
+        className='h-44'
+        hasError={!!error}
+        type={type}
+        isPassword={type === 'password'}
+        {...register(name)}
+      />
       {error && <div className={errorMessageStyle}>{error}</div>}
     </div>
   );

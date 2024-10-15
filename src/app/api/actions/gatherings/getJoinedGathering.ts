@@ -1,7 +1,7 @@
 'use server';
 
 import qs from 'qs';
-import { getCookie } from '@/actions/auth/cookie/cookie';
+import { getCookie } from '../cookie/cookie';
 import { UserJoinedGatheringsData } from '@/types/data.type';
 
 interface GetJoinedGatheringsParams {

@@ -9,7 +9,7 @@ import { getUserData } from './api/actions/mypage/getUserData';
 import { toastOptions } from '@/constants/toast.config';
 
 import { Toaster } from 'react-hot-toast';
-import { getCookie } from '@/actions/auth/cookie/cookie';
+import { getCookie } from './api/actions/cookie/cookie';
 
 export const metadata: Metadata = {
   title: 'Soothe With Me',

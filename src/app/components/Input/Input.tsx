@@ -1,6 +1,7 @@
 'use client';
 
-import { forwardRef, InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, useState } from 'react';
+import { IconVisivilityOff, IconVisivilityOn } from '@/public/icons';
 
 export const InputStyles = {
   base: 'w-full bg-var-gray-50 text-16 items-center gap-4 rounded-lg px-16 py-8 focus:ring-2 dark:bg-neutral-900',
@@ -14,6 +15,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
   className?: string;
   type?: 'text' | 'password' | 'number';
+  isPassword?: boolean;
 }
 
 /**
@@ -28,14 +30,47 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param {Ref<HTMLInputElement>} ref - forwardRef를 사용하여 전달받은 ref
  */
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ hasError = false, className = '', type = 'text', ...rest }, ref) => {
+  (
+    {
+      hasError = false,
+      className = '',
+      isPassword = false,
+      type = 'text',
+      ...rest
+    },
+    ref,
+  ) => {
+    const [inputType, setInputType] = useState<'password' | 'text'>(
+      isPassword ? 'password' : 'text',
+    );
+
     return (
-      <input
-        ref={ref}
-        type={type}
-        className={`${InputStyles.base} hover: ${InputStyles.hover} focus: ${InputStyles.focus} ${hasError && InputStyles.error} ${className}`}
-        {...rest}
-      />
+      <div className='relative'>
+        <input
+          ref={ref}
+          type={inputType}
+          className={`${InputStyles.base} hover: ${InputStyles.hover} focus: ${InputStyles.focus} ${hasError && InputStyles.error} ${className}`}
+          {...rest}
+        />
+        {isPassword && (
+          <button
+            type='button'
+            onClick={() => {
+              setInputType((prevType) =>
+                prevType === 'password' ? 'text' : 'password',
+              );
+            }}
+            tabIndex={-1}
+            className='absolute right-16 top-1/2 size-24 -translate-y-1/2'
+          >
+            {inputType === 'password' ? (
+              <IconVisivilityOff />
+            ) : (
+              <IconVisivilityOn />
+            )}
+          </button>
+        )}
+      </div>
     );
   },
 );
