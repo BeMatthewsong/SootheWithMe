@@ -9,6 +9,8 @@ import useSavedGatherings from '@/hooks/useSavedGatherings';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
 import { SORT_OPTIONS } from '@/constants/common';
 
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
+
 const SavedPage = () => {
   const { savedGatherings } = useSavedGatheringList();
 
@@ -48,7 +50,9 @@ const SavedPage = () => {
         {/* data list */}
         <div className='mt-24 flex grow flex-col gap-24'>
           {gatheringListData.length > 0 ? (
-            <SavedList dataList={gatheringListData} />
+            <MotionWrapper>
+              <SavedList dataList={gatheringListData} />
+            </MotionWrapper>
           ) : (
             <div className='flex size-full grow items-center justify-center text-14 font-medium text-var-gray-500 dark:text-neutral-200'>
               아직 찜한 모임이 없어요.

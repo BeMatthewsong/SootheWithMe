@@ -131,14 +131,18 @@ const Filter = ({
         />
       )}
 
-      {isOpen && (
+      <div
+        className={`relative transition-opacity duration-300 ease-in-out ${
+          isOpen ? 'z-filter opacity-100' : 'pointer-events-none opacity-0'
+        }`}
+      >
         <DropDown
           options={[children, ...options]}
           onSelect={handleOptionSelect}
           onClose={() => setIsOpen(false)}
           classnames={type === 'sort' ? 'min-w-max right-0' : ''}
         />
-      )}
+      </div>
     </div>
   );
 };

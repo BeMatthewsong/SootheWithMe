@@ -6,6 +6,7 @@ import Loader from '@/app/components/Loader/Loader';
 import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 import { ReviewsType } from '@/types/data.type';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 interface ReviewListProps {
   reviewList: ReviewsType[][];
@@ -43,29 +44,30 @@ const ReviewList = ({
 
       {reviewList.flatMap((list) =>
         list.map((item, index) => (
-          <div
-            key={item.id}
-            ref={
-              index === 0
-                ? firstReviewRef
-                : index === reviewList.length - 1
-                  ? lastReviewRef
-                  : null
-            }
-            data-testid='review-item'
-          >
-            <Link href={`/gatherings/${item.Gathering.id}`} className='block'>
-              <Review
-                image_source={item.Gathering.image}
-                rating={item.score}
-                description={item.comment}
-                place={item.Gathering.name}
-                location={item.Gathering.location}
-                user_name={item.User.name}
-                date={item.createdAt}
-              />
-            </Link>
-          </div>
+          <MotionWrapper key={item.id}>
+            <div
+              ref={
+                index === 0
+                  ? firstReviewRef
+                  : index === reviewList.length - 1
+                    ? lastReviewRef
+                    : null
+              }
+              data-testid='review-item'
+            >
+              <Link href={`/gatherings/${item.Gathering.id}`} className='block'>
+                <Review
+                  image_source={item.Gathering.image}
+                  rating={item.score}
+                  description={item.comment}
+                  place={item.Gathering.name}
+                  location={item.Gathering.location}
+                  user_name={item.User.name}
+                  date={item.createdAt}
+                />
+              </Link>
+            </div>
+          </MotionWrapper>
         )),
       )}
 

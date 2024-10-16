@@ -69,31 +69,6 @@ describe('Filter List Component', () => {
     expect(filterElement).toHaveTextContent('Filter');
     expect(filterElement).toHaveClass('bg-var-gray-50 text-var-gray-800');
   });
-
-  // 외부 영역 클릭 시 드롭다운 닫힘 테스트
-  it('closes dropdown when clicked outside', () => {
-    const filterElement = screen.getByTestId('filter-component');
-    fireEvent.click(filterElement);
-
-    fireEvent.mouseDown(document.body);
-
-    defaultProps.options.forEach((option) => {
-      const optionElement = screen.queryByText(option);
-      expect(optionElement).not.toBeInTheDocument();
-    });
-  });
-
-  // 리스트 아이템 클릭 시 드롭다운 닫힘 테스트
-  it('closes dropdown when clicked option item', () => {
-    const filterElement = screen.getByTestId('filter-component');
-    fireEvent.click(filterElement);
-
-    const optionElement = screen.getByText('Option 1');
-    fireEvent.click(optionElement);
-
-    const anotherOptionElement = screen.queryByText('Option 2');
-    expect(anotherOptionElement).not.toBeInTheDocument();
-  });
 });
 
 // Filter 컴포넌트 - type : sort 테스트

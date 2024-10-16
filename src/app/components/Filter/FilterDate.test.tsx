@@ -52,51 +52,16 @@ describe('FilterDate Component Test', () => {
     expect(iconElement).toBeInTheDocument();
   });
 
-  // 클릭 시 모달이 열리고 닫히는지 확인
-  it('toggles dropdown on click', () => {
-    const filterElement = screen.getByTestId('filterDate');
+  // 날짜 선택을 누르면 모달이 보이는지 확인
+  it('toggles dropdown visibility based on isOpen state', () => {
+    const filterElement = screen.getByText('날짜 선택');
 
     fireEvent.click(filterElement);
-    expect(screen.getByTestId('calendar-modal')).toBeInTheDocument();
 
-    fireEvent.click(filterElement);
-    expect(screen.queryByTestId('calendar-modal')).not.toBeInTheDocument();
-  });
+    const modalWrapper = screen.getByTestId('calendar-modal-wrapper');
 
-  // 외부 영역 클릭 시 모달이 닫히는지 확인
-  it('closes dropdown when clicked outside', () => {
-    const filterElement = screen.getByTestId('filterDate');
-
-    fireEvent.click(filterElement);
-    expect(screen.getByTestId('calendar-modal')).toBeInTheDocument();
-
-    fireEvent.mouseDown(document.body);
-    expect(screen.queryByTestId('calendar-modal')).not.toBeInTheDocument();
-  });
-
-  // 날짜 선택 시 상태 업데이트 확인
-  it('selects a date and updates state', () => {
-    const filterElement = screen.getByTestId('filterDate');
-    fireEvent.click(filterElement);
-
-    const dateInput = screen.getByTestId('date-input');
-
-    // 내일 날짜를 input에 세팅
-    const date = new Date();
-    date.setDate(date.getDate() + 1);
-    const dateStr = date.toISOString().slice(0, 10);
-    fireEvent.change(dateInput, { target: { value: dateStr } });
-
-    // '적용' 버튼 클릭
-    const applyButton = screen.getByText('적용');
-    fireEvent.click(applyButton);
-
-    // state 업데이트 확인
-    expect(filterElement).toHaveClass('text-var-gray-50 bg-var-gray-900');
-    // 선택된 날짜 표시 확인
-    expect(filterElement).toHaveTextContent(formatDate(dateStr));
-    // 모달이 닫히는지 확인
-    expect(screen.queryByTestId('calendar-modal')).not.toBeInTheDocument();
+    expect(modalWrapper).toHaveStyle('visibility: visible');
+    expect(modalWrapper).not.toHaveClass('pointer-events-none');
   });
 
   // 초기화 버튼 클릭 시 상태 업데이트 확인

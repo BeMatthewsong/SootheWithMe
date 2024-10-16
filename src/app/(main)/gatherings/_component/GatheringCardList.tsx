@@ -3,6 +3,7 @@ import CardList from '@/app/components/CardList/CardList';
 import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 import { GatheringType } from '@/types/data.type';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 
 interface GatheringCardListProps {
@@ -41,24 +42,25 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
         </div>
       ) : (
         gatherings.map((gathering, index) => (
-          <div
-            key={gathering.id}
-            ref={
-              index === 0
-                ? firstGatheringRef
-                : index === gatherings.length - 1
-                  ? lastGatheringRef
-                  : null
-            }
-          >
-            <Link href={`/gatherings/${gathering.id}`}>
-              <CardList
-                data={gathering}
-                isSaved={isSaved(gathering.id)}
-                handleButtonClick={handleButtonClick}
-              />
-            </Link>
-          </div>
+          <MotionWrapper key={gathering.id}>
+            <div
+              ref={
+                index === 0
+                  ? firstGatheringRef
+                  : index === gatherings.length - 1
+                    ? lastGatheringRef
+                    : null
+              }
+            >
+              <Link href={`/gatherings/${gathering.id}`}>
+                <CardList
+                  data={gathering}
+                  isSaved={isSaved(gathering.id)}
+                  handleButtonClick={handleButtonClick}
+                />
+              </Link>
+            </div>
+          </MotionWrapper>
         ))
       )}
     </div>
