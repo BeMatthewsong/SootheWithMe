@@ -42,12 +42,12 @@ export default function Providers({ children }: { children: ReactNode }) {
   // QueryClientProvider로 자식 컴포넌트들을 감싸서 QueryClient를 제공
   return (
     <ThemeProvider attribute='class' defaultTheme='system'>
-        <SavedGatheringProvider>
-          <QueryClientProvider client={queryClient}>
-            {children}
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </SavedGatheringProvider>
+      <SavedGatheringProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+      </SavedGatheringProvider>
     </ThemeProvider>
   );
 }

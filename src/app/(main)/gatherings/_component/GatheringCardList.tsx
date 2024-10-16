@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-
 import CardList from '@/app/components/CardList/CardList';
+import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 import { GatheringType } from '@/types/data.type';
 import { useSavedGatheringList } from '@/context/SavedGatheringContext';
-
-import { useInView } from 'react-intersection-observer';
+import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 
 interface GatheringCardListProps {
   gatherings: GatheringType[];
@@ -20,36 +18,17 @@ const GatheringCardList = ({ gatherings }: GatheringCardListProps) => {
     updateGathering(id);
   };
 
-  const [topGradientVisible, setTopGradientVisible] = useState(false);
-  const [bottomGradientVisible, setBottomGradientVisible] = useState(false);
-
-  const { ref: firstGatheringRef, inView: firstInView } = useInView({
-    threshold: 0,
-  });
-  const { ref: lastGatheringRef, inView: lastInView } = useInView({
-    threshold: 0,
-  });
-
-  useEffect(() => {
-    setTopGradientVisible(!firstInView);
-    setBottomGradientVisible(!lastInView);
-  }, [firstInView, lastInView]);
+  const {
+    topGradientVisible,
+    bottomGradientVisible,
+    firstItemRef: firstGatheringRef,
+    lastItemRef: lastGatheringRef,
+  } = useScrollGradientEffect();
 
   return (
     <div className='gathering-list mt-24 space-y-24'>
-      {/* Top gradient */}
-      <div
-        className={`fixed left-0 right-0 top-56 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10 transition-opacity duration-500 ease-in-out md:top-60 dark:from-neutral-900 ${
-          topGradientVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-
-      {/* Bottom gradient */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10 transition-opacity duration-500 ease-in-out dark:from-neutral-900 ${
-          bottomGradientVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+      <GradientOverlay position='top' isVisible={topGradientVisible} />
+      <GradientOverlay position='bottom' isVisible={bottomGradientVisible} />
 
       {/* 모임이 없는 경우 */}
       {gatherings.length === 0 ? (

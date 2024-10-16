@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import {
@@ -6,6 +6,9 @@ import {
   DEFAULT_GATHERINGS_OFFSET,
 } from '@/constants/common';
 import Loader from '../Loader/Loader';
+import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
+import GradientOverlay from '../GradientOverlay/GradientOverlay';
+
 interface ItemWithId {
   id: number;
 }
@@ -35,16 +38,14 @@ const InfiniteScroll = <T extends ItemWithId>({
   errorText,
   renderItem,
 }: InfiniteScrollProps<T>) => {
-  const [topGradientVisible, setTopGradientVisible] = useState(false);
-  const [bottomGradientVisible, setBottomGradientVisible] = useState(false);
+  const {
+    topGradientVisible,
+    bottomGradientVisible,
+    firstItemRef: firstGatheringRef,
+    lastItemRef: lastGatheringRef,
+  } = useScrollGradientEffect();
 
   const { ref, inView } = useInView({ threshold: 0 });
-  const { ref: firstGatheringRef, inView: firstInView } = useInView({
-    threshold: 0,
-  });
-  const { ref: lastGatheringRef, inView: lastInView } = useInView({
-    threshold: 0,
-  });
 
   const { data, isError, isFetching, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
@@ -68,12 +69,10 @@ const InfiniteScroll = <T extends ItemWithId>({
     });
 
   useEffect(() => {
-    setTopGradientVisible(!firstInView);
-    setBottomGradientVisible(!lastInView);
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, firstInView, lastInView]);
+  }, [inView]);
 
   // 데이터가 없거나 비어있을 때 emptyText를 표시
   if (!data || data.pages[0].data.length === 0) {
@@ -94,19 +93,8 @@ const InfiniteScroll = <T extends ItemWithId>({
   const allItems = data.pages.flatMap((page) => page.data);
   return (
     <>
-      {/* Top gradient */}
-      <div
-        className={`fixed left-0 right-0 top-56 z-[30] h-16 bg-gradient-to-b from-white to-transparent p-10 transition-opacity duration-500 ease-in-out md:top-60 ${
-          topGradientVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-
-      {/* Bottom gradient */}
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-[30] h-16 bg-gradient-to-t from-white to-transparent p-10 transition-opacity duration-500 ease-in-out ${
-          bottomGradientVisible ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+      <GradientOverlay position='top' isVisible={topGradientVisible} />
+      <GradientOverlay position='bottom' isVisible={bottomGradientVisible} />
 
       <ul className='flex h-full flex-col'>
         {allItems.map((item, index) => (

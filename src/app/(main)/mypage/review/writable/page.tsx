@@ -9,6 +9,8 @@ import { useState } from 'react';
 import EmptyReviewPage from '../../_component/EmptyReviewPage';
 import ReviewFilterTab from '../../_component/ReviewFilterTab';
 import { queries } from '@/queries';
+import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
+import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 
 const WritableReviewsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -30,24 +32,45 @@ const WritableReviewsPage = () => {
 
   usePreventScroll(isModalOpen);
 
+  const {
+    topGradientVisible,
+    bottomGradientVisible,
+    firstItemRef: firstReviewRef,
+    lastItemRef: lastReviewRef,
+  } = useScrollGradientEffect();
+
   return (
     <>
       <div className='grow pt-16'>
         {/* tab */}
         <ReviewFilterTab />
 
+        <GradientOverlay position='top' isVisible={topGradientVisible} />
+        <GradientOverlay position='bottom' isVisible={bottomGradientVisible} />
+
         {/* cards */}
         {writableReviews?.length ? (
-          writableReviews.map((data) => (
-            <Card key={data.id} data={data}>
-              <Card.Chips />
-              <Card.Info />
-              <Card.Button
-                handleButtonClick={() =>
-                  data.isCompleted && handleOpenModal(data.id)
-                }
-              />
-            </Card>
+          writableReviews.map((data, index) => (
+            <div
+              key={data.id}
+              ref={
+                index === 0
+                  ? firstReviewRef
+                  : index === writableReviews.length - 1
+                    ? lastReviewRef
+                    : null
+              }
+            >
+              <Card data={data}>
+                <Card.Chips />
+                <Card.Info />
+                <Card.Button
+                  handleButtonClick={() =>
+                    data.isCompleted && handleOpenModal(data.id)
+                  }
+                />
+              </Card>
+            </div>
           ))
         ) : (
           <EmptyReviewPage />

@@ -99,11 +99,17 @@ describe('Tag Component Render', () => {
 
 // SAVED 아이콘 클릭으로 토글 테스트
 describe('Saved button Test', () => {
+  // dateTime을 내일 날짜로 변경 (마감되지 않은 챌린지)
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  const MOCK_DATA = { ...MOCK_DATA_BASE, dateTime: date.toISOString() };
+
   it('should toggle isSaved state when handleToggleSave is called', () => {
     const handleToggleSave = jest.fn();
+
     render(
       <CardList
-        data={MOCK_DATA_BASE}
+        data={MOCK_DATA}
         isSaved={false}
         handleButtonClick={handleToggleSave}
       />,
@@ -138,9 +144,7 @@ describe('Saved button Test', () => {
   // 아이콘 클릭 시 이벤트 핸들러 작동 여부 테스트
   it('should call handleToggleSave when IconSaveInactive is clicked', () => {
     const handleToggleSave = jest.fn();
-    render(
-      <CardList data={MOCK_DATA_BASE} handleButtonClick={handleToggleSave} />,
-    );
+    render(<CardList data={MOCK_DATA} handleButtonClick={handleToggleSave} />);
 
     const inactiveButton = screen.getByTestId('IconSaveInactive');
     fireEvent.click(inactiveButton);
