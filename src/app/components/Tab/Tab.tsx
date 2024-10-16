@@ -16,6 +16,7 @@ const Tab = ({ type, isActive, onClick }: TabProps) => {
     <div
       className={`relative flex cursor-pointer items-center gap-4 overflow-hidden px-8 pb-4 text-18 font-semibold transition ${styles} before:absolute before:bottom-0 before:w-full before:border-b-2 before:border-var-gray-900 before:transition-all before:duration-300 dark:before:border-neutral-50`}
       onClick={onClick}
+      data-testid={`tab-${type}`}
     >
       {type === 'WORKATION' ? (
         <>

@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --passWithNoTests"
+    "test": "jest --passWithNoTests",
+    "playwright": "npx playwright test --pass-with-no-tests",
+    "dev:test": "cross-env PLAYWRIGHT_TEST=true npm run dev"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -27,6 +29,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.0",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query-devtools": "^5.59.13",
     "@testing-library/jest-dom": "^6.5.0",
@@ -37,10 +40,12 @@
     "@types/react": "^18",
     "@types/react-datepicker": "^7.0.0",
     "@types/react-dom": "^18",
+    "cross-env": "^7.0.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "msw": "^2.4.10",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",
@@ -48,5 +53,10 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

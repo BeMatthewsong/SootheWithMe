@@ -26,7 +26,10 @@ const AverageRating = ({ rating }: AverageRatingProps) => {
   return (
     <div>
       <p className='text-center text-24 font-semibold text-var-gray-400 dark:text-neutral-400'>
-        <span className='mr-2 text-var-gray-900 dark:text-white'>
+        <span
+          className='mr-2 text-var-gray-900 dark:text-white'
+          data-testid='average-score'
+        >
           {averageScore}
         </span>
         / 5

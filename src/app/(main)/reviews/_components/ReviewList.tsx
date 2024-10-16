@@ -35,6 +35,7 @@ const ReviewList = ({
             href={`/gatherings/${item.Gathering.id}`}
             key={item.id}
             className='block'
+            data-testid='review-item'
           >
             <Review
               image_source={item.Gathering.image}
@@ -55,7 +56,7 @@ const ReviewList = ({
         </div>
       )}
 
-      {hasMore && <div ref={ref} className='h-24' />}
+      {hasMore && <div ref={ref} className='h-24' data-testid='hasMoreRef' />}
     </div>
   );
 };
