@@ -53,9 +53,7 @@ const Gnb = ({ user, token }: GnbProps) => {
             {navList.map((nav, index) => (
               <li key={index} className='flex items-center gap-[5px]'>
                 <Link href={nav.link}>
-                  <TopTab isActive={pathname.includes(nav.link)}>
-                    {nav.name}
-                  </TopTab>
+                  <TopTab isActive={pathname === nav.link}>{nav.name}</TopTab>
                 </Link>
                 {/* nav.name이 '찜한 모임'이고 웹스토리지에 저장된 '찜한 모임'의 개수가 1개 이상일 시 Badge 렌더링 */}
                 {nav.name === '찜한 모임' && savedCount > 0 && (
