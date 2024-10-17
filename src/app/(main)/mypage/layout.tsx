@@ -2,6 +2,7 @@ import UserProfileLayout from '@/app/components/UserProfileLayout/UserProfileLay
 import { ReactNode } from 'react';
 import Tab from './_component/Tab';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
+import { redirect } from 'next/navigation';
 
 const Layout = async ({
   children,
@@ -9,6 +10,11 @@ const Layout = async ({
   children: ReactNode;
 }>) => {
   const userData = await getUserData();
+
+  if (!userData) {
+    redirect('/gatherings');
+  }
+
   return (
     <main className='mx-auto flex h-full max-w-1200 flex-col bg-var-gray-50 px-16 pt-24 md:px-24 md:pt-32 lg:px-100 dark:bg-neutral-900'>
       {/* head */}

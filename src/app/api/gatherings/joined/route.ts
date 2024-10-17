@@ -14,7 +14,7 @@ export async function GET(req: Request) {
   const token = await getCookie('token');
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings/joined?offset=${offset}&limit=${limit}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/gatherings/joined?offset=${offset}&limit=${limit}&sortOrder=desc`,
     {
       method: 'GET',
       headers: {

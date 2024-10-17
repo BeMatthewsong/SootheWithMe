@@ -43,6 +43,7 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
     if (!updatedUser) {
       toast.error('프로필 업데이트에 실패했습니다.');
     }
+    toast.success('프로필이 변경되었습니다.');
 
     setIsModalOpen(false);
   };
@@ -78,7 +79,6 @@ const UserProfileLayout = ({ user }: MyGatheringListProps) => {
 
       {isModalOpen && (
         <ProfileEditModal
-          user={user}
           onClose={toggleModal}
           onUploadProfileImage={onChangeProfileImage({
             setProfileImage,

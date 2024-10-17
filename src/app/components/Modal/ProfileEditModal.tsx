@@ -10,7 +10,6 @@ import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
 
 interface ProfileEditModalProps {
-  user: UserData | null;
   onClose: () => void;
   onUploadProfileImage?: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: () => void;
@@ -20,7 +19,6 @@ interface ProfileEditModalProps {
 }
 
 const ProfileEditModal = ({
-  user,
   onClose,
   onUploadProfileImage,
   onSubmit,
@@ -32,7 +30,7 @@ const ProfileEditModal = ({
     setProfileInput(e.target.value);
   };
 
-  const isValid = profileInput !== user?.companyName && profileInput !== '';
+  const isValid = profileInput !== '';
 
   return (
     <ModalFrame onClose={onClose}>

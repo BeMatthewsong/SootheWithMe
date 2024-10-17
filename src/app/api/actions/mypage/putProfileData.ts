@@ -4,6 +4,7 @@ import { getCookie } from '../cookie/cookie';
 import { UserData } from '@/types/client.type';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import toast from 'react-hot-toast';
 
 export const putProfileData = async (
   formData: FormData,
@@ -11,7 +12,7 @@ export const putProfileData = async (
   const token = await getCookie('token');
 
   if (!token) {
-    alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
+    toast.error('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
     redirect('/signin');
     return null;
   }

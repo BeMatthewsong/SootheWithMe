@@ -7,6 +7,9 @@ import toast from 'react-hot-toast';
 import { UserData } from '@/types/client.type';
 import '@testing-library/jest-dom';
 
+const mockToken =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZWFtSWQiOiIzLTQiLCJ1c2VySWQiOjcyMSwiaWF0IjoxNzI5MDYyODQ2LCJleHAiOjE3MjkwNjY0NDZ9.w4T2gz1nLLTN52UJBSxuy-LAvZI3zYTKKEQfdpmCngc';
+
 // 유저데이터 모킹
 const mockUser: UserData = {
   id: 1,
@@ -42,7 +45,7 @@ describe('UserStatus 컴포넌트', () => {
 
   beforeEach(() => {
     (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
-    render(<UserStatus user={mockUser} token='test-token' />);
+    render(<UserStatus user={mockUser} token={mockToken} />);
   });
 
   afterEach(() => {

@@ -67,7 +67,7 @@ const Gnb = ({ user, token }: GnbProps) => {
         </nav>
         <div className='flex items-center gap-12'>
           <ToggleTheme />
-          {user && <TokenExpirationTimerLayout token={token} variant='gnb' />}
+          <TokenExpirationTimerLayout token={token} variant='gnb' />
           <UserStatus user={user} token={token} />
         </div>
       </div>

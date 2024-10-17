@@ -41,19 +41,9 @@ const UserStatus = ({ user, token }: UserStatusProps) => {
   const handleLogout = async () => {
     const result = await postUserLogoutData();
     if (result) {
-      Promise.resolve()
-        .then(() => {
-          toast.success('로그아웃이 완료되었습니다.');
-        })
-        .then(() => {
-          localStorage.removeItem('timeLeft'); // 로컬 스토리지에서 시간 삭제
-        })
-        .then(() => {
-          deleteCookie('token'); // 쿠키에서 토큰 삭제
-        })
-        .then(() => {
-          router.push('/gatherings');
-        });
+      toast.success('로그아웃이 완료되었습니다.');
+      deleteCookie('token');
+      router.push('/gatherings');
     } else {
       toast.error('로그아웃에 실패했습니다. 다시 시도해 주세요.');
     }
