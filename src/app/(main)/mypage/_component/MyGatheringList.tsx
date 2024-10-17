@@ -4,6 +4,7 @@ import getMyGatherings from '@/app/api/gatherings/service/getMyGatherings';
 import Card from '@/app/components/Card/Card';
 import InfiniteScroll from '@/app/components/InfiniteScroll/InfiniteScroll';
 import ReviewModal from '@/app/components/Modal/ReviewModal';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 import useParticipation from '@/hooks/useParticipation';
 import { queries } from '@/queries';
 import { UserData } from '@/types/client.type';
@@ -30,7 +31,7 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
   };
 
   return (
-    <>
+    <MotionWrapper>
       <InfiniteScroll
         initData={initData}
         queryKey={queries.joined._def}
@@ -54,7 +55,7 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
       {isModalOpen && (
         <ReviewModal gatheringId={cardId} onClose={handleCloseModal} />
       )}
-    </>
+    </MotionWrapper>
   );
 };
 

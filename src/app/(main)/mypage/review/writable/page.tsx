@@ -11,6 +11,7 @@ import ReviewFilterTab from '../../_component/ReviewFilterTab';
 import { queries } from '@/queries';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 const WritableReviewsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -51,26 +52,27 @@ const WritableReviewsPage = () => {
         {/* cards */}
         {writableReviews?.length ? (
           writableReviews.map((data, index) => (
-            <div
-              key={data.id}
-              ref={
-                index === 0
-                  ? firstReviewRef
-                  : index === writableReviews.length - 1
-                    ? lastReviewRef
-                    : null
-              }
-            >
-              <Card data={data}>
-                <Card.Chips />
-                <Card.Info />
-                <Card.Button
-                  handleButtonClick={() =>
-                    data.isCompleted && handleOpenModal(data.id)
-                  }
-                />
-              </Card>
-            </div>
+            <MotionWrapper key={data.id}>
+              <div
+                ref={
+                  index === 0
+                    ? firstReviewRef
+                    : index === writableReviews.length - 1
+                      ? lastReviewRef
+                      : null
+                }
+              >
+                <Card data={data}>
+                  <Card.Chips />
+                  <Card.Info />
+                  <Card.Button
+                    handleButtonClick={() =>
+                      data.isCompleted && handleOpenModal(data.id)
+                    }
+                  />
+                </Card>
+              </div>
+            </MotionWrapper>
           ))
         ) : (
           <EmptyReviewPage />

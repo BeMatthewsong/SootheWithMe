@@ -5,6 +5,7 @@ import Card from '@/app/components/Card/Card';
 import GradientOverlay from '@/app/components/GradientOverlay/GradientOverlay';
 import useScrollGradientEffect from '@/hooks/useScrollGradientEffect';
 import { GatheringType } from '@/types/data.type';
+import MotionWrapper from '@/app/components/MotionWrapper/MotionWrapper';
 
 interface GatheringListProps {
   dataList: GatheringType[];
@@ -35,22 +36,23 @@ const GatheringList = ({ dataList }: GatheringListProps) => {
       <GradientOverlay position='bottom' isVisible={bottomGradientVisible} />
 
       {updateDataList().map((data, index) => (
-        <div
-          key={data.id}
-          ref={
-            index === 0
-              ? firstGatheringRef
-              : index === updateDataList().length - 1
-                ? lastGatheringRef
-                : null
-          }
-        >
-          <Link href={`/gatherings/${data.id}`}>
-            <Card handleSaveDiscard={handleSaveDiscard} data={data}>
-              <Card.Info />
-            </Card>
-          </Link>
-        </div>
+        <MotionWrapper key={data.id}>
+          <div
+            ref={
+              index === 0
+                ? firstGatheringRef
+                : index === updateDataList().length - 1
+                  ? lastGatheringRef
+                  : null
+            }
+          >
+            <Link href={`/gatherings/${data.id}`}>
+              <Card handleSaveDiscard={handleSaveDiscard} data={data}>
+                <Card.Info />
+              </Card>
+            </Link>
+          </div>
+        </MotionWrapper>
       ))}
     </div>
   );
