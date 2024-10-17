@@ -53,7 +53,7 @@ const FilterSort = ({
     data-testid='filter-component'
   >
     <IconSort className='${iconClass} h-24 w-24' />
-    <span className='hidden md:mr-8 md:inline'>{text}</span>
+    <span className='hidden whitespace-nowrap md:mr-8 md:inline'>{text}</span>
   </div>
 );
 
