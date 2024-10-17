@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 interface GatheringImageProps {
   image: string;
-  endTime?: string;
+  endTime: string;
 }
 
 const GatheringImage = ({ image, endTime }: GatheringImageProps) => {
