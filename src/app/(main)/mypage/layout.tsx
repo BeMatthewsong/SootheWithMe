@@ -1,8 +1,12 @@
+import { Metadata } from 'next';
 import UserProfileLayout from '@/app/components/UserProfileLayout/UserProfileLayout';
 import { ReactNode } from 'react';
 import Tab from './_component/Tab';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 import { redirect } from 'next/navigation';
+import { pageMetadata } from '@/utils/makeMetadata';
+
+export const metadata: Metadata = pageMetadata('나의 리뷰', '/mypage/review');
 
 const Layout = async ({
   children,

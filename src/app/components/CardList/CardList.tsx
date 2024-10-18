@@ -20,7 +20,6 @@ import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
 
-// TODO : optional props를 필수로 변경
 interface CardProps {
   data: GatheringType;
   isSaved?: boolean;

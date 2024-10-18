@@ -9,6 +9,17 @@ import getGatheringParticipants from '@/app/api/actions/gatherings/getGatheringP
 import getGatheringInfo from '@/app/api/actions/gatherings/getGatheringInfo';
 import { getUserData } from '@/app/api/actions/mypage/getUserData';
 import { UserData } from '@/types/client.type';
+import { gatheringMetadata } from '@/utils/makeMetadata';
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: {
+    id: number;
+  };
+}) => {
+  return await gatheringMetadata(params.id);
+};
 
 const GatheringsDetailPage = async ({
   params,

@@ -1,10 +1,8 @@
 import SignInForm from '@/app/(auth)/signin/_component/SignInForm';
 import { Metadata } from 'next';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '로그인 | Soothe With Me',
-  description: 'Soothe With Me 로그인 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata('로그인', '/signin');
 
 const SignIn = () => {
   return <SignInForm />;

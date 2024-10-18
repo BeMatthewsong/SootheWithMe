@@ -1,10 +1,8 @@
 import SignUpForm from '@/app/(auth)/signup/_component/SignUpForm';
 import { Metadata } from 'next';
+import { pageMetadata } from '@/utils/makeMetadata';
 
-export const metadata: Metadata = {
-  title: '회원가입 | Soothe With Me',
-  description: 'Soothe With Me 회원가입 페이지입니다.',
-};
+export const metadata: Metadata = pageMetadata('회원가입', '/signup');
 
 const SignUp = () => {
   return <SignUpForm />;

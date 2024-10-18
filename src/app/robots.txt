@@ -1,0 +1,5 @@
+User-agent: *  
+Disallow: /mypage/ 
+Allow: /
+
+Sitemap: https://soothe-with-me.vercel.app/sitemap

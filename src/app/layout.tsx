@@ -11,14 +11,9 @@ import { toastOptions } from '@/constants/toast.config';
 import { Toaster } from 'react-hot-toast';
 import { getCookie } from './api/actions/cookie/cookie';
 
-export const metadata: Metadata = {
-  title: 'Soothe With Me',
-  description:
-    '유저가 바쁜 일상 속 휴식을 위한 다양한 모임을 탐색하고 참여하며, 직접 모임을 개설하고 리뷰를 생성할 수 있는 서비스입니다.',
-  icons: {
-    icon: '/icons/bye.svg',
-  },
-};
+import { rootMetadata } from '@/utils/makeMetadata';
+
+export const metadata: Metadata = rootMetadata;
 
 export default async function RootLayout({
   children,

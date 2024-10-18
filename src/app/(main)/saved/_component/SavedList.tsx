@@ -35,6 +35,7 @@ const SavedList = ({ dataList }: SavedListProps) => {
       {dataList.map((item, index) => (
         <div
           key={item.id}
+          className='mb-24'
           ref={
             index === 0
               ? firstGatheringRef
