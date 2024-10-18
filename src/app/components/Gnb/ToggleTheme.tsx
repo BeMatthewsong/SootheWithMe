@@ -16,6 +16,11 @@ const ToggleTheme = () => {
     <button
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       className='relative h-32 w-60 rounded-full bg-var-orange-700 shadow-inner'
+      aria-label={
+        resolvedTheme === 'dark'
+          ? 'Switch to light theme'
+          : 'Switch to dark theme'
+      }
     >
       <div
         className={`absolute left-2 top-1/2 flex size-24 -translate-y-1/2 items-center justify-center rounded-full bg-white text-var-orange-600 transition-all duration-300 dark:translate-x-[26px] dark:bg-neutral-900 dark:text-var-orange-400`}

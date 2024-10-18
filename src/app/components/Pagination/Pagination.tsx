@@ -94,6 +94,7 @@ const Pagination = ({
         }`}
         onClick={() => handlePageClick(currentPage - 1)}
         disabled={currentPage === 1}
+        aria-label='이전 페이지로 이동'
       >
         <IconChevronLeft className='text-var-gray-800 dark:text-neutral-50' />
       </button>
@@ -130,6 +131,7 @@ const Pagination = ({
         }`}
         onClick={() => handlePageClick(currentPage + 1)}
         disabled={currentPage === totalPages}
+        aria-label='다음 페이지로 이동'
       >
         <IconChevronLeft className='rotate-180 text-var-gray-800 dark:text-neutral-50' />
       </button>

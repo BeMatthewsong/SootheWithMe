@@ -119,6 +119,7 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
             type='button'
             className='right-24 mt-24 md:absolute md:top-24 md:mt-0'
             onClick={handleToggleSave}
+            aria-label='종료된 모임을 찜하기 해제'
           >
             <IconSaveDiscardBtn className='h-36 w-116 md:hidden' />
             <IconSaveDiscard className='hidden h-48 w-48 md:block' />

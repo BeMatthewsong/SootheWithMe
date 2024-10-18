@@ -29,6 +29,7 @@ const CalendarModal = ({
         data-testid='close-modal-button'
         className='absolute right-16 top-16'
         onClick={onCloseModal}
+        aria-label='close modal'
       >
         <IconX className='h-20 w-20 text-var-gray-900 dark:text-neutral-100' />
       </button>

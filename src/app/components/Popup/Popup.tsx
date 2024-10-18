@@ -37,7 +37,11 @@ const Popup = ({
         >
           {/* 닫기 버튼 */}
           <div className='flex w-full justify-end'>
-            <button data-testid='close-modal-button' onClick={onClickClose}>
+            <button
+              data-testid='close-modal-button'
+              onClick={onClickClose}
+              aria-label='close modal'
+            >
               <IconX className='h-24 w-24 text-var-gray-900 dark:text-neutral-100' />
             </button>
           </div>

@@ -62,6 +62,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             }}
             tabIndex={-1}
             className='absolute right-16 top-1/2 size-24 -translate-y-1/2'
+            aria-label={
+              inputType === 'password' ? 'show password' : 'hide password'
+            }
           >
             {inputType === 'password' ? (
               <IconVisivilityOff />

@@ -46,7 +46,7 @@ const Gnb = ({ user, token }: GnbProps) => {
     <header className='fixed left-0 top-0 z-popup w-full border-b-2 border-var-gray-900 bg-var-orange-600'>
       <div className='mx-16 flex max-w-[1200px] items-center justify-between md:mx-24 lg:mx-auto'>
         <nav className='flex items-center'>
-          <Link href='/gatherings'>
+          <Link href='/gatherings' aria-label='메인 페이지로 이동'>
             <Logo className='mr-20 h-40 w-72' />
           </Link>
           <ul className='flex gap-12 md:gap-24'>
