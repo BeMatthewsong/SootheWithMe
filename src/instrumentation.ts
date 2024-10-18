@@ -4,6 +4,8 @@ export async function register() {
     process.env.NEXT_RUNTIME === 'nodejs'
   ) {
     const { server } = await import('./msw/server');
-    server.listen();
+    server.listen({
+      onUnhandledRequest: 'bypass',
+    });
   }
 }

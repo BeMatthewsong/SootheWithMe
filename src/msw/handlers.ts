@@ -22,10 +22,10 @@ export const handlers = [
 
   /*
    * GET
-   * /reviews/score
+   * /reviews/scores
    */
   http.get(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews/score`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews/scores`,
     ({ request }) => {
       const url = new URL(request.url);
       const queryParam = qs.parse(url.searchParams.toString());
