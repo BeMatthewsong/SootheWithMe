@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 
 import { UserData } from '@/types/client.type';
@@ -10,6 +10,7 @@ import useCancelGathering from '@/hooks/useCancelGathering';
 import useParticipation from '@/hooks/useParticipation';
 import { GatheringParticipantsType } from '@/types/data.type';
 import Popup from '../Popup/Popup';
+import CancelGatheringModal from '../Modal/CancelGatheringModal';
 
 interface ParticipationButtonProps {
   isHost: boolean;
@@ -31,6 +32,7 @@ const ParticipationButton = ({
   participantsData,
 }: ParticipationButtonProps) => {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const params = useParams();
 
   const { copyUrlToClipboard } = useCopyUrlToClipboard();
@@ -90,10 +92,18 @@ const ParticipationButton = ({
     const disabled = isRegistrationEnded; // 마감일이 지난 경우 버튼 비활성화
 
     return (
-      <div className='flex w-[330px] gap-[10px]'>
-        {renderButton('취소하기', 'white', cancelGathering)}
-        {renderButton('공유하기', 'default', copyUrlToClipboard, disabled)}
-      </div>
+      <>
+        <div className='flex w-[330px] gap-[10px]'>
+          {renderButton('취소하기', 'white', () => setIsModalOpen(true))}
+          {renderButton('공유하기', 'default', copyUrlToClipboard, disabled)}
+        </div>
+        {isModalOpen && (
+          <CancelGatheringModal
+            onClick={cancelGathering}
+            onClose={() => setIsModalOpen(false)}
+          />
+        )}
+      </>
     );
   }
 

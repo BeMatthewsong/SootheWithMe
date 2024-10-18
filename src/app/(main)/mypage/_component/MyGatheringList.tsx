@@ -38,19 +38,35 @@ const MyGatheringList = ({ initData, user }: MyGatheringListProps) => {
         queryFn={getMyGatherings}
         emptyText='아직 참여한 모임이 없습니다.'
         errorText='모임을 불러오지 못했습니다.'
-        renderItem={(item) => (
-          <Card data={item}>
-            <Card.Chips />
-            <Card.Info />
-            <Card.Button
-              handleButtonClick={() => {
-                item.isCompleted
-                  ? handleOpenModal(item.id)
-                  : handleWithdrawClickWithId(item.id, queries.joined._def);
-              }}
-            />
-          </Card>
-        )}
+        renderItem={(item) => {
+          // 주최자인지 여부를 확인하는 변수
+          const isHost = item.createdBy === user?.id;
+          return (
+            <Card data={item}>
+              <Card.Chips />
+              <Card.Info />
+              {isHost ? (
+                // 주최자일 때 렌더링
+                item.isCompleted && (
+                  <Card.Button
+                    handleButtonClick={() => {
+                      handleOpenModal(item.id);
+                    }}
+                  />
+                )
+              ) : (
+                // 참가자일 때 렌더링
+                <Card.Button
+                  handleButtonClick={() => {
+                    item.isCompleted
+                      ? handleOpenModal(item.id)
+                      : handleWithdrawClickWithId(item.id, queries.joined._def);
+                  }}
+                />
+              )}
+            </Card>
+          );
+        }}
       />
       {isModalOpen && (
         <ReviewModal gatheringId={cardId} onClose={handleCloseModal} />

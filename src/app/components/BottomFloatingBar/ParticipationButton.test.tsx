@@ -29,6 +29,16 @@ jest.mock('../Popup/Popup', () => ({
   ),
 }));
 
+// 모임취소 모달 모킹
+jest.mock('../Modal/CancelGatheringModal', () => {
+  function MockCancelGatheringModal() {
+    return <div>모임을 정말 취소하시겠습니까?</div>;
+  }
+
+  MockCancelGatheringModal.displayName = 'MockCancelGatheringModal';
+  return MockCancelGatheringModal;
+});
+
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
   useParams: jest.fn(() => ({ id: '1' })),
@@ -120,8 +130,8 @@ describe('ParticipationButton', () => {
     expect(mockCopyUrlToClipboard).toHaveBeenCalled();
   });
 
-  // 주최자일 때 "취소하기" 버튼을 클릭하면 copyUrlToClipboard 함수가 호출되는지 확인
-  it('checks if the copyUrlToClipboard function is called when "Cancel" button is clicked by the host', () => {
+  // 주최자일 때 "취소하기" 버튼을 클릭하면 모임 취소 모달이 띄워지는지 확인
+  it('displays the meeting cancellation modal when the "Cancel" button is clicked by the host', async () => {
     render(
       <ParticipationButton
         isHost={true}
@@ -137,30 +147,32 @@ describe('ParticipationButton', () => {
     const cancelButton = screen.getByRole('button', { name: '취소하기' });
     fireEvent.click(cancelButton);
 
-    expect(mockCancelGathering).toHaveBeenCalled();
+    expect(
+      await screen.findByText('모임을 정말 취소하시겠습니까?'),
+    ).toBeInTheDocument();
   });
 
-  // @todo 테스트코드 수정하기
-  // // 주최자일 때 마감일이 지났거나 모임이 취소된 경우 버튼이 비활성화되는지 확인
-  // it('checks if buttons are disabled when the host has passed the deadline or the gathering is canceled', () => {
-  //   render(
-  //     <ParticipationButton
-  //       isHost={true}
-  //       user={mockUser}
-  //       participantCount={5}
-  //       capacity={10}
-  //       registrationEnd='2024-10-02'
-  //       canceledAt='2024-10-01'
-  //       participantsData={[]}
-  //     />,
-  //   );
+  // 주최자일 때 마감일이 지났거나 모임이 취소된 경우 버튼이 비활성화되는지 확인
+  it('checks if buttons are disabled when the host has passed the deadline or the gathering is canceled', () => {
+    render(
+      <ParticipationButton
+        isHost={true}
+        user={mockUser}
+        participantCount={5}
+        capacity={10}
+        registrationEnd='2024-10-02'
+        canceledAt='2024-10-01'
+        participantsData={[]}
+      />,
+    );
 
-  //   const cancelButton = screen.getByRole('button', { name: '취소하기' });
-  //   const shareButton = screen.getByRole('button', { name: '공유하기' });
+    const cancelButton = screen.getByRole('button', { name: '취소하기' });
+    const shareButton = screen.getByRole('button', { name: '공유하기' });
 
-  //   expect(cancelButton).toBeDisabled();
-  //   expect(shareButton).toBeDisabled();
-  // });
+    expect(cancelButton).not.toBeDisabled();
+
+    expect(shareButton).toBeDisabled();
+  });
 
   // 참여자일 때 참여 상태에 따라 버튼 텍스트가 변경되는지 확인
   it('checks if button text changes based on participation status when the user is a participant', () => {
