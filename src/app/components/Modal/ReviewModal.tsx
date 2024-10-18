@@ -8,6 +8,7 @@ import ModalFrame from './ModalFrame';
 import ModalHeader from './ModalHeader';
 import CommentReview from './ReviewModal/CommentReview';
 import HeartReview from './ReviewModal/HeartReview';
+import { useRouter } from 'next/navigation';
 
 interface ReviewModalProps {
   gatheringId: number;
@@ -18,12 +19,14 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
   const [comment, setComment] = useState<string>('');
   const [score, setScore] = useState<number>(0);
 
+  const router = useRouter();
+
   const handleChangeReviewComment = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value);
   };
 
   const handleSubmit = async () => {
-    const { success, message } = await postReviews({
+    const { success, data, message } = await postReviews({
       gatheringId,
       score,
       comment,
@@ -35,8 +38,9 @@ const ReviewModal = ({ gatheringId, onClose }: ReviewModalProps) => {
       return;
     }
 
-    toast.success(message);
     onClose();
+    router.push(`/gatherings/${data?.gatheringId}`);
+    toast.success(message);
   };
 
   return (

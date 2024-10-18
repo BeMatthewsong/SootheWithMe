@@ -83,11 +83,8 @@ const MakeGatheringModal = ({ onClose }: MakeGatheringModalProps) => {
     }
 
     onClose();
-
     await postGatheringToJoin(data.id);
-
     router.push(`/gatherings/${data.id}`);
-
     toast.success(message);
   };
 
