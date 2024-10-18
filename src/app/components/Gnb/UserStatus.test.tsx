@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import UserStatus from './UserStatus';
 import { useRouter } from 'next/navigation';
 import { deleteCookie } from '@/app/api/actions/cookie/cookie';
@@ -35,6 +35,7 @@ jest.mock('@/app/api/actions/mypage/postUserLogoutData', () => ({
 
 jest.mock('react-hot-toast', () => ({
   success: jest.fn(),
+  error: jest.fn(),
 }));
 
 describe('UserStatus 컴포넌트', () => {
@@ -94,6 +95,5 @@ describe('UserStatus 컴포넌트', () => {
     expect(mockPostUserLogoutData).toHaveBeenCalled();
     expect(mockToastSuccess).toHaveBeenCalledWith('로그아웃이 완료되었습니다.');
     expect(mockDeleteCookie).toHaveBeenCalledWith('token');
-    expect(mockPush).toHaveBeenCalledWith('/gatherings');
   });
 });

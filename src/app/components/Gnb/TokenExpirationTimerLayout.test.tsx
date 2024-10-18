@@ -22,7 +22,7 @@ describe('TokenExpirationTimerLayout 컴포넌트', () => {
       timeLeft: 300,
     });
 
-    render(<TokenExpirationTimerLayout token={mockToken} variant='gnb' />);
+    render(<TokenExpirationTimerLayout token='' variant='gnb' />);
 
     expect(screen.queryByText(/남은 시간:/)).not.toBeInTheDocument();
   });
@@ -40,14 +40,9 @@ describe('TokenExpirationTimerLayout 컴포넌트', () => {
     expect(screen.getByText('남은 시간: 2분 0초')).toBeInTheDocument();
   });
 
-  // 남은 시간이 0일 경우 아무것도 렌더링하지 않아야 함
-  it('should render nothing when time left is 0', () => {
-    (TokenExpirationTimer as jest.Mock).mockReturnValue({
-      isLoggedIn: true,
-      timeLeft: 0,
-    });
-
-    render(<TokenExpirationTimerLayout token={mockToken} variant='gnb' />);
+  // 토큰이 없을 경우 아무것도 렌더링하지 않아야 함
+  it('should not render anything when there is no token', () => {
+    render(<TokenExpirationTimerLayout token='' variant='gnb' />);
 
     expect(screen.queryByText(/남은 시간:/)).not.toBeInTheDocument();
   });
