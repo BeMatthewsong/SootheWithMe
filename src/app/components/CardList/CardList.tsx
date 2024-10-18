@@ -9,16 +9,15 @@ import {
   IconSaveDiscardBtn,
   IconSaveInactive,
 } from '@/public/icons';
-import {
-  formatDate,
-  formatTimeColon,
-  formatTimeHours,
-} from '@/utils/formatDate';
-import getDaysUntilRegistrationEnd from '@/utils/getDaysUntilRegistrationEnd';
+import { formatDate, formatTimeColon } from '@/utils/formatDate';
+import getDaysUntilRegistrationEnd from '@/app/(main)/gatherings/_helpers/getDaysUntilRegistrationEnd';
 import { GatheringType } from '@/types/data.type';
 import Tag from '@/app/components/Tag/Tag';
 import InfoChip from '@/app/components/Chip/InfoChip';
 import ProgressBar from '@/app/components/ProgressBar/ProgressBar';
+import getTagMessage from '@/app/(main)/gatherings/_helpers/getTagMessage';
+import isGatheringFull from '@/app/(main)/gatherings/_helpers/isGatheringFull';
+import isClosingTagVisible from '@/app/(main)/gatherings/_helpers/isClosingTagVisible';
 
 interface CardProps {
   data: GatheringType;
@@ -27,13 +26,16 @@ interface CardProps {
 }
 
 const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
+  const isChallengeEnded =
+    new Date(data.dateTime) <= new Date() ||
+    isGatheringFull(data.participantCount, data.capacity);
   const daysRemaining = getDaysUntilRegistrationEnd(data.registrationEnd);
-
-  // 모임의 날짜와 현재 날짜를 비교하여 태그 렌더링
-  const isRenderTag = daysRemaining >= 0 && daysRemaining <= 7;
-
-  // 모임의 날짜와 현재 날짜를 비교하여 마감 여부 표시
-  const isChallengeEnded = new Date(data.dateTime) <= new Date();
+  const tagMessage = getTagMessage(
+    daysRemaining,
+    data.registrationEnd,
+    isChallengeEnded,
+  );
+  const isRenderTag = isClosingTagVisible(daysRemaining, isChallengeEnded);
 
   const [isSavedActive, setSavedActive] = useState<boolean>(isSaved || false);
 
@@ -64,13 +66,7 @@ const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
           quality={85}
           sizes='(max-width: 768px) 100vw, 280px'
         />
-        {isRenderTag && (
-          <Tag>
-            {daysRemaining === 0
-              ? `오늘 ${formatTimeHours(data.registrationEnd)}시 마감`
-              : `${daysRemaining}일 후 마감`}
-          </Tag>
-        )}
+        {isRenderTag && <Tag>{tagMessage}</Tag>}
       </div>
 
       {/* 정보 */}

@@ -40,6 +40,14 @@ jest.mock('@/public/icons', () => ({
   IconPerson: () => <div data-testid='IconPerson' />,
 }));
 
+// 함수 모킹
+jest.mock('@/app/(main)/gatherings/_helpers/getTagMessage', () =>
+  jest.fn().mockReturnValue('오늘 15시 마감'),
+);
+jest.mock('@/app/(main)/gatherings/_helpers/isClosingTagVisible', () =>
+  jest.fn().mockReturnValue(true),
+);
+
 // 기본 렌더링 테스트
 describe('CardList Component', () => {
   const MOCK_DATA = {
@@ -92,8 +100,7 @@ describe('Tag Component Render', () => {
     };
 
     render(<CardList data={MOCK_DATA} />);
-    const tagElement = screen.getByText(/오늘 \d{1,2}시 마감/);
-    expect(tagElement).toBeInTheDocument();
+    expect(screen.getByText(/오늘 \d{1,2}시 마감/)).toBeInTheDocument();
   });
 });
 

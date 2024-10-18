@@ -49,3 +49,6 @@ export const EXPIRY_TIME = 3600 * 1000; //1시간
 
 // 모임 만들기 내 모임 날짜 기한
 export const MAKING_GATHERING_DATE_DEADLINE = 365;
+
+// 일주일 이내 마감
+export const CLOSING_IN_A_WEEK = 7;

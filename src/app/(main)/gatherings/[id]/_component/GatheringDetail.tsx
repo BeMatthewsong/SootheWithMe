@@ -12,6 +12,7 @@ import {
   ReviewsType,
 } from '@/types/data.type';
 import { UserData } from '@/types/client.type';
+import isGatheringFull from '@/app/(main)/gatherings/_helpers/isGatheringFull';
 
 interface GatheringDetailProps {
   gatheringInfo: GatheringInfoType;
@@ -32,6 +33,11 @@ const GatheringDetail = ({
     setCurrentPage(page);
   };
 
+  const isFull = isGatheringFull(
+    gatheringInfo.participantCount,
+    gatheringInfo.capacity,
+  );
+
   return (
     <>
       <div className='mx-auto h-full max-w-[1200px]'>
@@ -41,6 +47,7 @@ const GatheringDetail = ({
             <GatheringImage
               image={gatheringInfo.image}
               endTime={gatheringInfo.registrationEnd}
+              isFull={isFull}
             />
             <GatheringInfo
               name={gatheringInfo.name || ''}
