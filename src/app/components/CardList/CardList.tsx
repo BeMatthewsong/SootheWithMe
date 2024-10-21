@@ -26,9 +26,7 @@ interface CardProps {
 }
 
 const CardList = ({ data, isSaved, handleButtonClick }: CardProps) => {
-  const isChallengeEnded =
-    new Date(data.dateTime) <= new Date() ||
-    isGatheringFull(data.participantCount, data.capacity);
+  const isChallengeEnded = new Date(data.dateTime) <= new Date();
   const daysRemaining = getDaysUntilRegistrationEnd(data.registrationEnd);
   const tagMessage = getTagMessage(
     daysRemaining,

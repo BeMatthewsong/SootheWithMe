@@ -59,7 +59,7 @@ const ProgressBar = ({
             </div>
           )}
           {/* 개설확정 렌더링 선택 */}
-          {hasOpeningConfirmed && isOpeningConfirmed && !isClosedGathering && (
+          {hasOpeningConfirmed && isOpeningConfirmed && (
             <div
               className='flex items-center gap-4 text-14 text-var-orange-400 dark:text-var-orange-500'
               data-testid='opening-confirmed-badge'
